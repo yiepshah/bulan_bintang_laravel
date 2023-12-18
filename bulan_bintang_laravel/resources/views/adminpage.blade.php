@@ -379,7 +379,7 @@
     </div> --}}
 
 
-    <div class="stock-table-container">
+    {{-- <div class="stock-table-container">
         <h2 class="main--title">User Information</h2>
         <div class="table-responsive">
             <table class="stock-table table table-striped">
@@ -406,9 +406,11 @@
                         <tr><td colspan='4'>No users found</td></tr>
                     @endforelse
                 </tbody>
-            </table>
-        </div>
+            {{-- </table> --}}
+        
     </div>
+    </div>
+    <div></div>
 
     <script>
         $(document).ready(function () {

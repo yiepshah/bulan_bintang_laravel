@@ -71,13 +71,15 @@
 
 <body>    
     
-
+@include('adminsidebar')
+@include('header')
 
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h1>Add New Item</h1>
-                <form action="add_item.php" method="post" enctype="multipart/form-data" class="justify-content-center">
+                <form action="{{ route('addPost') }}" method="post" enctype="multipart/form-data" class="justify-content-center">
+                    @csrf
                 <img id="bblogo" src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
 												style="width: 80px; height: auto; margin-right: 10px;" alt="">
                     <div class="form-group">
@@ -111,20 +113,15 @@
                     </div><br>
 
                     <div class="form-group">
-                        <label for="category_id">Category ID:</label>
-                        <input type="number" class="form-control" name="category_id" id="category_id" required>
-                    </div><br>
-
-                    <div class="form-group">
                         <button id="addbtn" class="btn" name="submit" type="submit">Add</button>
                     </div><br><br>                  
                 </form>
             </div>
         </div>
     </div>
-
-   
+    @include('footer')
+    
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   
 </body>
-
 </html>

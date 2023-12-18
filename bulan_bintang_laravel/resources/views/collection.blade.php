@@ -1,16 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<title>Collection</title>
-
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Collection</title>
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            background-image: url('your-background-image-url.jpg');
+            background-repeat: repeat;
+        }
+
+        <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         body {
@@ -150,13 +158,26 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 1.0);
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    
+
     <script>
         $(document).ready(function () {
             $('.category-link').on('click', function (e) {
                 e.preventDefault();
                 var categoryId = $(this).data('category-id');
-                window.location.href = 'collection.php?id=' + categoryId;
+                window.location.href = '{{ route("collection", ["id" => ":categoryId"]) }}'.replace(':categoryId', categoryId);
+            });
+
+            $('#search-icon').on('click', function () {
+                $('#search-input').toggle();
+            });
+
+            $("#search-input").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".item").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
         });
     </script>
@@ -170,7 +191,8 @@
             <div class="item">
                 <a id="detail" href="{{ route('details', ['item_id' => $item->item_id]) }}">
                     <figure>
-                        <img src="{{ asset('images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
+                        <img src="{{ Storage::url('images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
+
                     </figure>
                     <p>{{ $item->item_name }}</p>
                     <p id="itemprice">${{ $item->price }}</p>
@@ -184,27 +206,6 @@
         @endforeach
     </div>
 
-    <script>
-        $(document).ready(function () {
-
-            $('#search-icon').on('click', function () {
-                $('#search-input').toggle();
-            });
-
-
-            $("#search-input").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $(".item").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
     @include('footer')
 </body>
-
 </html>

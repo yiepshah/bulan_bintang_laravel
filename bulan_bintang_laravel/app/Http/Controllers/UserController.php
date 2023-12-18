@@ -66,4 +66,9 @@ class UserController extends Controller
 
         return view('adminpage', ['users' => $users]);
     }
+
+    public function logout(){
+        auth()->logout();
+        return redirect('/');
+    }
 }
