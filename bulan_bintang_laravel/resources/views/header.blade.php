@@ -67,6 +67,12 @@
         .search--box{
             margin-top: 18px;
         }
+
+        #CartIcon{
+            margin-top: 10px;
+
+        }
+
     </style>
     
 </head>
@@ -106,7 +112,7 @@
 
             <li class="nav-item" data-toggle="tooltip" title="Log Out">
                 @auth
-                    {{-- <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a> --}}
+                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
                 @endauth
             </li>
 
@@ -117,20 +123,25 @@
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
-                <div class="search--box">
-                    <i id="search-icon" class="fa fa-solid fa-search"></i>
-                    <input id="search-input" type="text" placeholder="Search" style="display: none;">
-                </div>
+                @auth  
+                    <div class="search--box">
+                        <i id="search-icon" class="fas fa-search"></i>
+                        <input id="search-input" type="text" placeholder="Search" style="display: none;">
+                    </div>
+                @endauth
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="cart">
-                @php
-                    // $cartCount = session('cart') ? count(session('cart')) : 0;
-                @endphp
-                {{-- <a href="{{ route('cart') }}" class="nav-link">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
-                </a> --}}
+                @auth
+                    @php
+                        $cartCount = session('cart') ? count(session('cart')) : 0;
+                    @endphp
+                    <a id="CartIcon" href="{{ route('cart') }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
+                    </a>
+                @endauth
+
             </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="shop">
@@ -143,9 +154,10 @@
 
             <li class="nav-item" data-toggle="tooltip" title="login">
                 @auth
-                    {{-- <a class="nav-link" data-placement="bottom" title="profile" href="{{ route('profile') }}"><i class="fas fa-user"></i></a> --}}
+                <a class="nav-link" data-placement="bottom" title="profile" href="{{ route('profile') }}"><i class="fas fa-user"></i></a>
+
                 @else
-                    <a class="nav-link" data-placement="bottom" title="login" href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" data-placement="bottom" title="login" href="{{ route('login') }}">Login <i class="fas fa-sign-in-alt"></i></a>
                 @endauth
             </li>
         </ul>

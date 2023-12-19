@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\Post;
 use App\Models\User;
 
 class UserController extends Controller
@@ -67,8 +67,26 @@ class UserController extends Controller
         return view('adminpage', ['users' => $users]);
     }
 
+
     public function logout(){
         auth()->logout();
         return redirect('/');
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        
+        return view('profile', ['user' => $user]);
+    }
+
+    public function showAdminpage()
+    {
+        // Assuming $users is the data you want to pass to the view
+        $users = User::all(); // Replace this with your actual query to fetch users
+    
+        return view('adminpage', ['users' => $users]);
+    }
+    
+    
 }

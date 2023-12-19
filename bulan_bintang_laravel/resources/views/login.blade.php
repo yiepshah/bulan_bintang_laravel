@@ -42,7 +42,7 @@
                                         @endif
 
                                         <div id="login-error-alert" class="alert alert-danger" style="display: none;">
-                                            <strong>Error!</strong> Invalid email or password.
+                                            <strong>Error!</strong> Invalid email or password. 
                                         </div>
 
                                         <div class="d-flex align-items-center mb-3 pb-1">

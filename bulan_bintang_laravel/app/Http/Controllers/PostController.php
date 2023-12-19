@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -32,48 +33,38 @@ class PostController extends Controller
 
     public function collection()
     {
-        $items = Post::all(); // Assuming you want to retrieve all posts
+        $items = Post::all(); 
         return view('collection', compact('items'));
     }
 
-    public function details($item_id)
+    public function showDetails($itemId)
     {
-        $mysqli = new \mysqli("localhost", "root", "", "bulan_bintang");
+        $itemDetails = DB::table('posts')
+            ->select('item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
+            ->where('item_id', $itemId)
+            ->first();
 
-        if ($mysqli->connect_error) {
-            die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-        }
+        if ($itemDetails) {
+            $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
+            // $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
+            $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
 
-        $itemDetails = null;
-
-        $query = "SELECT item_name, image_path, price, product_information, material, inside_box FROM posts WHERE item_id = ?";
-        $stmt = $mysqli->prepare($query);
-
-        if ($stmt === false) {
-            die('Error: ' . $mysqli->error);
-        }
-
-        $stmt->bind_param("i", $item_id);
-
-        $stmt->execute();
-
-        if ($stmt->error) {
-            echo "Error: " . $stmt->error;
-        }
-
-        $result = $stmt->get_result();
-
-        $mysqli->close();
-
-        if ($result->num_rows > 0) {
-            $itemDetails = $result->fetch_assoc();
-            $breadcrumb = '<a href="home">Home</a> / ';
-            $breadcrumb .= '<a href="collection">Baju Melayu Slim Fit</a> / ';
-            $breadcrumb .= '<span>' . $itemDetails['item_name'] . '</span>';
-            
             return view('details', compact('itemDetails', 'breadcrumb'));
         } else {
-            return view('details', ['error' => 'Item not found']);
+            return view('details', ['itemNotFound' => true]);
+        }
+    }
+
+    public function addToCart(Request $request, $itemId)
+    {
+        $itemDetails = DB::table('posts')->find($itemId);
+
+        if ($itemDetails) {
+
+
+            return view('cart_confirmation', compact('itemDetails'));
+        } else {
+            return view('cart_confirmation', ['itemNotFound' => true]);
         }
     }
 }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Collection</title>
 
@@ -29,14 +29,14 @@
         #collection {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: darkslategray;
-            margin-top: 50px;
+            margin-top: 30px;
         }
 
         .items-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .item figure {
@@ -64,8 +64,6 @@
             -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
         }
-
-
 
         .item:hover figure::before {
             opacity: 1;
@@ -185,14 +183,12 @@
 
 <body>
     @include('header')
-
     <div class="items-container">
         @foreach ($items as $item)
             <div class="item">
-                <a id="detail" href="{{ route('details', ['item_id' => $item->item_id]) }}">
+                <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
                     <figure>
                         <img src="{{ Storage::url('images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
-
                     </figure>
                     <p>{{ $item->item_name }}</p>
                     <p id="itemprice">${{ $item->price }}</p>

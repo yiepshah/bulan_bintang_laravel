@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CartController;
 use App\Models\Post;
 use App\Models\User;
 
@@ -32,25 +33,25 @@ Route::get('/login', function () {
 })->name('login'); // Add ->name('login') to give the route a name
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/adminpage', function () {
-        return view('adminpage'); 
-    })->name('adminpage');
+    Route::get('/adminpage', [UserController::class, 'showAdminpage'])->name('adminpage');
 });
+
 
 Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/collection', function () {
-    return view('collection');
-});
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 
-Route::get('/logout',[UserController::class,'logout']);
-
-
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
+Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
+
+Route::post('/addToCart/{itemId}', [PostController::class, 'addToCart'])->name('addToCart');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
@@ -58,10 +59,7 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
-
 Route::post('/add-post', 'PostController@addPost')->name('addPost');
 
-
-Route::get('/details/{item_id}', [PostController::class, 'details'])->name('details');
 
 

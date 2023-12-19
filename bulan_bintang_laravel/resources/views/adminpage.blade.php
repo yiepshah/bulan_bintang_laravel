@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Admin Dashboard</title>
     <style>
         body {
@@ -281,12 +283,12 @@
 </head>
 
 <body>
-    
+    @include('header')
     <div class="w3-sidebar">
-        <!-- Laravel route() function is used to generate URLs -->
+        
         <a href="{{ route('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home"></i></a>
         <a href="{{ route('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store"></i></a>
-
+    </div>
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
@@ -340,46 +342,39 @@
             <hr>
 
 
-            {{-- <div class="user-table-container">
-        <h2 class="main--title">User Information</h2>
-        <div class="table-responsive">
-            <table class="stock-table table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="myUsertable">
-                    
-                    // $selectUserQuery = "SELECT * FROM users ORDER BY id DESC";
-                    // $userResult = $mysqli->query($selectUserQuery);
-
-                    // if ($userResult && $userResult->num_rows > 0) {
-                    //     while ($userRow = $userResult->fetch_assoc()) {
-                            // echo "<tr>";
-                            // echo "<td>" . $userRow['id'] . "</td>";
-                            // echo "<td contenteditable='true' onBlur='updateUser(this, " . $userRow['id'] . ", \"name\")' onClick='editUser(this)'>" . $userRow['name'] . "</td>";
-                            // echo "<td contenteditable='true' onBlur='updateUser(this, " . $userRow['id'] . ", \"email\")' onClick='editUser(this)'>" . $userRow['email'] . "</td>";
-                            // echo "<td>";
-                            // echo "<button class='btn btn-dark' onclick='deleteUser(" . $userRow['id'] . ")'>Delete</button><br><br>";
-                            // echo "<button class='btn btn-dark' onclick='submitUser(" . $userRow['id'] . ")'>Submit</button>";
-                            // echo "</td>";
-                            // echo "</tr>";
-                    //     }
-                    // } else {
-                    //     echo "<tr><td colspan='4'>No users found</td></tr>";
-                    // }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div> --}}
+            <div class="stock-table-container">
+                <h2 class="main--title">User Information</h2>
+                <div class="table-responsive">
+                    <table class="stock-table table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="myUsertable">
+                            @forelse ($users as $user)
+                                <tr>
+                                    <td>{{ $user->id }}</td>
+                                    <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "name")' onClick='editUser(this)'>{{ $user->name }}</td>
+                                    <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "email")' onClick='editUser(this)'>{{ $user->email }}</td>
+                                    <td>
+                                        <button class='btn btn-dark' onclick='deleteUser({{ $user->id }})'>Delete</button><br><br>
+                                        <button class='btn btn-dark' onclick='submitUser({{ $user->id }})'>Submit</button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr><td colspan='4'>No users found</td></tr>
+                            @endforelse
+                        </tbody>
+                     </table>
+                </div>
+            </div>
 
 
-    {{-- <div class="stock-table-container">
+     <div class="stock-table-container">
         <h2 class="main--title">User Information</h2>
         <div class="table-responsive">
             <table class="stock-table table table-striped">
@@ -406,11 +401,11 @@
                         <tr><td colspan='4'>No users found</td></tr>
                     @endforelse
                 </tbody>
-            {{-- </table> --}}
-        
+             </table>
+        </div>
     </div>
-    </div>
-    <div></div>
+    
+    
 
     <script>
         $(document).ready(function () {
