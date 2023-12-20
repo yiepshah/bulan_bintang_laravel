@@ -57,7 +57,7 @@
             <div class="col-md-9">
                 <h2>Sign Up</h2>
 
-                <form action="signup" method="post">
+                <form action="{{ url('/signup') }}" method="post">
                     @csrf
 
                     <div id="errorAlert" class="alert alert-danger" style="display: none;">

@@ -11,6 +11,8 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    protected $primaryKey = 'item_id';
+
     public $timestamps = false;
 
     protected $fillable = [

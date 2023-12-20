@@ -345,7 +345,7 @@
             <div class="stock-table-container">
                 <h2 class="main--title">User Information</h2>
                 <div class="table-responsive">
-                    <table class="stock-table table table-striped">
+                    <table class="stock-table table table-striped">-
                         <thead class="thead-dark">
                             <tr>
                                 <th>User ID</th>

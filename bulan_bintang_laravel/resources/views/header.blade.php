@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{-- <!-- Include your CSS files here -->
-    <!-- For example: <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --> --}}
+
     <style>
           <style>
         .navbar {
@@ -68,8 +67,8 @@
             margin-top: 18px;
         }
 
-        #CartIcon{
-            margin-top: 10px;
+        #carticon{
+            padding-top: 22px;
 
         }
 
@@ -78,35 +77,39 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img class="logo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                {{-- @foreach ($mainCategories as $mainCategory) --}}
-                    <li class="nav-item dropdown">
-                        {{-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{ $mainCategory['category_name'] }}</a> --}}
-                        <ul class="dropdown-menu">
-                            {{-- @foreach ($mainCategory['subcategories'] as $subcategory) --}}
-                                <li class="dropdown-submenu">
-                                    {{-- <a class="dropdown-item dropdown" href="{{ url('collection') }}?id={{ $subcategory['category_id'] }}">{{ $subcategory['category_name'] }}</a> --}}
-                                    <ul class="dropdown-menu">
-                                        {{-- @foreach ($subcategory['subcategories'] as $subSubcategory) --}}
-                                            {{-- <li><a class="dropdown-item" href="{{ url('collection') }}?id={{ $subSubcategory['category_id'] }}">{{ $subSubcategory['category_name'] }}</a></li> --}}
-                                        {{-- @endforeach --}}
-                                    </ul>
-                                </li>
-                            {{-- @endforeach --}}
-                        </ul>
-                    </li>
-                {{-- @endforeach --}}
-            </ul>
-        </div>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img class="logo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    @isset($mainCategories)
+                    @foreach ($mainCategories as $mainCategory)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{ $mainCategory['category_name'] }}</a>
+                            <ul class="dropdown-menu">
+                                @foreach ($mainCategory['subcategories'] as $subcategory)
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown" href="{{ url('collection') }}?id={{ $subcategory['category_id'] }}">{{ $subcategory['category_name'] }}</a>
+                                        <ul class="dropdown-menu">
+                                            @foreach ($subcategory['subcategories'] as $subSubcategory)
+                                                <li><a class="dropdown-item" href="{{ url('collection') }}?id={{ $subSubcategory['category_id'] }}">{{ $subSubcategory['category_name'] }}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    
+                                @endforeach
+                            </ul>
+                        </li>
+                        
+                    @endforeach
+                    @endisset
+                </ul>
+            </div>
 
         <ul class="navbar-nav ml-auto">
 
@@ -116,11 +119,13 @@
                 @endauth
             </li>
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
-                @auth
+            @auth
+                @if (auth()->user()->role === 'admin')
+                <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
                     <a class="nav-link" href="{{ route('adminpage') }}"><i class="fas fa-user-tie"></i></a>
-                @endauth
-            </li>
+                </li>
+                @endif
+            @endauth
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
                 @auth  
@@ -131,23 +136,23 @@
                 @endauth
             </li>
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="cart">
-                @auth
-                    @php
-                        $cartCount = session('cart') ? count(session('cart')) : 0;
-                    @endphp
-                    <a id="CartIcon" href="{{ route('cart') }}">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
-                    </a>
-                @endauth
-
-            </li>
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="shop">
                 @auth
                     <a class="nav-link" href="{{ route('collection') }}" id="collection">
                         <i class="fas fa-store"></i>
+                    </a>
+                @endauth
+            </li>
+
+            <li  class="nav-item" data-toggle="tooltip" data-placement="bottom" title="cart">
+                @auth
+                    @php
+                        $cartCount = session('cart') ? count(session('cart')) : 0;
+                    @endphp
+                    <a id="CartIcon" href="{{ route('cart') }}">
+                        <i id="carticon" class="fas fa-shopping-cart"></i>
+                        <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
                     </a>
                 @endauth
             </li>
@@ -165,7 +170,7 @@
 </nav>
 
 
-{{-- <!-- For example: <script src="{{ asset('js/app.js') }}"></script> --> --}}
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>

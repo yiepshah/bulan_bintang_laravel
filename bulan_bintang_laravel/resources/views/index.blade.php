@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Bulan Bintang</title>
-
     <style>
-    
     
     .image-container {
         display: flex; 
@@ -52,8 +49,6 @@
         font-weight: lighter;
     }
 
-
-
     @media (max-width: 767px) {
         .third-image {
             flex-direction: column;
@@ -82,11 +77,7 @@
         width: 730px;
         border-radius: 10px 10px;
         margin-bottom: 20px;
-        
-        
-        
-
-        
+               
     }
 
     #third-3{       
@@ -142,20 +133,19 @@
     }
 
     @media (max-width: 767px) {
-        /* Adjust the position and font size for smaller screens */
+      
         #shop {
-            top: 80%; /* Adjust the vertical position */
+            top: 80%; 
             font-size: 15px;
         }
     }   
-      
-    
+
 
     .custom-image {
         max-width: 100%;
-        height:auto; /* Set a fixed height as needed */
+        height:auto; 
         width: 100%;
-        border-radius: 10px; /* Add border-radius if you want rounded corners */
+        border-radius: 10px; 
     }
 
     .carousel-indicators button,
@@ -163,7 +153,7 @@
     .carousel-control-next {
         background-color: transparent;
         border: none;
-        color: #000; /* Set the color as needed */
+        color: #000; /
     }
       
 </style>
@@ -195,8 +185,10 @@
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </button>
-  @if(isset($_SESSION['user_id']))
+  @if(isset($_SESSION['user_id'])) @auth
     <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
+  @endauth
+    
 @else
     <a id="shop" href="{{ url('login') }}">SHOP NOW!</a>
 @endif

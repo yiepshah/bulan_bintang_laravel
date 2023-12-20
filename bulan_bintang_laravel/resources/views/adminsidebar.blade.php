@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <head>
 
     <title>Document</title>
 
     <style>
- 
+        
+        .w3-sidebar {
+            height: 100%;
+            width: 70px;
+            background-color: #111;
+            position: fixed;
+            overflow-x: hidden;
+            padding-top: 20px;
+            transition: width 0.3s;
+            z-index: 1;
+        }
 
         .w3-sidebar a {
             text-decoration: none;
@@ -20,15 +36,14 @@
             width: 200px;
         }
 
-        .w3-sidebar {
-            height: 100%;
-            width: 90px;
-            background-color: #111;
-            position: fixed;
-            overflow-x: hidden;
-             transition: width 0.3s;
-            z-index: 1;
+        .w3-sidebar a:hover {
+            color: #f1f1f1;
         }
+
+        .w3-sidebar:hover+.main--content {
+            margin-left: 200px;
+        }
+
 
         @media (max-width: 768px) {
             .w3-sidebar {
@@ -52,10 +67,14 @@
         
         <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store"></i></a>
        
-        @auth
-            <a class="nav-link" title="Add Item" href="{{ url('add_item') }}"><i class="fas fa-plus"></i></a>
-            <a class="nav-link" title="Log out" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
-        @endauth
+        <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus"></i></a>
+
+        <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+
+        
+            {{-- <a class="nav-link" title="Add Item" href="{{ url('add_item') }}"><i class="fas fa-plus"></i></a>
+            <a class="nav-link" title="Log out" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i></a> --}}
+        
     </div>
 </body>
 </html>

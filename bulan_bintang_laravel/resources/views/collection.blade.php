@@ -202,6 +202,44 @@
         @endforeach
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $('.category-link').on('click', function (e) {
+                e.preventDefault();
+                var categoryId = $(this).data('category-id');
+    
+                // Make an AJAX request to fetch items for the selected category
+                $.ajax({
+                    url: '/get-items/' + categoryId,
+                    type: 'GET',
+                    success: function (data) {
+                        // Update the items container with the fetched items
+                        updateItemsContainer(data.items);
+                    },
+                    error: function (error) {
+                        console.error('Error fetching items:', error);
+                    }
+                });
+            });
+    
+            // ... (other existing JavaScript code)
+    
+            function updateItemsContainer(items) {
+                // Clear existing items
+                $('.items-container').empty();
+    
+                // Append the new items to the container
+                items.forEach(function (item) {
+                    // Create and append HTML for each item
+                    var itemHtml = '<div class="item">' +
+                        '<a id="detail" href="{{ route("details", ["itemId" => ":itemId"]) }}">'.replace(':itemId', item.item_id) +
+                        // ... (rest of your item HTML)
+                        '</a></div>';
+                    $('.items-container').append(itemHtml);
+                });
+            }
+        });
+    </script>
     @include('footer')
 </body>
 </html>

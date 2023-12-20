@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Post;
+
 use App\Models\User;
 
-class UserController extends Controller
+class UserController extends Controller  
 {   
+
     public function showSignupForm()
     {
         return view('signup');
@@ -17,20 +18,26 @@ class UserController extends Controller
 
     public function signup(Request $request)
     {
+    
         $request->validate([
-            'name' => 'required|min:6',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+        ]);
+    
+      
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'role' => 'user', 
         ]);
 
-       
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
 
-        return redirect()->route('login')->with('success', 'Signup successful! You can now log in.');
+        auth()->login($user);
+
+
+        return redirect()->route('login')->with('success', 'Signup successful!');
     }
 
     public function showLoginForm()

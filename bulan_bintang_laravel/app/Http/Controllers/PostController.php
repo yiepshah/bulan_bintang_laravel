@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
 use App\Models\Post;
+
+
 
 class PostController extends Controller
 {
@@ -39,22 +40,23 @@ class PostController extends Controller
 
     public function showDetails($itemId)
     {
-        $itemDetails = DB::table('posts')
-            ->select('item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
+        $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
             ->where('item_id', $itemId)
             ->first();
-
+    
         if ($itemDetails) {
+            // Define predefined size options
+            $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
+    
             $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
-            // $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
+            $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
             $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
-
-            return view('details', compact('itemDetails', 'breadcrumb'));
+    
+            return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions'));
         } else {
             return view('details', ['itemNotFound' => true]);
         }
     }
-
     public function addToCart(Request $request, $itemId)
     {
         $itemDetails = DB::table('posts')->find($itemId);
