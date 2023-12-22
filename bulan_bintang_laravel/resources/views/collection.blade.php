@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Collection</title>
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-        body {
-            background-image: url('your-background-image-url.jpg');
-            background-repeat: repeat;
-        }
 
         <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-        body {
-            background-image: url('your-background-image-url.jpg');
-            background-repeat: repeat;
-        }
 
         #collection {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: darkslategray;
-            margin-top: 30px;
+            margin-top: 50px;
         }
 
         .items-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .item figure {
@@ -64,6 +54,8 @@
             -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
         }
+
+
 
         .item:hover figure::before {
             opacity: 1;
@@ -126,35 +118,6 @@
             background-color: transparent;
             color: #0056b3;
         }
-
-
-        .categories-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .category-card {
-            width: calc(32% - 20px);
-            margin: 10px;
-            display: inline-block;
-            vertical-align: top;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            transition: box-shadow 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .category-link {
-            text-decoration: none;
-            color: black;
-        }
-
-        .category-card:hover {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 1.0);
-        }
     </style>
 
     
@@ -184,36 +147,40 @@
 <body>
     @include('header')
     <div class="items-container">
-        @foreach ($items as $item)
-            <div class="item">
-                <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
-                    <figure>
-                        <img src="{{ Storage::url('images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
-                    </figure>
-                    <p>{{ $item->item_name }}</p>
-                    <p id="itemprice">${{ $item->price }}</p>
-                    <div class="add-to-cart">
-                        <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
-                            Add to Cart <i class="fas fa-cart-plus"></i>
-                        </button>
-                    </div>
-                </a>
-            </div>
-        @endforeach
-    </div>
+        @php     
+            $reversedItems = $items->reverse();     
+        @endphp
 
-    <script>
+        @foreach ($reversedItems as $item)
+                <div class="item">
+                    <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
+                        <figure>
+                            <img src="{{ asset('images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
+                        </figure>
+                        <p>{{ $item->item_name }}</p>
+                        <p id="itemprice">${{ $item->price }}</p>
+                        <div class="add-to-cart">
+                            <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+
+
+    {{-- <script>
         $(document).ready(function () {
             $('.category-link').on('click', function (e) {
                 e.preventDefault();
                 var categoryId = $(this).data('category-id');
     
-                // Make an AJAX request to fetch items for the selected category
                 $.ajax({
                     url: '/get-items/' + categoryId,
                     type: 'GET',
                     success: function (data) {
-                        // Update the items container with the fetched items
+                        
                         updateItemsContainer(data.items);
                     },
                     error: function (error) {
@@ -222,24 +189,35 @@
                 });
             });
     
-            // ... (other existing JavaScript code)
+            
     
             function updateItemsContainer(items) {
-                // Clear existing items
+                
                 $('.items-container').empty();
     
-                // Append the new items to the container
+              
                 items.forEach(function (item) {
-                    // Create and append HTML for each item
+                   
                     var itemHtml = '<div class="item">' +
                         '<a id="detail" href="{{ route("details", ["itemId" => ":itemId"]) }}">'.replace(':itemId', item.item_id) +
-                        // ... (rest of your item HTML)
+                       
                         '</a></div>';
                     $('.items-container').append(itemHtml);
                 });
             }
         });
+    </script>  --}}
+
+
+    <script>
+        function addToCart(itemId, itemName, price) {
+           
+            console.log("Adding to cart:", itemId, itemName, price);
+        
+            window.location.href = '{{ route("cart") }}';
+        }
     </script>
+
     @include('footer')
 </body>
 </html>

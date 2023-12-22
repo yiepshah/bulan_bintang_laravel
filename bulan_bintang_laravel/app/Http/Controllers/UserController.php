@@ -67,12 +67,12 @@ class UserController extends Controller
         return redirect()->route('login')->with('login_error', 'Invalid email or password.')->with('showAlert', 'loginError');
     }
 
-    public function showUsers()
-    {
-        $users = User::orderBy('id', 'DESC')->get();
+    // public function showUsers()
+    // {
+    //     $users = User::orderBy('id', 'DESC')->get();
 
-        return view('adminpage', ['users' => $users]);
-    }
+    //     return view('adminpage', ['users' => $users]);
+    // }
 
 
     public function logout(){
@@ -89,11 +89,48 @@ class UserController extends Controller
 
     public function showAdminpage()
     {
-        // Assuming $users is the data you want to pass to the view
-        $users = User::all(); // Replace this with your actual query to fetch users
-    
+        $users = User::all(); 
         return view('adminpage', ['users' => $users]);
+    }
+
+    public function updateUser(Request $request)
+    {
+        $userId = $request->input('userId');
+        $field = $request->input('field');
+        $value = $request->input('value');
+
+        try {
+            
+            $user = User::findOrFail($userId);
+
+            
+            $user->{$field} = $value;
+            $user->save();
+
+            return response()->json(['status' => 'success']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $userId = $request->input('userId');
+
+        try {
+            
+            $user = User::findOrFail($userId);
+
+            
+            $user->delete();
+
+            return response()->json(['status' => 'success']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
     
     
+    
+
 }

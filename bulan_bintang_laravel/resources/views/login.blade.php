@@ -19,7 +19,6 @@
 
 <body>
     @include('header')
-
     <section class="vh-100" style="background-color: #202d45;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -27,11 +26,13 @@
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                
                                 <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2022/01/170947095_130190345785670_5967843123006398473_n.jpg?resize=800%2C800&ssl=1"
                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                                 <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2022/01/170947095_130190345785670_5967843123006398473_n.jpg?resize=800%2C800&ssl=1"
                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                             </div>
+
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 

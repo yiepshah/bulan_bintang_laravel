@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> --}}
 
     <style>
-          <style>
+          
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -87,27 +87,18 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    @isset($mainCategories)
-                    @foreach ($mainCategories as $mainCategory)
+                    
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{ $mainCategory['category_name'] }}</a>
-                            <ul class="dropdown-menu">
-                                @foreach ($mainCategory['subcategories'] as $subcategory)
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown" href="{{ url('collection') }}?id={{ $subcategory['category_id'] }}">{{ $subcategory['category_name'] }}</a>
-                                        <ul class="dropdown-menu">
-                                            @foreach ($subcategory['subcategories'] as $subSubcategory)
-                                                <li><a class="dropdown-item" href="{{ url('collection') }}?id={{ $subSubcategory['category_id'] }}">{{ $subSubcategory['category_name'] }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                    
-                                @endforeach
-                            </ul>
-                        </li>
-                        
-                    @endforeach
-                    @endisset
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                               
+                            </a>
+                            {{-- <ul>
+                                <li><a href="{{ route('category.items', 'MEN') }}">Men</a></li>
+                                <li><a href="{{ route('category.items', 'WOMEN') }}">Women</a></li>
+                                <li><a href="{{ route('category.items', 'KIDS') }}">Kids</a></li>
+                                <!-- Add more categories as needed -->
+                            </ul> --}}
+                        </li>    
                 </ul>
             </div>
 
@@ -137,7 +128,7 @@
             </li>
 
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="shop">
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="collection">
                 @auth
                     <a class="nav-link" href="{{ route('collection') }}" id="collection">
                         <i class="fas fa-store"></i>
@@ -168,8 +159,6 @@
         </ul>
     </div>
 </nav>
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

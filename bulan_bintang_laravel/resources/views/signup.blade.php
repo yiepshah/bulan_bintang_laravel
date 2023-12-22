@@ -52,6 +52,7 @@
 
 <body>
     @include('header')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
@@ -90,7 +91,7 @@
                         <strong>Success!</strong> Passwords match.
                     </div>
                     <p style="font-family: cursive;">Already Have An Account? <a id="loginlink" href="login">Login
-                            Now!</a></p>
+                            Now! </a></p>
                     <button type="submit" id="Sbtn" class="btn btn-dark">Submit</button><br><br>
                     <a href="">Terms of use. Privacy policy</a>
                 </form>
@@ -98,7 +99,6 @@
         </div>
     </div>
 
- 
     <script>
         
 

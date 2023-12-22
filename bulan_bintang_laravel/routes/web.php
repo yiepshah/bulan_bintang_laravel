@@ -5,8 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
-
-
+// use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,31 +18,39 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-
 Route::get('/', function () {
     return view('index');
-})->name('index'); // Add ->name('index') to give the route a name
+})->name('index'); 
 
 Route::post('/signup', [UserController::class, 'signup']);
+Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
 
 Route::get('/login', function () {
     return view('login');
-})->name('login'); // Add ->name('login') to give the route a name
+})->name('login'); 
 
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/adminpage', [UserController::class, 'showAdminpage'])->name('adminpage');
 });
 
+// Route::get('/adminpage', 'PostController@adminPage')->name('adminpage');
+
 Route::get('/add_item', function () {
     return view('add_item');
 });
 
+Route::post('/add_item',[PostController::class,'addPost']);
 
-Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
-Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+// Route:: get('/adminpage', function () {
+//     $items = DB::table('posts')->get();
 
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+//     return view('adminpage', ['petani' => $items]);
+// });
+
+// Route::post('/add_item', 'PostController@addPost')->name('addPost');
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
@@ -51,17 +58,27 @@ Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('d
 
 Route::post('/addToCart/{itemId}', [PostController::class, 'addToCart'])->name('addToCart');
 
-Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
-Route::post('/signup', [UserController::class, 'signup']);
-
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [UserController::class, 'login']);
-
-Route::post('/add-post', 'PostController@addPost')->name('addPost');
-
 Route::get('/get-items/{categoryId}', [CategoryController::class, 'getItems']);
 
-Route::get('/category', [CategoryController::class, 'index'])->name('category');
+// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+// Route::get('/categories/{category}', [CategoryController::class, 'showCategoryItems'])->name('category.items');
 
+// Route::get('/categories', [CategoryController::class, 'showCategories'])->name('categories.show');
+
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::post('/update-user', 'UserController@updateUser')->name('update.user');
+Route::post('/delete-user', 'UserController@deleteUser')->name('delete.user');
+
+
+
+
+
+
+

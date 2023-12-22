@@ -58,15 +58,13 @@
        
     </style>
 </head>
-<body>
-    @auth
-        @if (auth()->user()->role === 'admin')
-            @include('adminsidebar')
-        @endif
-    @endauth
-   
+<body> 
     @include('header')
-   
+    @auth
+    @if (auth()->user()->role === 'admin')
+        @include('adminsidebar')
+    @endif
+    @endauth 
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-3"></div>
@@ -76,10 +74,11 @@
                     <div class="card-header">
                         <h2 id="userprofile">User Profile</h2>
                     </div>
-                    <img id="profileImg" src="https://uploads-ssl.webflow.com/5e95471ed56b94bd8e14bde6/5ebb7855246215caa927b0b0_user%20feedback%20icons-21.png" alt="dv">
+                    <img id="profileImg" src="https://cdn-icons-png.flaticon.com/512/6998/6998058.png" alt="dv">
                     <div class="card-body">
                         <div class="profile-info">
                             @if ($user !== null)
+                            
                                 <div>
                                     <p><strong>Name:</strong> {{ $user->name }}</p>
                                     <p><strong>Email:</strong> {{ $user->email }}</p>
@@ -96,6 +95,7 @@
                                         <p><strong>Register Date:</strong> Not available</p>
                                     @endisset
                                 </div>
+
                             @else
                                 <p>No user data found.</p>
                             @endif

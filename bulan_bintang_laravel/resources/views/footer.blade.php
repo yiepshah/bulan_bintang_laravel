@@ -1,9 +1,11 @@
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
     .footer {
         font-family: poppins, sans-serif;
         font-weight: 500;
- 
-        font-size: smaller;
+        font-size: medium;
 
     }
 </style>

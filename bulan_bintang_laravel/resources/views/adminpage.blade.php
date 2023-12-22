@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Admin Dashboard</title>
     <style>
         body {
@@ -60,6 +64,20 @@
             margin-left: 200px;
         }
 
+        @media (max-width: 576px) {
+        .w3-sidebar {
+            width: 100px;
+        }
+
+        .w3-sidebar:hover {
+            width: 100%;
+        }
+
+        .main--content {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
         .header--wrapper img {
             width: 50px;
             height: 50px;
@@ -260,7 +278,6 @@
             margin-right: 5px;
             transition: transform 0.3s ease-in-out;
 
-
         }
 
         #editItembtn:hover {
@@ -284,11 +301,13 @@
 
 <body>
     @include('header')
-    <div class="w3-sidebar">
-        
-        <a href="{{ route('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home"></i></a>
-        <a href="{{ route('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store"></i></a>
-    </div>
+
+    @auth
+        @if (auth()->user()->role === 'admin')
+            @include('adminsidebar')
+        @endif
+    @endauth 
+
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
@@ -297,7 +316,8 @@
             </div>
             <div class="user--info">
                 <div class="search--box">
-                    <i class="fa-solid fa-search"></i>
+                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg" alt="Profile Image">
+                    {{-- <i class="fa-solid fa-search"></i> --}}
                     <input id="myInput" type="text" placeholder="Search">
                 </div>
             </div>
@@ -341,11 +361,15 @@
             </div>
             <hr>
 
+            <!-- Add this canvas element where you want the chart to appear -->
+            <canvas id="myLineChart" width="3" height="15"></canvas>
+
+
 
             <div class="stock-table-container">
                 <h2 class="main--title">User Information</h2>
                 <div class="table-responsive">
-                    <table class="stock-table table table-striped">-
+                    <table class="stock-table table table-striped">
                         <thead class="thead-dark">
                             <tr>
                                 <th>User ID</th>
@@ -371,163 +395,154 @@
                         </tbody>
                      </table>
                 </div>
+
+                <div class="stock-table-container">
+                    <h2 class="main--title">Stock Information</h2>
+                    <div class="table-responsive">
+                        <table class="stock-table table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Price</th>
+                                    <th>Product Info</th>
+                                    <th>Material</th>
+                                    <th>Inside Box</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="myUsertable">
+                                {{-- @forelse ($items as $key => $data) --}}
+                                    <tr>
+                                        {{-- <th>{{$data->item_id}}</th>
+                                        <th>{{$data->item_name}}</th>
+                                        <th>{{$data->price}}</th>
+                                        <th>{{$data->product_information}}</th>
+                                        <th>{{$data->material}}</th>--}}
+
+                                    </tr>
+                                    
+                                {{-- @empty --}}
+                                    <tr><td colspan='4'>No items found</td></tr>
+                                {{-- @endforelse --}}
+                            </tbody>
+                         </table>
+                    </div>
             </div>
 
-
-     <div class="stock-table-container">
-        <h2 class="main--title">User Information</h2>
-        <div class="table-responsive">
-            <table class="stock-table table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="myUsertable">
-                    @forelse ($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "name")' onClick='editUser(this)'>{{ $user->name }}</td>
-                            <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "email")' onClick='editUser(this)'>{{ $user->email }}</td>
-                            <td>
-                                <button class='btn btn-dark' onclick='deleteUser({{ $user->id }})'>Delete</button><br><br>
-                                <button class='btn btn-dark' onclick='submitUser({{ $user->id }})'>Submit</button>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr><td colspan='4'>No users found</td></tr>
-                    @endforelse
-                </tbody>
-             </table>
-        </div>
-    </div>
     
     
 
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myItemtable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(
-                        value) > -1)
+            <script>
+                $(document).ready(function () {
+                    $("#myInput").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#myItemtable tr").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(
+                                value) > -1)
+                        });
+                    });
                 });
-            });
-        });
-    </script>
-
-<script>
-        function editUser(element) {
-          
-            element.style.backgroundColor = "#ffffcc";
-        }
-
-        function updateUser(element, userId, field) {
-            
-            element.style.backgroundColor = "";
-
-           
-            var updatedValue = element.innerText.trim();
-
-
-            $.ajax({
-                type: "POST",
-                url: "update_user.php", 
-                data: {
-                    userId: userId,
-                    field: field,
-                    value: updatedValue
-                },
-                success: function (response) {
-                 
-                    if (response === "success") {
-                        Swal.fire("Success!", "User data updated.", "success");
-                    } else {
-                        Swal.fire("Error!", "Failed to update user data.", "error");
+            </script>
+        
+        <script>
+            function editUser(element) {
+                element.style.backgroundColor = "#ffffcc";
+            }
+        
+            function updateUser(element, userId, field) {
+                element.style.backgroundColor = "";
+        
+                var updatedValue = element.innerText.trim();
+        
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('update.user') }}",
+                    data: {
+                        userId: userId,
+                        field: field,
+                        value: updatedValue,
+                        _token: "{{ csrf_token() }}",
+                    },
+                    success: function (response) {
+                        if (response.status === "success") {
+                            Swal.fire("Success!", "User data updated.", "success");
+                        } else {
+                            Swal.fire("Error!", "Failed to update user data.", "error");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire("Error!", "Failed to update user data. " + error, "error");
                     }
-                }
-            });
-        }
-
-        function deleteUser(userId) {
-
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                type: "POST",
-                url: "delete_user.php",
-                data: {
-                    userId: userId
-                },
-                success: function (response) {
-                   
-                    if (response === "success") {
-                        Swal.fire("Deleted!", "User has been deleted.", "success");
-                       
-                        location.reload();
-                    } else {
-                        Swal.fire("Error!", "Failed to delete user. " + response, "error");
-                        console.error(response);
+                });
+            }
+        
+            function deleteUser(userId) {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('delete.user') }}",
+                            data: {
+                                userId: userId,
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function (response) {
+                                if (response.status === "success") {
+                                    Swal.fire("Deleted!", "User has been deleted.", "success");
+                                    location.reload();
+                                } else {
+                                    Swal.fire("Error!", "Failed to delete user. " + response.message, "error");
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                Swal.fire("Error!", "Failed to delete user. " + error, "error");
+                            }
+                        });
                     }
-                },
-                error: function (xhr, status, error) {
-                    Swal.fire("Error!", "Failed to delete user. " + error, "error");
-                    console.error(error); 
-                }
-            });
-        }
-    });
-}
-    </script>
+                });
+            }
+        </script>
 
-    <script>
-$.ajax({
-    type: "POST",
-    url: "adminpage",
-    data: {
-        userId: userId,
-        field: field,
-        value: updatedValue
-    },
-    success: function (response) {
-      
-        if (response === "success") {
-            Swal.fire("Success!", "User data updated.", "success");
-        } else {
-            Swal.fire("Error!", "Failed to update user data. " + response, "error");
-            console.error(response);
+{{-- <script>
+    // Dummy data (replace this with your actual data)
+    var chartData = {
+        labels: ["January", "February", "March", "April", "May"],
+        datasets: [{
+            label: "Sales Data",
+            data: [30, 45, 60, 20, 80], // Replace with your actual data
+            borderColor: "#3498db",
+            backgroundColor: "rgba(52, 152, 219, 0.2)",
+            fill: true,
+        }]
+    };
+
+    // Get the canvas element
+    var ctx = document.getElementById('myLineChart').getContext('2d');
+
+    // Create the line chart
+    var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: chartData,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false, // Set to false to disable aspect ratio preservation
+        scales: {
+            // ... (other options)
+        },
+        plugins: {
+            // ... (other options)
         }
-    },
-    error: function (xhr, status, error) {
-        Swal.fire("Error!", "Failed to update user data. " + error, "error");
-        console.error(error);
     }
 });
-    </script>
 
-<script>
-    function confirmDeleteItem(itemId) {
-        var confirmDelete = confirm("Are you sure you want to delete this item?");
-        if (confirmDelete) {
-            window.location.href = "adminpage.php?id=" + itemId;
-        }
-    }
-
-    function editItem(itemId) {
-        window.location.href = "adminpage.php?id=" + itemId;
-    }
-</script>
-@include('footer')
-</body>
+</script> --}}
+        @include('footer')
+        </body>

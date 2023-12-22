@@ -11,10 +11,19 @@
     <title>Bulan Bintang</title>
     <style>
     
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+
+
+    body{
+        /* font-family: 'Quicksand', sans-serif; */
+    }
+
     .image-container {
         display: flex; 
         align-items: center;
-        margin-top: 20px; 
+        padding-top: 20px; 
         width: 25%;    
     }
 
@@ -23,7 +32,7 @@
         height: auto;
         width: 500px;
         transition: transform 0.4s ease-in-out;   
-        padding: 10px;
+             
     }
 
     .brother-collection img:hover {
@@ -114,11 +123,11 @@
         left: 69%; 
         padding: 5px 5px; 
         background: transparent; 
-        border: 3px solid black; 
+        border: 2px solid black; 
         border-radius: 10px 10px;
         text-decoration: none;
-        font-weight: 900;
-        font-size: 40px;
+        font-weight: 700;
+        font-size: 30px;
         color: #000; 
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         transition: transform 0.3s ease-in-out;    
@@ -185,6 +194,7 @@
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
     <span class="carousel-control-next-icon"></span>
   </button>
+
   @if(isset($_SESSION['user_id'])) @auth
     <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
   @endauth
@@ -197,6 +207,7 @@
 </div>
 
     <h3 class="collection">Brothers Collection</h3>
+
     <div class="image-container brother-collection">
         <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Flamingo-Pink_SF_22.jpg" alt="Image 1">
         <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/03/Viridian-Green_BMTF_34-1536x1536.jpg" alt="Image 2">
@@ -205,7 +216,6 @@
         
     </div><br><br><br>
 
-    
     <div class="third-image">
     <h3 class="collection">2023 Collection</h3>
         <div class="image-group">    
@@ -290,6 +300,7 @@
     <div style="background-color: #12122f;color: #fff; padding: 60px;">
         <div class="container">
             <div class="row">
+                
                 <div class="col-md-3">
                     <h4>ABOUT US</h4> <br>
                     <ul>
@@ -298,6 +309,7 @@
                         <li>Careers</li><br>
                     </ul>
                 </div>
+
                 <div class="col-md-3">
                     <h4>CUSTOMER CARE</h4><br>
                     <ul>
@@ -305,6 +317,7 @@
                         <li>Return Policy</li>
                     </ul>
                 </div>
+
                 <div class="col-md-3">
                     <h4>FOLLOW US</h4><br>
                     <ul>
@@ -313,6 +326,7 @@
                         <i class="fab fa-twitter"></i>
                     </ul>
                 </div>
+
                 <div class="col-md-3">
                     <h4>CUSTOMER SERVICES</h4><br>
                     <ul>

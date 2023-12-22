@@ -1,37 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use App\Models\Post;
 
-
-
 class PostController extends Controller
 {
-    public function addPost(Request $request){
+    public function addPost(Request $request)
+    {
         $itemPost = $request->validate([
             'item_name' => 'required',
-            'price'=> 'required',
-            'product_information'=> 'required',
-            'material'=> 'required',
-            'inside_box'=> 'required',
-            'category_id'=> 'required',
-            'image_path'=> 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'required',
+            'product_information' => 'required',
+            'material' => 'required',
+            'inside_box' => 'required',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
+    
+        if (auth()->check()) {
+                   
+            $image_path = $request->file('image_path')->store('images', 'public');
+            $itemPost['item_name'] = strip_tags($itemPost['item_name']);
+            $itemPost['product_information'] = strip_tags($itemPost['product_information']);
+            $itemPost['material'] = strip_tags($itemPost['material']);
+            $itemPost['inside_box'] = strip_tags($itemPost['inside_box']);
 
-        $imagePath = $request->file('image_path')->store('images', 'public');
-        $itemPost['item_name'] = strip_tags( $itemPost['item_name']);
-        $itemPost['product_information'] = strip_tags($itemPost['product_information']);
-        $itemPost['material'] = strip_tags($itemPost['material']);
-        $itemPost['inside_box'] = strip_tags($itemPost['inside_box']);
-        $itemPost['category_id'] = strip_tags($itemPost['category_id']);
-        $itemPost['item_id'] = auth()->id();
-        Post::create($itemPost);
-        return redirect('adminpage'); 
+            $itemPost['image_path'] = $image_path;
 
+            $itemPost['user_id'] = auth()->id();
+            
+            Post::create($itemPost);
+    
+            return redirect('/collection');
+        }
+    
+  
+        return redirect('/login')->with('error', 'Please log in to add a post.');
     }
-
     public function collection()
     {
         $items = Post::all(); 
@@ -45,11 +51,10 @@ class PostController extends Controller
             ->first();
     
         if ($itemDetails) {
-            // Define predefined size options
             $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
     
             $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
-            $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
+            // $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
             $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
     
             return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions'));
@@ -57,16 +62,12 @@ class PostController extends Controller
             return view('details', ['itemNotFound' => true]);
         }
     }
-    public function addToCart(Request $request, $itemId)
+
+    public function adminPage()
     {
-        $itemDetails = DB::table('posts')->find($itemId);
+        $items = Post::all();
 
-        if ($itemDetails) {
-
-
-            return view('cart_confirmation', compact('itemDetails'));
-        } else {
-            return view('cart_confirmation', ['itemNotFound' => true]);
-        }
+        
+        return view('adminpage', ['items' => $items]);
     }
 }

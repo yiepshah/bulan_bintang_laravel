@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
-    public function showCart()
-    {
-        
-        return view('cart'); 
-    }
+
 
     /**
      * Add item to the cart.
@@ -19,23 +15,55 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function addToCart(Request $request)
-    {
-        // Validate the request data
+    {   
         $request->validate([
             'item_id' => 'required|numeric',
+            'item_name' => 'required|string',
+            'image_path' => 'required|string',
+            'price' => 'required|numeric',
+            // 'size' => 'required|string',
             'quantity' => 'required|numeric|min:1',
-            // Add other validation rules as needed
+            'product_information' => 'required|string',
+            'material' => 'required|string',
+            'inside_box' => 'required|string',
         ]);
 
-        // Retrieve data from the request
         $item_id = $request->input('item_id');
+        $item_name = $request->input('item_name');
+        $image_path = $request->input('image_path');
+        $price = $request->input('price');
+        // $size = $request->input('size');
         $quantity = $request->input('quantity');
+        $product_information = $request->input('product_information');
+        $material = $request->input('material');
+        $inside_box = $request->input('inside_box');
 
-        // Your logic to add the item to the cart goes here
-        // For example, you might store it in the session or a database table
+        // Create an array with the item details
+        $cartItem = [
+            'item_id' => $item_id,
+            'item_name' => $item_name,
+            'image_path' => $image_path,
+            'price' => $price,
+            // 'size' => $size,
+            'quantity' => $quantity,
+            'product_information' => $product_information,
+            'material' => $material,
+            'inside_box' => $inside_box,
+        ];
 
-        // After adding to the cart, you can redirect to the cart page or show a confirmation message
+        $cart = session('cart', []);
+        $cart[] = $cartItem;
+        session(['cart' => $cart]);
         return redirect()->route('cart')->with('success', 'Item added to the cart successfully.');
+    
+    }
+
+    public function showCart()
+    {
+        
+        $cartItems = session('cart', []);
+
+        return view('cart', ['cartItems' => $cartItems]);
     }
 
 }

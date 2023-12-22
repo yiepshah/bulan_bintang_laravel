@@ -7,46 +7,58 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {   
-    public function getItems($categoryId)
-    {
-        $items = DB::table('posts')
-            ->select('item_id', 'item_name', 'image_path', 'price')
-            ->where('category_id', $categoryId)
-            ->orderByDesc('item_id')
-            ->get();
+    // public function getItems($categoryId)
+    // {
+    //     $items = DB::table('posts')
+    //         ->select('item_id', 'item_name', 'image_path', 'price')
+    //         ->where('category_id', $categoryId)
+    //         ->orderByDesc('item_id')
+    //         ->get();
 
-        return response()->json(['items' => $items]);
-    }
+    //     return response()->json(['items' => $items]);
+    // }
 
-    public function index()
-    {
-        $categories = Category::all();
-        return view('categories.index', compact('categories'));
-    }
+    // public function showCategoryItems($category)
+    // {
+        
+    //     $parentCategory = Category::where('category_name', $category)->first();
 
-    public function create()
-    {
-        return view('categories.create');
-    }
+    //     if ($parentCategory) {
+           
+    //         $items = Category::where('parent_id', $parentCategory->category_id)->get();
 
-    public function store(Request $request)
-    {
-        // Validation and store logic
-    }
+    //         return view('collection', ['items' => $items]);
+    //     } else {
+            
+    //         abort(404);
+    //     }
+    // }
 
-    public function edit($id)
-    {
-        $category = Category::findOrFail($id);
-        return view('categories.edit', compact('category'));
-    }
+    // public function index()
+    // {
+    //     $mainCategories = Category::with('subcategories')->whereNull('parent_id')->get();
+    //     return view('categories.index', compact('mainCategories'));
+    // }
+    
 
-    public function update(Request $request, $id)
-    {
-        // Validation and update logic
-    }
+    // public function create()
+    // {
+    //     return view('categories.create');
+    // }
 
-    public function destroy($id)
-    {
-        // Delete logic
-    }
+    // public function edit($id)
+    // {
+    //     $category = Category::findOrFail($id);
+    //     return view('categories.edit', compact('category'));
+    // }
+
+    // public function update(Request $request, $id)
+    // {
+       
+    // }
+
+    // public function destroy($id)
+    // {
+       
+    // }
 }
