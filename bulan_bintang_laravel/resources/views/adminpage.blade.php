@@ -407,27 +407,29 @@
                                     <th>Product Info</th>
                                     <th>Material</th>
                                     <th>Inside Box</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody id="myUsertable">
-                                {{-- @forelse ($items as $key => $data) --}}
+                            <tbody id="myItemtable">
+                                @forelse ($items as $item)
                                     <tr>
-                                        {{-- <th>{{$data->item_id}}</th>
-                                        <th>{{$data->item_name}}</th>
-                                        <th>{{$data->price}}</th>
-                                        <th>{{$data->product_information}}</th>
-                                        <th>{{$data->material}}</th>--}}
-
+                                        <td>{{ $item->item_name }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->product_information }}</td>
+                                        <td>{{ $item->material }}</td>
+                                        <td>{{ $item->inside_box }}</td>
+                                        <td>
+                                            <button class='btn btn-dark' onclick='editItem({{ $item->id }})'>Edit</button><br><br>
+                                            <button class='btn btn-dark' onclick='deleteItem({{ $item->id }})'>Delete</button>
+                                        </td>
                                     </tr>
-                                    
-                                {{-- @empty --}}
-                                    <tr><td colspan='4'>No items found</td></tr>
-                                {{-- @endforelse --}}
+                                @empty
+                                    <tr><td colspan='6'>No items found</td></tr>
+                                @endforelse
                             </tbody>
-                         </table>
+                        </table>
                     </div>
-            </div>
+                </div>
 
     
     
@@ -511,38 +513,44 @@
             }
         </script>
 
-{{-- <script>
-    // Dummy data (replace this with your actual data)
-    var chartData = {
-        labels: ["January", "February", "March", "April", "May"],
-        datasets: [{
-            label: "Sales Data",
-            data: [30, 45, 60, 20, 80], // Replace with your actual data
-            borderColor: "#3498db",
-            backgroundColor: "rgba(52, 152, 219, 0.2)",
-            fill: true,
-        }]
-    };
-
-    // Get the canvas element
-    var ctx = document.getElementById('myLineChart').getContext('2d');
-
-    // Create the line chart
-    var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: chartData,
-    options: {
-        responsive: true,
-        maintainAspectRatio: false, // Set to false to disable aspect ratio preservation
-        scales: {
-            // ... (other options)
-        },
-        plugins: {
-            // ... (other options)
-        }
+<script>
+    function editItem(itemId) {
+        // Implement your logic to handle editing stock items here
+        // You can open a modal or redirect to an edit page
+        // Example: window.location.href = '/edit-item/' + itemId;
+        console.log('Edit Item:', itemId);
     }
-});
 
-</script> --}}
+    function deleteItem(itemId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Implement your logic to handle deleting stock items here
+                // Example AJAX request:
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/delete-item/" + itemId,
+                //     data: {
+                //         _token: "{{ csrf_token() }}",
+                //     },
+                //     success: function (response) {
+                //         // Handle success
+                //     },
+                //     error: function (xhr, status, error) {
+                //         // Handle error
+                //     }
+                // });
+                console.log('Delete Item:', itemId);
+            }
+        });
+    }
+</script>
         @include('footer')
         </body>

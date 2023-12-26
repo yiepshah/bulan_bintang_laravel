@@ -170,7 +170,7 @@
         </div>
 
 
-    {{-- <script>
+    <script>
         $(document).ready(function () {
             $('.category-link').on('click', function (e) {
                 e.preventDefault();
@@ -206,7 +206,7 @@
                 });
             }
         });
-    </script>  --}}
+    </script> 
 
 
     <script>

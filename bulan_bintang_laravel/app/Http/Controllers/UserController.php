@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Post;
 
 class UserController extends Controller  
 {   
@@ -89,10 +90,11 @@ class UserController extends Controller
 
     public function showAdminpage()
     {
-        $users = User::all(); 
-        return view('adminpage', ['users' => $users]);
+        $users = User::all();
+        $items = Post::all(); // Assuming you have an Item model
+        return view('adminpage', ['users' => $users, 'items' => $items]);
     }
-
+    
     public function updateUser(Request $request)
     {
         $userId = $request->input('userId');

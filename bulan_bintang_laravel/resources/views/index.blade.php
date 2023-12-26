@@ -195,12 +195,10 @@
     <span class="carousel-control-next-icon"></span>
   </button>
 
-  @if(isset($_SESSION['user_id'])) @auth
-    <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
-  @endauth
-    
+  @if(auth()->check())
+  <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
 @else
-    <a id="shop" href="{{ url('login') }}">SHOP NOW!</a>
+  <a id="shop" href="{{ url('login') }}">SHOP NOW!</a>
 @endif
 
 </a>
@@ -288,8 +286,7 @@
             <div class ="col-md-3">
                 <figure>
                     <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/TERENGGANU.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Terengganu</figcaption>
-                    
+                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Terengganu</figcaption>    
                 </figure>
             </div>
 

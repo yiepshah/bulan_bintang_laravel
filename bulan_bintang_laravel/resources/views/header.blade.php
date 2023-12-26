@@ -87,18 +87,18 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                               
-                            </a>
-                            {{-- <ul>
-                                <li><a href="{{ route('category.items', 'MEN') }}">Men</a></li>
-                                <li><a href="{{ route('category.items', 'WOMEN') }}">Women</a></li>
-                                <li><a href="{{ route('category.items', 'KIDS') }}">Kids</a></li>
-                                <!-- Add more categories as needed -->
-                            </ul> --}}
-                        </li>    
+                    {{-- @foreach ($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.items', $category->id) }}">{{ $category->category_name }}</a>
+                            @if ($category->subcategories->count() > 0)
+                                <ul>
+                                    @foreach ($category->subcategories as $subcategory)
+                                        <li><a href="{{ route('category.items', $subcategory->id) }}">{{ $subcategory->category_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach --}}
                 </ul>
             </div>
 

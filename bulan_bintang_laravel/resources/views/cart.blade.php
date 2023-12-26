@@ -142,13 +142,13 @@
             color: grey;
         }
 
-        #cartSize{
+        /* #cartSize{
             font-family: poppins , sans-serif;
             font-style: oblique;
             font-size: small;
             margin-top: 20px;
             color: grey;
-        }
+        } */
 
         #removeCartbtn{
             margin-top: 20px;
@@ -191,29 +191,48 @@
                             <p>{{ $item['item_name'] }}</p>
                             <p>RM {{ $item['price'] }}</p>
                             <div class="quantity-tools">
-                                <label for="quantity{{ $index }}">Quantity</label>
-                                <button onclick="decrementQuantity('quantity{{ $index }}')">-</button>
-                                <input type="number" id="quantity{{ $index }}" name="quantity{{ $index }}" value="{{ $item['quantity'] }}" min="1" oninput="updateCartItemQuantity({{ $index }})">
-                                <button onclick="incrementQuantity('quantity{{ $index }}')">+</button>
-                                <span id="quantityDisplay{{ $index }}"> X {{ $item['quantity'] }}</span>
+                                <label for="quantity{{ $index }}">Quantity: {{ $item['quantity'] }}</label>
                             </div>
-                            <p id="cartSize"> Size: {{ implode(', ', $item['size']) }}</p>
+                            <p id="cartSize"> Size: {{ $item['size'] ?? 'N/A' }}</p>
                             <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
-                            <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
-                                @csrf
-                                <button class="btn btn" id="removeCartbtn" type="submit" name="remove{{ $item['item_id'] }}">Remove</button><br><br>
-                            </form>
+                            @if (isset($item['item_id']))
+                                <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit" name="remove{{ $item['item_id'] }}">Remove</button>
+                                </form>
+                             @elseif ($item['date_added'] ?? null !== 'N/A')
+                                <button class="btn btn-danger" id="removeCartbtn{{ $index }}" type="button" disabled>Remove</button>
+                            @endif
                         </div>
                     </div>
                 @endforeach
+            @else
+                <p>Your cart is empty.</p>
             @endif
         </div>
-
+        
         <div class="cart-buttons">            
             <button id="checkout-btn" type="submit" name="proceed_to_checkout" class="btn btn-dark">Checkout <i class="fas fa-check-double"></i></button>
         </div>
+        
     </div>
-@include('footer')    
+
+
+@include('footer')  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var removeButtons = document.querySelectorAll('.btn');
+        removeButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+              
+                button.closest('form').submit();
+            });
+        });
+    });
+</script>
+
+
 </body>
 </html>
 

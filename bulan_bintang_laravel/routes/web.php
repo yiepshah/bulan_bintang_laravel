@@ -36,7 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/adminpage', [UserController::class, 'showAdminpage'])->name('adminpage');
 });
 
-// Route::get('/adminpage', 'PostController@adminPage')->name('adminpage');
 
 Route::get('/add_item', function () {
     return view('add_item');
@@ -44,28 +43,22 @@ Route::get('/add_item', function () {
 
 Route::post('/add_item',[PostController::class,'addPost']);
 
-// Route:: get('/adminpage', function () {
-//     $items = DB::table('posts')->get();
+Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
 
-//     return view('adminpage', ['petani' => $items]);
-// });
-
-// Route::post('/add_item', 'PostController@addPost')->name('addPost');
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
 Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
 
-Route::post('/addToCart/{itemId}', [PostController::class, 'addToCart'])->name('addToCart');
-
 Route::get('/get-items/{categoryId}', [CategoryController::class, 'getItems']);
 
-// Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-// Route::get('/categories/{category}', [CategoryController::class, 'showCategoryItems'])->name('category.items');
-
-// Route::get('/categories', [CategoryController::class, 'showCategories'])->name('categories.show');
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+
+
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+Route::get('/category/{id}', 'CategoryController@categoryItems')->name('category.items');
 
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 

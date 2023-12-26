@@ -25,9 +25,7 @@ class PostController extends Controller
             $itemPost['product_information'] = strip_tags($itemPost['product_information']);
             $itemPost['material'] = strip_tags($itemPost['material']);
             $itemPost['inside_box'] = strip_tags($itemPost['inside_box']);
-
             $itemPost['image_path'] = $image_path;
-
             $itemPost['user_id'] = auth()->id();
             
             Post::create($itemPost);
@@ -38,6 +36,13 @@ class PostController extends Controller
   
         return redirect('/login')->with('error', 'Please log in to add a post.');
     }
+
+    public function adminPage()
+    {
+        $items = Post::all();
+        return view('adminpage', ['items' => $items]);
+    }
+
     public function collection()
     {
         $items = Post::all(); 
@@ -63,11 +68,5 @@ class PostController extends Controller
         }
     }
 
-    public function adminPage()
-    {
-        $items = Post::all();
 
-        
-        return view('adminpage', ['items' => $items]);
-    }
 }

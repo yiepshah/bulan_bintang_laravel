@@ -48,6 +48,5 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id', 'category_id');
     }
-
     // Add other relationships, scopes, or methods as needed
 }

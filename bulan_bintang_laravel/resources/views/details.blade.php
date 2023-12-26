@@ -29,46 +29,12 @@
 
 
     .text {
-        font-size: 24px;
-        font-family: 'Roboto', sans-serif;
-        font-weight: bolder;
+        font-size: 20px;
     }
 
-    .size-box-container {
-        display: flex;
-        gap: 10px; 
-        border: none;
-        
-    }
 
-    .size-box {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        width: 40px;
-        border: none;
-        
-    }
-
-    .size-box input {
-       
-        display: none;
-        border: none;
-        
-        
-    }
-
-    .size-box label {     
-        border-color: white;
-        border: 1px solid; 
-        border-radius: 3px;
-        cursor: pointer;
-        border: none;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .size-box label:hover{
-        transform: scale(1.4);
+    #sizeSelect{
+        width: 300px;
     }
 
     .h4{
@@ -118,13 +84,14 @@
         cursor: pointer; 
     }
 
-    .detailPrice {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 600;
-    }
+    /* .detailProduct {
+        font-style: oblique;
+    } */
 
     .detailItem{
         font-family: 'Roboto', sans-serif;
+        margin-right: 10px;
+        margin-left: 10px;
     }
 
 
@@ -155,41 +122,54 @@
                     </ol>
                 </nav>
     
-                <h4 class="h4" style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
-                <hr>
+
                 
                 <div class="detailItem">
-                    <p class="detailProduct"> <strong>Product Information:</strong> {{ $itemDetails->product_information }}</p>
+                    <h4 class="h4" style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
+                    <hr>
+                    <div class="text">
+                        <p class="detailProduct"> <strong>Product Information:</strong> {{ $itemDetails->product_information }}</p>
 
-                    <p class="detailmaterial"> <strong>Material:</strong>  {{ $itemDetails->material }}</p>
+                        <p class="detailProduct"> <strong>Material:</strong>  {{ $itemDetails->material }}</p>
+        
+                        <p class="detailProduct"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
+        
+                        <p class="detailProduct"><strong>Price: $ </strong>{{ $itemDetails->price }}</p>
     
-                    <p class="detailinsidebox"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
-    
-                    <p class="detailPrice"><strong>Price: $ </strong>{{ $itemDetails->price }}</p>
-                </div>
-    
-                <div class="form-group">
-                    <label for="size"><strong>Size:</strong></label>
-                    <select id="sizeSelect" class="form-control">
-                        @foreach ($sizeOptions as $size)
-                            <option value="{{ $size }}">{{ $size }}</option>
-                        @endforeach
-                    </select>
+                    </div>
+
+                    {{-- <div class="form-group">
+                        <label for="size"><strong>Size:</strong></label>
+                        <select id="sizeSelect" class="form-control">
+                            @foreach ($sizeOptions as $size)
+                                <option value="{{ $size }}">{{ $size }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+
+                    <form method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">>
+                        @csrf
+                        <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
+                        <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
+                        <input type="hidden" name="image_path" value="{{ $itemDetails->image_path }}">
+                        <input type="hidden" name="price" value="{{ $itemDetails->price }}">
+                        <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
+                        <input type="hidden" name="material" value="{{ $itemDetails->material }}">
+                        <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
+                        <div class="form-group">
+                            <label for="size"><strong>Size:</strong></label>
+                            <select id="sizeSelect" class="form-control" name="size">
+                                @foreach ($sizeOptions as $size)
+                                    <option value="{{ $size }}">{{ $size }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">                    
+                        <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>
+                    </form>
+                    <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
                 </div>
                 <hr>
-              
-                <form method="post" action="{{ route('cart') }}">
-                    @csrf
-                    <input type="hidden" name="item_id" value="{{ $itemDetails->id }}">
-                    <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
-                    <input type="hidden" name="image_path" value="{{ $itemDetails->image_path }}">
-                    <input type="hidden" name="price" value="{{ $itemDetails->price }}">
-                    <input type="hidden" name="size" id="selectedSize" value="">
-                    <input type="number" id="quantity" name="quantity" value="1" min="1">
-                    
-                    <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>
-                </form> <br>
-                <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
             </div>
         </div>
     </div>
@@ -197,22 +177,33 @@
 <script>
     
     document.addEventListener("DOMContentLoaded", function () {
-        var sizeCheckboxes = document.querySelectorAll('.size-checkbox');
+    var sizeSelect = document.getElementById('sizeSelect');
+    var quantityInput = document.getElementById('quantity');
+    var selectedSizeInput = document.getElementById('selectedSize');
 
-        sizeCheckboxes.forEach(function (checkbox) {
-            checkbox.addEventListener('change', function () {
-                if (this.checked) {
-                    
-                    this.nextElementSibling.style.backgroundColor = '#007bff';
-                    this.nextElementSibling.style.color = '#fff';
-                } else {
-
-                    this.nextElementSibling.style.backgroundColor = 'transparent';
-                    this.nextElementSibling.style.color = '#007bff';
-                }
-            });
-        });
+    sizeSelect.addEventListener('change', function () {
+        var selectedSize = sizeSelect.value;
+        selectedSizeInput.value = selectedSize;
     });
+
+    quantityInput.addEventListener('input', function () {
+        var quantity = quantityInput.value;
+        if (quantity < 1) {
+            quantityInput.value = 1;
+        }
+    });
+
+    var addButton = document.getElementById('button');
+    addButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Add additional validation if needed
+
+        // Now you can submit the form using JavaScript
+        var form = document.getElementById('addToCartForm');
+        form.submit();
+    });
+});
 </script>
 
 <script>
