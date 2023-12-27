@@ -25,8 +25,7 @@
                 <div class="col col-xl-10">
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
-                            <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                
+                            <div class="col-md-6 col-lg-5 d-none d-md-block">                               
                                 <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2022/01/170947095_130190345785670_5967843123006398473_n.jpg?resize=800%2C800&ssl=1"
                                     alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                                 <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2022/01/170947095_130190345785670_5967843123006398473_n.jpg?resize=800%2C800&ssl=1"
@@ -83,7 +82,6 @@
                                         <a href="#!" class="small text-muted">Terms of use.</a>
                                         <a href="#!" class="small text-muted">Privacy policy</a>
                                     </form>
-
                                 </div>
                             </div>
                         </div>

@@ -50,3 +50,6 @@ class Category extends Model
     }
     // Add other relationships, scopes, or methods as needed
 }
+
+
+

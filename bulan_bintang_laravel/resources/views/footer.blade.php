@@ -6,7 +6,6 @@
         font-family: poppins, sans-serif;
         font-weight: 500;
         font-size: medium;
-
     }
 </style>
 

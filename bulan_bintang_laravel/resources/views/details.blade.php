@@ -14,19 +14,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
-    .small-image {
+    .image {
         max-width: 100%;
         width: 800px;
         height: auto;
-        border-radius: 8px;
-        
+        border-radius: 10px 10px;
+        margin-left: 10px;
+        margin-top: 10px;
     }
 
     .col-md-11{
         font-family: 'Roboto', sans-serif;    
     }
-
-
 
     .text {
         font-size: 20px;
@@ -35,6 +34,7 @@
 
     #sizeSelect{
         width: 300px;
+        border-radius: 20px 20px;
     }
 
     .h4{
@@ -94,6 +94,10 @@
         margin-left: 10px;
     }
 
+    #quantity{
+        border-radius: 10px 10px;
+    }
+
 
     
     </style>
@@ -104,12 +108,10 @@
     <div class="details-container">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('images/' . $itemDetails->image_path) }}" alt="{{ $itemDetails->item_name }}" class="img-fluid small-image">
+                <img class="image" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/KURTA-A-MIDNIGHT-BLUE-1.jpg?fit=1010%2C1010&ssl=1" alt="Item">
+                {{-- <img src="{{ asset('images/' . $itemDetails->image_path) }}" alt="{{ $itemDetails->item_name }}" class="img-fluid small-image"> --}}
             </div>
 
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
             
             <div class="col-md-6">
                 <nav aria-label="breadcrumb">
@@ -147,7 +149,7 @@
                         </select>
                     </div> --}}
 
-                    <form method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">>
+                    <form method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
                         <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
@@ -195,16 +197,16 @@
 
     var addButton = document.getElementById('button');
     addButton.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); 
 
-        // Add additional validation if needed
+ 
 
-        // Now you can submit the form using JavaScript
         var form = document.getElementById('addToCartForm');
         form.submit();
     });
 });
 </script>
+
 
 <script>
 

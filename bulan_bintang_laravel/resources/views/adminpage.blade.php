@@ -257,6 +257,42 @@
             background-color: #f2f2f2;
         }
 
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+            border-radius: 5px 5px;
+        }
+
+        .user-table th,
+        .user-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .user-table th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background-color: #3498db;
+        }
+
+        .user-table td {
+            background-color: #fff;
+            color: #343a40;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .user-table tbody tr:hover td {
+            background-color: #f2f2f2;
+        }
+
+
         #editItembtn {
             color: #000;
             border: none;
@@ -286,14 +322,19 @@
             transform: scale('1.2');
         }
 
-        #deleteItembtn{
-            background-color: #BB2525;
-            border: none;
-            transform: scale('1.3');
-        }
 
         #profileimg {
             margin-left: 6px;
+        }
+
+        #clearBtn{
+            background: linear-gradient(to right, #45a049, #8cc84b);
+            border: none;
+        }
+
+        #deleteBtn{
+            background: linear-gradient(to right, #e74c3c, #e66767);
+            border: none;
         }
     </style>
 
@@ -317,7 +358,7 @@
             <div class="user--info">
                 <div class="search--box">
                     <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg" alt="Profile Image">
-                    {{-- <i class="fa-solid fa-search"></i> --}}
+                   
                     <input id="myInput" type="text" placeholder="Search">
                 </div>
             </div>
@@ -361,40 +402,43 @@
             </div>
             <hr>
 
-            <!-- Add this canvas element where you want the chart to appear -->
-            <canvas id="myLineChart" width="3" height="15"></canvas>
-
-
-
-            <div class="stock-table-container">
+            <div class="user-table-container">
                 <h2 class="main--title">User Information</h2>
                 <div class="table-responsive">
-                    <table class="stock-table table table-striped">
+                    <table class="user-table table table-striped">
                         <thead class="thead-dark">
                             <tr>
-                                <th>User ID</th>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
+                        </thead>                       
+                        @if(isset($users))
                         <tbody id="myUsertable">
-                            @forelse ($users as $user)
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "name")' onClick='editUser(this)'>{{ $user->name }}</td>
-                                    <td contenteditable='true' onBlur='updateUser(this, {{ $user->id }}, "email")' onClick='editUser(this)'>{{ $user->email }}</td>
-                                    <td>
-                                        <button class='btn btn-dark' onclick='deleteUser({{ $user->id }})'>Delete</button><br><br>
-                                        <button class='btn btn-dark' onclick='submitUser({{ $user->id }})'>Submit</button>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr><td colspan='4'>No users found</td></tr>
-                            @endforelse
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->role }}</td>
+                                                                       
+                                <td>
+                                    <button class='btn btn-primary' onclick='editUser({{ $user->id }})'>Edit</button><br><br>
+                                    <button id="deleteBtn" class='btn btn-danger' onclick='deleteUser({{ $user->id }})'>Delete</button><br><br>
+                                    <button id="clearBtn" href="javascript:void(0);" onclick="clearPage()"  class='btn btn-success' type="submit">Enter</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else
+                            <p>No users found</p>
+                        @endif                           
                         </tbody>
                      </table>
                 </div>
+
+
 
                 <div class="stock-table-container">
                     <h2 class="main--title">Stock Information</h2>
@@ -402,6 +446,7 @@
                         <table class="stock-table table table-striped">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th>Item Id</th>
                                     <th>Item Name</th>
                                     <th>Price</th>
                                     <th>Product Info</th>
@@ -411,16 +456,24 @@
                                 </tr>
                             </thead>
                             <tbody id="myItemtable">
-                                @forelse ($items as $item)
+                                @php
+                                
+                                    $reversedItems = $items->reverse();
+                                @endphp
+
+                                @forelse ($reversedItems as $item)
                                     <tr>
+                                        <td>{{ $item->item_id }}</td>
                                         <td>{{ $item->item_name }}</td>
                                         <td>{{ $item->price }}</td>
                                         <td>{{ $item->product_information }}</td>
                                         <td>{{ $item->material }}</td>
                                         <td>{{ $item->inside_box }}</td>
+
                                         <td>
-                                            <button class='btn btn-dark' onclick='editItem({{ $item->id }})'>Edit</button><br><br>
-                                            <button class='btn btn-dark' onclick='deleteItem({{ $item->id }})'>Delete</button>
+                                            <button class='btn btn-primary' onclick='editItem({{ $item->item_id }})'>Edit</button><br><br>
+                                            <button id="deleteBtn" class='btn btn-danger' onclick='deleteItem({{ $item->item_id }})'>Delete</button><br><br>
+                                            <button id="clearBtn" href="javascript:void(0);" onclick="clearPage()"  class='btn btn-success' type="submit">Enter</button>                                         
                                         </td>
                                     </tr>
                                 @empty
@@ -431,126 +484,59 @@
                     </div>
                 </div>
 
-    
-    
 
-            <script>
-                $(document).ready(function () {
-                    $("#myInput").on("keyup", function () {
-                        var value = $(this).val().toLowerCase();
-                        $("#myItemtable tr").filter(function () {
-                            $(this).toggle($(this).text().toLowerCase().indexOf(
-                                value) > -1)
-                        });
-                    });
-                });
-            </script>
-        
-        <script>
-            function editUser(element) {
-                element.style.backgroundColor = "#ffffcc";
-            }
-        
-            function updateUser(element, userId, field) {
-                element.style.backgroundColor = "";
-        
-                var updatedValue = element.innerText.trim();
-        
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('update.user') }}",
-                    data: {
-                        userId: userId,
-                        field: field,
-                        value: updatedValue,
-                        _token: "{{ csrf_token() }}",
-                    },
-                    success: function (response) {
-                        if (response.status === "success") {
-                            Swal.fire("Success!", "User data updated.", "success");
-                        } else {
-                            Swal.fire("Error!", "Failed to update user data.", "error");
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        Swal.fire("Error!", "Failed to update user data. " + error, "error");
-                    }
-                });
-            }
-        
-            function deleteUser(userId) {
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
-                    confirmButtonText: "Yes, delete it!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ route('delete.user') }}",
-                            data: {
-                                userId: userId,
-                                _token: "{{ csrf_token() }}",
-                            },
-                            success: function (response) {
-                                if (response.status === "success") {
-                                    Swal.fire("Deleted!", "User has been deleted.", "success");
-                                    location.reload();
-                                } else {
-                                    Swal.fire("Error!", "Failed to delete user. " + response.message, "error");
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                Swal.fire("Error!", "Failed to delete user. " + error, "error");
+                <script>
+                    function editUser(id) {
+                        
+                        $('#myUsertable').find('tr').each(function() {
+                            
+                            if ($(this).find('td:first').text() == id) {
+                               $(this).find('td:not(:last-child)').attr('contenteditable', true);
                             }
                         });
                     }
-                });
-            }
-        </script>
+                
+                    function deleteUser(id) {
 
-<script>
-    function editItem(itemId) {
-        // Implement your logic to handle editing stock items here
-        // You can open a modal or redirect to an edit page
-        // Example: window.location.href = '/edit-item/' + itemId;
-        console.log('Edit Item:', itemId);
-    }
+                        $('#myUsertable').find('tr').each(function() {
+                           
+                            if ($(this).find('td:first').text() == id) {
+                               
+                                $(this).remove();
+                            }
+                        });          
+                    }
+                </script>
 
-    function deleteItem(itemId) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Implement your logic to handle deleting stock items here
-                // Example AJAX request:
-                // $.ajax({
-                //     type: "POST",
-                //     url: "/delete-item/" + itemId,
-                //     data: {
-                //         _token: "{{ csrf_token() }}",
-                //     },
-                //     success: function (response) {
-                //         // Handle success
-                //     },
-                //     error: function (xhr, status, error) {
-                //         // Handle error
-                //     }
-                // });
-                console.log('Delete Item:', itemId);
-            }
-        });
-    }
-</script>
+                <script>
+                    function editItem(itemId) {
+                        
+                        $('#myItemtable').find('tr').each(function() {
+                            
+                            if ($(this).find('td:first').text() == itemId) {
+                            $(this).find('td:not(:last-child)').attr('contenteditable', true);
+                            }
+                        });
+                    }
+
+                    function deleteItem(itemId) {
+
+                        $('#myItemtable').find('tr').each(function() {
+                        
+                            if ($(this).find('td:first').text() == itemId) {
+                            
+                                $(this).remove();
+                            }
+                        });
+                    }
+                </script>
+                
+                <script>
+                    function clearPage() {
+    
+                        location.reload();
+                    }
+
+                </script>
         @include('footer')
         </body>

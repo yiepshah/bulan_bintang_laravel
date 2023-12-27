@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+
 class CartController extends Controller
 {
 
@@ -61,6 +63,8 @@ class CartController extends Controller
     
     }
 
+    
+
     public function showCart()
     {
         
@@ -73,10 +77,8 @@ class CartController extends Controller
     {
         $cart = session('cart', []);
     
-        // Find the item in the cart by item_id or any unique identifier
         $index = array_search($item_id, array_column($cart, 'item_id'));
     
-        // If the item is found, remove it from the cart
         if ($index !== false) {
             unset($cart[$index]);
             session(['cart' => $cart]);
@@ -84,8 +86,6 @@ class CartController extends Controller
     
         return redirect()->route('cart')->with('success', 'Item removed from the cart.');
     }
-    
-
 
     
 

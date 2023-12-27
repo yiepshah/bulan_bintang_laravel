@@ -44,7 +44,11 @@ Route::get('/add_item', function () {
 Route::post('/add_item',[PostController::class,'addPost']);
 
 Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
+Route::post('/updateItem/{itemId}', 'PostController@updateItem');
+Route::post('/deleteItem/{itemId}', 'PostController@deleteItem');
 
+Route::post('/updateUser/{id}', 'UserController@updateUser');
+Route::post('/deleteUser/{id}', 'UserController@deleteUser');
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
@@ -66,8 +70,6 @@ Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::post('/update-user', 'UserController@updateUser')->name('update.user');
-Route::post('/delete-user', 'UserController@deleteUser')->name('delete.user');
 
 
 

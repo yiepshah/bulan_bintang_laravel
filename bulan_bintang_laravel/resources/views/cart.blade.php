@@ -11,16 +11,16 @@
     <title>Document</title>
 
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         
-        body {
-            
+        body {           
             background-color: #f8f9fa;
             margin: 10px; 
+            font-family: 'Roboto', sans-serif;
         }
 
         .content {
-            padding: 20px;           
+            padding: 20px;        
         }
 
         .content {
@@ -32,9 +32,8 @@
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 10px;     
-            font-family: "Trirong", serif; 
-            margin-top: 10px;
-            
+             
+            margin-top: 10px;           
         }
 
         .cart-container{
@@ -47,7 +46,7 @@
             padding: 20px;
             box-sizing: border-box;
             display: flex;
-            gap: 40px;
+            gap: 20px;
             
         }
 
@@ -63,39 +62,6 @@
             font-size: 17px;
         }
 
-        .quantity-tools {
-            display: flex;
-            
-            
-        }
-
-        .quantity-tools label {  
-            font-size: 17px;
-        }
-
-        .quantity-tools input {
-            width: 60px;
-            text-align: center;
-            font-size: 12px;
-            margin-left: 20px;
-            
-        }
-
-        .quantity-tools button {
-            background-color: #202d45;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 12px;
-            margin-left: 20px;
-        }
-
-        .quantity-tools button:hover {
-            background-color: #54E346;
-        }
 
         .cart-totals {
             width: 100%;
@@ -142,14 +108,6 @@
             color: grey;
         }
 
-        /* #cartSize{
-            font-family: poppins , sans-serif;
-            font-style: oblique;
-            font-size: small;
-            margin-top: 20px;
-            color: grey;
-        } */
-
         #removeCartbtn{
             margin-top: 20px;
             border-radius: 20px 20px;
@@ -166,73 +124,130 @@
         @media (max-width: 768px) {
        
         .cart-item {
-            flex: 0 0 100%; 
+            flex: 0 0 90%; 
         }
 
         .quantity-tools {
             flex-direction: column; 
             align-items: flex-start; 
-        }
+        }       
+    }
 
-        
+    .cartLogo{
+        width: 80px;
     }
 
     </style>
 </head>
 <body>
 @include('header')
-    <div class="content">
-        <div class="cart-container">
-            @if (session('cart') && count(session('cart')) > 0)
-                @foreach (array_reverse(session('cart')) as $index => $item)
-                    <div class="cart-item">
-                        <img src="{{ asset('images/' . $item['image_path']) }}" alt="Product Image">
-                        <div class="cart-item-details">
-                            <p>{{ $item['item_name'] }}</p>
-                            <p>RM {{ $item['price'] }}</p>
-                            <div class="quantity-tools">
-                                <label for="quantity{{ $index }}">Quantity: {{ $item['quantity'] }}</label>
-                            </div>
-                            <p id="cartSize"> Size: {{ $item['size'] ?? 'N/A' }}</p>
-                            <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
-                            @if (isset($item['item_id']))
-                                <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
-                                    @csrf
-                                    <button class="btn btn-danger" type="submit" name="remove{{ $item['item_id'] }}">Remove</button>
-                                </form>
-                             @elseif ($item['date_added'] ?? null !== 'N/A')
-                                <button class="btn btn-danger" id="removeCartbtn{{ $index }}" type="button" disabled>Remove</button>
-                            @endif
+<div class="content">
+    <div class="cart-container">
+        @if (session('cart') && count(session('cart')) > 0)
+            @foreach (array_reverse(session('cart')) as $index => $item)
+                <div class="cart-item">
+                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/KURTA-A-MIDNIGHT-BLUE-1.jpg?fit=1010%2C1010&ssl=1" alt="Item">
+                    {{-- <img src="{{ asset('images/' . $item['image_path']) }}" alt="Item"> --}}
+                    <div class="cart-item-details">
+                        <p>{{ $item['item_name'] }}</p>
+                        <p id="totalPrice{{ $index }}">RM {{ $item['quantity'] * $item['price'] }}</p>
+                        <div class="quantity-tools">
+                            <label for="quantity{{ $index }}">Quantity: {{ $item['quantity'] }} </label>
                         </div>
+                        <p id="cartSize">Size: {{ $item['size'] ?? 'N/A' }}</p>
+                        <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
+                        @if (isset($item['item_id']))
+                            <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
+                                @csrf
+                                <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal">Remove</button>
+                            </form>                     
+                        @endif       
                     </div>
-                @endforeach
-            @else
-                <p>Your cart is empty.</p>
-            @endif
-        </div>
-        
-        <div class="cart-buttons">            
-            <button id="checkout-btn" type="submit" name="proceed_to_checkout" class="btn btn-dark">Checkout <i class="fas fa-check-double"></i></button>
-        </div>
-        
+                </div>
+            @endforeach
+        @else
+            <p>Your cart is empty.</p>
+        @endif
     </div>
+                
+</div>
 
 
 @include('footer')  
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var removeButtons = document.querySelectorAll('.btn');
+        var removeButtons = document.querySelectorAll('.remove-button');
         removeButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-              
-                button.closest('form').submit();
+            button.addEventListener('click', function (event) {
             });
         });
     });
 </script>
 
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img class="cartLogo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this item from the cart?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmRemoveBtn">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        var removeButtons = document.querySelectorAll('.remove-button');
+        var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+
+        var itemIdToRemove; 
+
+        removeButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                
+            
+                itemIdToRemove = button.getAttribute('data-item-id');
+                
+                $('#confirmationModal').modal('show');
+            });
+        });
+
+        confirmRemoveBtn.addEventListener('click', function () {
+
+            console.log('Item removed with ID:', itemIdToRemove);
+
+            
+            $.ajax({
+                url: '/cart/remove/' + itemIdToRemove,
+                type: 'POST',
+                data: {_token: '{{ csrf_token() }}'},
+                success: function (response) {
+                    console.log(response);
+                 
+                    location.reload(); 
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+            $('#confirmationModal').modal('hide');
+        });
+    });
+</script>
 </body>
 </html>
 

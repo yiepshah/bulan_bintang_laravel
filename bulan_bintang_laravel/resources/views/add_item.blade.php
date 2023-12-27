@@ -93,32 +93,32 @@
                     <img id="bblogo" src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
 												style="width: 80px; height: auto; margin-right: 10px;" alt="">
                     <div class="form-group">
-                        <label for="image_path">Image:</label>
+                        <label for="image_path">Image :</label>
                         <input class="form-control" type="file" name="image_path" id="image_path"  required accept="image/*">
                     </div><br>
 
                     <div class="form-group">
-                        <label for="item_name">Name:</label>
+                        <label for="item_name">Name :</label>
                         <input type="text" class="form-control" name="item_name" id="item_name" required>
                     </div><br>
 
                     <div class="form-group">
-                        <label for="price">Price:</label>
+                        <label for="price">Price :</label>
                         <input type="number" class="form-control" name="price" id="price" required>
                     </div><br>
 
                     <div class="form-group">
-                        <label for="product_information">Product Information:</label>
+                        <label for="product_information">Product Information :</label>
                         <input type="text" class="form-control" name="product_information" id="product_information">
                     </div><br>
 
                     <div class="form-group">
-                        <label for="material">Material:</label>
+                        <label for="material">Material :</label>
                         <input type="text" class="form-control" name="material" id="material" required>
                     </div><br>
 
                     <div class="form-group">
-                        <label for="inside_box">Inside Box:</label>
+                        <label for="inside_box">Inside Box :</label>
                         <input type="text" class="form-control" name="inside_box" id="inside_box" required>
                     </div><br>
 

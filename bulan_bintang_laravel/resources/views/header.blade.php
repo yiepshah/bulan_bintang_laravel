@@ -87,18 +87,7 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    {{-- @foreach ($categories as $category)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.items', $category->id) }}">{{ $category->category_name }}</a>
-                            @if ($category->subcategories->count() > 0)
-                                <ul>
-                                    @foreach ($category->subcategories as $subcategory)
-                                        <li><a href="{{ route('category.items', $subcategory->id) }}">{{ $subcategory->category_name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach --}}
+                    
                 </ul>
             </div>
 
@@ -110,13 +99,13 @@
                 @endauth
             </li>
 
-            @auth
-                @if (auth()->user()->role === 'admin')
-                <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
-                    <a class="nav-link" href="{{ route('adminpage') }}"><i class="fas fa-user-tie"></i></a>
-                </li>
-                @endif
-            @endauth
+                @auth
+                    @if (auth()->user()->role === 'admin')
+                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
+                        <a class="nav-link" href="{{ route('adminpage') }}"><i class="fas fa-user-tie"></i></a>
+                    </li>
+                    @endif
+                @endauth
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
                 @auth  
@@ -162,14 +151,6 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.category-link').on('click', function (e) {
-            e.preventDefault();
-            var categoryId = $(this).data('category-id');
-            window.location.href = '{{ url("collection") }}?id=' + categoryId;
-        });
-    });
-</script>
+
 </body>
 </html>
