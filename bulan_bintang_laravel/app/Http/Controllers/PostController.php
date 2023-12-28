@@ -19,24 +19,26 @@ class PostController extends Controller
             'inside_box' => 'required',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
-
+    
         if (Auth::check()) {
-            $image_path = $request->file('image_path')->store('images', 'public');
-
+            $imagePath = $request->file('image_path')->store('images', 'public');
+            $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
+    
             $itemPost = array_map(function ($value) {
                 return strip_tags($value);
             }, $itemPost);
-
-            $itemPost['image_path'] = $image_path;
+    
+            $itemPost['image_path'] = $imageName; // Save only the image name
             $itemPost['user_id'] = Auth::id();
-
+    
             Post::create($itemPost);
-
+    
             return redirect('/collection');
         }
-
-            return redirect('/login')->with('error', 'Please log in to add a post.');
-        }
+    
+        return redirect('/login')->with('error', 'Please log in to add a post.');
+    }
+    
 
         public function adminPage()
         {
@@ -51,35 +53,56 @@ class PostController extends Controller
             return view('collection', compact('items'));
         }
 
-        public function updateItem(Request $request, $itemId)
-        {
-        
-            $item = Post::find($itemId);
-            $item->item_name = $request->input('item_name');
-            $item->price = $request->input('price');
-            $item->product_information = $request->input('product_information');
-            $item->material = $request->input('material');
-            $item->inside_box = $request->input('inside_box');
-        
-            $item->save();
-
-        
-            return response()->json(['success' => true]);
+        public function editItem($item_id){
+            $items = Post::where('item_id', '=',$item_id)->first();
+            return view('admin_edit' , compact('items'));
         }
 
-        public function deleteItem($itemId)
-        {            
-            $item = Post::find($itemId);
-            $item->delete();    
-            return response()->json(['success' => true]);
+        public function updateItem(Request $request){
+            // dd($request->all());
+                $request->validate([
+                'item_id'=>'required',
+                'item_name' => 'required',
+                'price' => 'required',
+                'product_information' => 'required',
+                'material' => 'required',
+                'inside_box' => 'required',
+
+            ]);
+
+            $items = $request->item_id;
+            $item_name = $request->item_name;
+            $price = $request->price;
+            $product_information = $request->product_information;
+            $material = $request->material;
+            $inside_box = $request->inside_box;
+
+            Post:: where ('item_id', '=',$items)->update([
+                'item_name'=>$item_name,
+                'price'=>$price,
+                'product_information'=>$product_information,
+                'material'=>$material,
+                'inside_box'=>$inside_box,
+            ]);
+            return redirect('adminpage')->with('success', 'Items Updated Successfully');
+        } 
+
+        public function deleteItem($items){
+            Post:: where ('item_id', '=',$items)->delete();
+            return redirect()->back()->with('success', 'Items Deleted Successfully');
         }
+
+ 
+
+
+        
 
         public function showDetails($itemId)
         {
             $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
                 ->where('item_id', $itemId)
                 ->first();
-        
+             
             if ($itemDetails) {
                 $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
         

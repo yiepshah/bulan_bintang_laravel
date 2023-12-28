@@ -35,26 +35,37 @@ Route::post('/login', [UserController::class, 'login']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/adminpage', [UserController::class, 'showAdminpage'])->name('adminpage');
 });
+Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/users/{userId}/edit', 'PostController@editUser');
+    Route::delete('/users/{userId}', 'PostController@deleteUser');
+});
+
+Route::get('edit-item/{item_id}', [PostController::class, 'editItem']);
+
+Route::post('update-item', [PostController::class, 'updateItem']);
 
 Route::get('/add_item', function () {
     return view('add_item');
 });
 
+Route::get('edit-user/{id}', [UserController::class, 'editUser']);
+Route::get('delete-user/{id}', [UserController::class, 'deleteUser']);
+Route::post('update-user', [UserController::class, 'updateUser']);
+
 Route::post('/add_item',[PostController::class,'addPost']);
+Route::get('delete-item/{item_id}', [PostController::class, 'deleteItem']);
 
-Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
-Route::post('/updateItem/{itemId}', 'PostController@updateItem');
-Route::post('/deleteItem/{itemId}', 'PostController@deleteItem');
+Route::post('/cart/remove/{item_id}', 'CartController@removeItem')->name('cart.remove');
 
-Route::post('/updateUser/{id}', 'UserController@updateUser');
-Route::post('/deleteUser/{id}', 'UserController@deleteUser');
+
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
 Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
 
-Route::get('/get-items/{categoryId}', [CategoryController::class, 'getItems']);
+// Route::get('/get-items/{categoryId}', [CategoryController::class, 'getItems']);
 
 
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');

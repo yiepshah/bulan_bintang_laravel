@@ -63,6 +63,27 @@ class CartController extends Controller
     
     }
 
+    public function removeItem(Request $request, $item_id)
+    {
+        // Retrieve the cart from the session
+        $cart = $request->session()->get('cart', []);
+
+        // Check if the item with the specified $item_id exists in the cart
+        if (isset($cart[$item_id])) {
+            // Remove the item from the cart
+            unset($cart[$item_id]);
+
+            // Update the cart in the session
+            $request->session()->put('cart', $cart);
+
+            // Return a success response
+            return response()->json(['success' => true]);
+        }
+
+        // Return an error response if the item was not found in the cart
+        return response()->json(['success' => false, 'message' => 'Item not found in the cart.']);
+    }
+
     
 
     public function showCart()

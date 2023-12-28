@@ -61,12 +61,47 @@ class UserController extends Controller
             if ($user->email === 'shahirayp@gmail.com') {
                 return redirect()->route('adminpage');
             } else {
-                return redirect()->route('index');
+                return redirect()->route('collection');
             }
         }
 
         return redirect()->route('login')->with('login_error', 'Invalid email or password.')->with('showAlert', 'loginError');
     } 
+
+
+    public function editUser($id){
+        $users = User::where('id', '=',$id)->first();
+        return view('admin_user_edit' , compact('users'));
+    }
+
+    public function updateUser(Request $request){
+        // dd($request->all());
+            $request->validate([
+            'id'=>'required',
+            'name' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+        ]);
+
+        $users = $request->id;
+        $name = $request->name;
+        $email = $request->email;
+        $role = $request->role;
+
+        User:: where ('id', '=',$users)->update([
+            'name'=>$name,
+            'email'=>$email,
+            'role'=>$role,
+
+        ]);
+        return redirect('adminpage')->with('success', 'User Updated Successfully');
+    } 
+
+    public function deleteUser($users){
+        User:: where ('id', '=',$users)->delete();
+        return redirect()->back()->with('warning', 'User Deleted Successfully');
+    }
+
 
     public function logout(){
         auth()->logout();
@@ -79,31 +114,6 @@ class UserController extends Controller
         return view('profile', ['user' => $users]);
     }
 
-    public function updateUser(Request $request, $id)
-    {
-       
-        $users = User::find($id);
-        $users->name = $request->input('name');
-        $users->email = $request->input('email');
-        $users->role = $request->input('role');  
-        $users->save();
-
-        return response()->json(['success' => true]);
-    }
-
-
-
-    public function deleteItem($id)
-    {
-        
-        $users = Post::find($id);
-        $users->delete();
-
-       
-        return response()->json(['success' => true]);
-    }
-    
-    
-    
+  
 
 }

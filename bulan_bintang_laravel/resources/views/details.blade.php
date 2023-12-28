@@ -19,7 +19,7 @@
         width: 800px;
         height: auto;
         border-radius: 10px 10px;
-        margin-left: 10px;
+        margin-left: 0px;
         margin-top: 10px;
     }
 
@@ -108,8 +108,7 @@
     <div class="details-container">
         <div class="row">
             <div class="col-md-6">
-                <img class="image" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/KURTA-A-MIDNIGHT-BLUE-1.jpg?fit=1010%2C1010&ssl=1" alt="Item">
-                {{-- <img src="{{ asset('images/' . $itemDetails->image_path) }}" alt="{{ $itemDetails->item_name }}" class="img-fluid small-image"> --}}
+                <img class="image" src="{{ asset('storage/images/' . $itemDetails->image_path) }}" alt="{{ $itemDetails->item_name }}">   
             </div>
 
             

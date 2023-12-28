@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Edit Item</title>
+    <style>
+        body {
+           background-image: url('https://www.shoutmeloud.com/wp-content/uploads/2015/09/Screenshot-Tools-700px-Wide.gif');
+           background-position: center;
+           
+           
+        }
+
+        .edit-user-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 220px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px 10px;
+            
+        }
+
+        .main--title {
+            text-align: center;
+            color: #000000;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #editUserBtn {
+            background-color: #000000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 100px; /* Add margin to separate the buttons */
+        }
+
+        #editUserBtn:hover {
+            background-color: #004109;
+        }
+
+        #backBtn {
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    @include('header')
+    @include('adminsidebar')
+    <div class="edit-user-container">
+        <h2 class="main--title">Edit User</h2>
+        <form action="{{ url('update-user') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="id" value="{{ $users->id }}">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" value="{{ $users->name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" name="email" value="{{ $users->email }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" class="form-control" name="role" value="{{ $users->role }}" required>
+            </div>
+
+            <div class="form-group">               
+                <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
+                <button type="submit" id="editUserBtn" class="btn btn-primary">Update Item</button>
+            </div>
+        </form>
+    </div>
+    @include('footer')
+</body>
+</html>

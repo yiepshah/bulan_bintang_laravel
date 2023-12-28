@@ -155,7 +155,9 @@
                 <div class="item">
                     <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
                         <figure>
-                            <img src="{{ asset('images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
+                            <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
+
+
                         </figure>
                         <p>{{ $item->item_name }}</p>
                         <p id="itemprice">${{ $item->price }}</p>

@@ -271,25 +271,19 @@
             border: 1px solid #ddd;
             padding: 15px;
             text-align: left;
-            background-color: #3498db;
-            color: #fff;
+            background-color: #ffffff;
+      
+            
         }
 
-        .user-table th {
-            position: sticky;
-            top: 0;
-            z-index: 2;
-            background-color: #3498db;
-        }
 
-        .user-table td {
-            background-color: #fff;
-            color: #343a40;
-            transition: background-color 0.3s ease-in-out;
-        }
+
 
         .user-table tbody tr:hover td {
-            background-color: #f2f2f2;
+            background-color: #cecece;
+       
+   
+            
         }
 
 
@@ -336,6 +330,11 @@
             background: linear-gradient(to right, #e74c3c, #e66767);
             border: none;
         }
+
+        #admin{
+            color: #fff;
+            margin-right: 20px;
+        }
     </style>
 
 </head>
@@ -344,10 +343,12 @@
     @include('header')
 
     @auth
-        @if (auth()->user()->role === 'admin')
+        @if(auth()->user()->role === 'admin')
             @include('adminsidebar')
         @endif
     @endauth 
+
+
 
     <div class="main--content">
         <div class="header--wrapper">
@@ -356,6 +357,7 @@
                 <h2>dashboard</h2>
             </div>
             <div class="user--info">
+                <p id="admin">Welcome Mr Admin  </p>
                 <div class="search--box">
                     <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg" alt="Profile Image">
                    
@@ -404,6 +406,10 @@
 
             <div class="user-table-container">
                 <h2 class="main--title">User Information</h2>
+                {{-- @if(Session::has('warning'))
+                <div class="alert alert-success" role="alert"> 
+                    {{Session::get('warning')}}
+                </div> --}}
                 <div class="table-responsive">
                     <table class="user-table table table-striped">
                         <thead class="thead-dark">
@@ -415,25 +421,23 @@
                                 <th>Action</th>
                             </tr>
                         </thead>                       
-                        @if(isset($users))
+                       
                         <tbody id="myUsertable">
-                        @foreach ($users as $user)
+                            @forelse ($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                        <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->role }}</td>
-                                                                       
-                                <td>
-                                    <button class='btn btn-primary' onclick='editUser({{ $user->id }})'>Edit</button><br><br>
-                                    <button id="deleteBtn" class='btn btn-danger' onclick='deleteUser({{ $user->id }})'>Delete</button><br><br>
-                                    <button id="clearBtn" href="javascript:void(0);" onclick="clearPage()"  class='btn btn-success' type="submit">Enter</button>
-                                </td>
+                                        <td>{{ $user->role }}</td>                                                                       
+                                     <td>
+                                    <a href="{{url('edit-user/'.$user->id)}}"
+                                        class="btn btn-primary">Edit</a> <br><br>
+                                         <a href="{{url('delete-user/'.$user->id)}}" class="btn btn-danger">Delete</a>
+                                    </td>
                             </tr>
-                        @endforeach
-                        @else
-                            <p>No users found</p>
-                        @endif                           
+                            @empty
+                                <tr><td colspan='6'>No user found</td></tr>
+                            @endforelse                        
                         </tbody>
                      </table>
                 </div>
@@ -442,6 +446,11 @@
 
                 <div class="stock-table-container">
                     <h2 class="main--title">Stock Information</h2>
+                    {{-- @if(Session::has('success'))
+                    <div class="alert alert-success" role="alert"> 
+                        {{Session::get('success')}}
+                    </div> --}}
+                    {{-- @endif  --}}
                     <div class="table-responsive">
                         <table class="stock-table table table-striped">
                             <thead class="thead-dark">
@@ -469,11 +478,10 @@
                                         <td>{{ $item->product_information }}</td>
                                         <td>{{ $item->material }}</td>
                                         <td>{{ $item->inside_box }}</td>
-
                                         <td>
-                                            <button class='btn btn-primary' onclick='editItem({{ $item->item_id }})'>Edit</button><br><br>
-                                            <button id="deleteBtn" class='btn btn-danger' onclick='deleteItem({{ $item->item_id }})'>Delete</button><br><br>
-                                            <button id="clearBtn" href="javascript:void(0);" onclick="clearPage()"  class='btn btn-success' type="submit">Enter</button>                                         
+                                            <a href="{{url('edit-item/'.$item->item_id)}}"
+                                             class="btn btn-primary">Edit</a> <br><br>
+                                              <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 @empty
@@ -484,52 +492,38 @@
                     </div>
                 </div>
 
-
                 <script>
-                    function editUser(id) {
-                        
-                        $('#myUsertable').find('tr').each(function() {
-                            
-                            if ($(this).find('td:first').text() == id) {
-                               $(this).find('td:not(:last-child)').attr('contenteditable', true);
-                            }
+               
+                    function showSuccessAlert(message) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: message,
                         });
                     }
-                
-                    function deleteUser(id) {
-
-                        $('#myUsertable').find('tr').each(function() {
-                           
-                            if ($(this).find('td:first').text() == id) {
-                               
-                                $(this).remove();
-                            }
-                        });          
-                    }
+            
+             
+                    // function showErrorAlert(message) {
+                    //     Swal.fire({
+                    //         icon: 'error',
+                    //         title: 'Error!',
+                    //         text: message,
+                    //     });
+                    // }
                 </script>
 
-                <script>
-                    function editItem(itemId) {
-                        
-                        $('#myItemtable').find('tr').each(function() {
-                            
-                            if ($(this).find('td:first').text() == itemId) {
-                            $(this).find('td:not(:last-child)').attr('contenteditable', true);
-                            }
-                        });
-                    }
+            @if(Session::has('success'))
+            <script>
+                showSuccessAlert("{{ Session::get('success') }}");
+            </script>
+            @endif
 
-                    function deleteItem(itemId) {
+            @if(Session::has('warning'))
+            <script>
+                showErrorAlert("{{ Session::get('warning') }}");
+            </script>
+            @endif
 
-                        $('#myItemtable').find('tr').each(function() {
-                        
-                            if ($(this).find('td:first').text() == itemId) {
-                            
-                                $(this).remove();
-                            }
-                        });
-                    }
-                </script>
                 
                 <script>
                     function clearPage() {

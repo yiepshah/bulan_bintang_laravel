@@ -144,46 +144,41 @@
 <div class="content">
     <div class="cart-container">
         @if (session('cart') && count(session('cart')) > 0)
-            @foreach (array_reverse(session('cart')) as $index => $item)
+            {{-- Use a unique key to identify the items, e.g., item_id + size --}}
+            @foreach (session('cart') as $uniqueItemId => $item)
                 <div class="cart-item">
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/KURTA-A-MIDNIGHT-BLUE-1.jpg?fit=1010%2C1010&ssl=1" alt="Item">
-                    {{-- <img src="{{ asset('images/' . $item['image_path']) }}" alt="Item"> --}}
-                    <div class="cart-item-details">
-                        <p>{{ $item['item_name'] }}</p>
-                        <p id="totalPrice{{ $index }}">RM {{ $item['quantity'] * $item['price'] }}</p>
-                        <div class="quantity-tools">
-                            <label for="quantity{{ $index }}">Quantity: {{ $item['quantity'] }} </label>
+                    @if (is_array($item) && array_key_exists('image_path', $item))
+                        <img src="{{ asset('storage/images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
+                        <div class="cart-item-details">
+                            <p>{{ $item['item_name'] }}</p>
+                            <p id="totalPrice{{ $uniqueItemId }}">RM {{ $item['quantity'] * $item['price'] }}</p>
+                            <div class="quantity-tools">
+                                <label for="quantity{{ $uniqueItemId }}">Quantity: {{ $item['quantity'] }} </label>
+                            </div>
+                            <p id="cartSize">Size: {{ $item['size'] ?? 'N/A' }}</p>
+                            <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
+                            @if (isset($item['item_id']))
+                                <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
+                                    @csrf
+                                    <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>
+                                </form>
+                            @endif
                         </div>
-                        <p id="cartSize">Size: {{ $item['size'] ?? 'N/A' }}</p>
-                        <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
-                        @if (isset($item['item_id']))
-                            <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
-                                @csrf
-                                <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal">Remove</button>
-                            </form>                     
-                        @endif       
-                    </div>
+                    @else
+                        <p>Invalid item data.</p>
+                    @endif
                 </div>
             @endforeach
         @else
             <p>Your cart is empty.</p>
         @endif
     </div>
-                
 </div>
 
 
 @include('footer')  
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var removeButtons = document.querySelectorAll('.remove-button');
-        removeButtons.forEach(function (button) {
-            button.addEventListener('click', function (event) {
-            });
-        });
-    });
-</script>
+
 
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -209,44 +204,39 @@
 <script>
     
     document.addEventListener('DOMContentLoaded', function () {
-        var removeButtons = document.querySelectorAll('.remove-button');
-        var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+    var removeButtons = document.querySelectorAll('.remove-button');
+    var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
 
-        var itemIdToRemove; 
+    var itemIdToRemove;
 
-        removeButtons.forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                
-            
-                itemIdToRemove = button.getAttribute('data-item-id');
-                
-                $('#confirmationModal').modal('show');
-            });
-        });
-
-        confirmRemoveBtn.addEventListener('click', function () {
-
-            console.log('Item removed with ID:', itemIdToRemove);
-
-            
-            $.ajax({
-                url: '/cart/remove/' + itemIdToRemove,
-                type: 'POST',
-                data: {_token: '{{ csrf_token() }}'},
-                success: function (response) {
-                    console.log(response);
-                 
-                    location.reload(); 
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-
-            $('#confirmationModal').modal('hide');
+    removeButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            itemIdToRemove = button.getAttribute('data-item-id');
+            $('#confirmationModal').modal('show');
         });
     });
+
+    confirmRemoveBtn.addEventListener('click', function () {
+        console.log('Item removed with ID:', itemIdToRemove);
+
+        $.ajax({
+            url: '/cart/remove/' + itemIdToRemove,
+            type: 'POST',
+            data: { _token: '{{ csrf_token() }}' },
+            success: function (response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+
+        $('#confirmationModal').modal('hide');
+    });
+});
+
 </script>
 </body>
 </html>
