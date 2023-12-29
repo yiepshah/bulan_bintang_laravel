@@ -14,8 +14,8 @@
         
         .w3-sidebar {
             height: 100%;
-            width: 70px;
-            background-color: #111;
+            width: 60px;
+            background-color: #fcfcfc;
             position: fixed;
             overflow-x: hidden;
             padding-top: 20px;
@@ -26,7 +26,7 @@
         .w3-sidebar a {
             text-decoration: none;
             font-size: 18px;
-            color: #818181;
+            color: #000000;
             display: block;
             padding: 30px;
             text-align: center;

@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
     <title>Admin Dashboard</title>
     <style>
@@ -55,26 +53,26 @@
             background: #fff;
             width: calc(100% - 70px);
             padding: 1rem;
-            margin-left: 70px;
+            left: 70px;
             transition: margin-left 0.3s;
             color: #333;
         }
 
         .w3-sidebar:hover+.main--content {
-            margin-left: 200px;
+            margin-left: 90px;
         }
 
         @media (max-width: 576px) {
         .w3-sidebar {
-            width: 100px;
+            width: 90px;
         }
 
         .w3-sidebar:hover {
-            width: 100%;
+           
         }
 
         .main--content {
-            width: 100%;
+            width: 90%;
             margin-left: 0;
         }
     }
@@ -94,7 +92,7 @@
             border-radius: 10px;
             padding: 10px 2rem;
             margin-bottom: 1rem;
-            margin-left: 20px;
+     
         }
 
         .header--title {
@@ -113,7 +111,7 @@
             color: #495057;
             display: flex;
             align-items: center;
-            gap: 10px;
+            
             padding: 4px 12px;
         }
 
@@ -135,12 +133,12 @@
 
         .card-container {
             background: #fff;
-            width: calc(100% - 2rem);
+            /* width: calc(100% - 2rem); */
             margin-top: 1rem;
             padding: 1rem;
             border-radius: 10px;
             color: #343a40;
-            margin-left: 20px;
+           
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -173,7 +171,7 @@
         }
 
         .card--header {
-            display: flex;
+            
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
@@ -359,7 +357,8 @@
             <div class="user--info">
                 <p id="admin">Welcome Mr Admin  </p>
                 <div class="search--box">
-                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg" alt="Profile Image">
+                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg"
+                     alt="Profile Image">
                    
                     <input id="myInput" type="text" placeholder="Search">
                 </div>
@@ -432,7 +431,7 @@
                                      <td>
                                     <a href="{{url('edit-user/'.$user->id)}}"
                                         class="btn btn-primary">Edit</a> <br><br>
-                                         <a href="{{url('delete-user/'.$user->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">Delete</a>
                                     </td>
                             </tr>
                             @empty
@@ -490,6 +489,26 @@
                             </tbody>
                         </table>
                     </div>
+                </div> 
+
+                <div class="modal fade" id="deleteUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteUserModalLabel">Confirm Deletion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this user?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <script>
@@ -503,13 +522,13 @@
                     }
             
              
-                    // function showErrorAlert(message) {
-                    //     Swal.fire({
-                    //         icon: 'error',
-                    //         title: 'Error!',
-                    //         text: message,
-                    //     });
-                    // }
+                    function showErrorAlert(message) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: message,
+                        });
+                    }
                 </script>
 
             @if(Session::has('success'))

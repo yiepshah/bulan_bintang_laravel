@@ -88,6 +88,22 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     
+                        <li class="nav-item">
+                            <a class="nav-link" href=>
+                                Men
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=>
+                                Women
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=>
+                                Kids
+                            </a>
+                        </li>
+                
                 </ul>
             </div>
 
@@ -115,7 +131,6 @@
                     </div>
                 @endauth
             </li>
-
 
             <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="collection">
                 @auth
@@ -148,7 +163,6 @@
         </ul>
     </div>
 </nav>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 

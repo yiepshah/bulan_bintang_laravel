@@ -143,6 +143,7 @@
 @include('header')
 <div class="content">
     <div class="cart-container">
+        
         @if (session('cart') && count(session('cart')) > 0)
             {{-- Use a unique key to identify the items, e.g., item_id + size --}}
             @foreach (session('cart') as $uniqueItemId => $item)
@@ -209,13 +210,14 @@
 
     var itemIdToRemove;
 
-    removeButtons.forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            itemIdToRemove = button.getAttribute('data-item-id');
-            $('#confirmationModal').modal('show');
-        });
+removeButtons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        itemIdToRemove = button.getAttribute('data-item-id');
+        console.log('Item ID to remove:', itemIdToRemove); // Add this line
+        $('#confirmationModal').modal('show');
     });
+});
 
     confirmRemoveBtn.addEventListener('click', function () {
         console.log('Item removed with ID:', itemIdToRemove);

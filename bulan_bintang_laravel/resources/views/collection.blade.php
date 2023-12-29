@@ -27,6 +27,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
+            padding: 10px;
         }
 
         .item figure {
@@ -50,7 +51,6 @@
             max-width: 100%;
             height: auto;
             border-radius: 5px 5px;
-
             -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
         }
@@ -62,8 +62,9 @@
         }
 
         .item figure::before {
-            content: 'Click here';           
+            content: 'Click Here';           
             position: absolute;
+            /* font-family: 'Roboto', sans-serif; */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -72,7 +73,7 @@
             font-weight: bold;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
             
           
         }
@@ -82,11 +83,11 @@
             font-weight: bold;
             font-size: 15px;
             color: black;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+           
         }
 
         #itemprice {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+           
             font-weight: 600;
 
         }
@@ -118,6 +119,20 @@
             background-color: transparent;
             color: #0056b3;
         }
+
+        /* Media Queries for Responsive Design */
+
+@media (max-width: 1200px) {
+    .item {
+        width: calc(48% - 30px);
+    }
+}
+
+@media (max-width: 768px) {
+    .item {
+        width: calc(100% - 20px);
+    }
+}
     </style>
 
     
@@ -146,6 +161,7 @@
 
 <body>
     @include('header')
+    
     <div class="items-container">
         @php     
             $reversedItems = $items->reverse();     
@@ -153,6 +169,7 @@
 
         @foreach ($reversedItems as $item)
                 <div class="item">
+                    <p>Collection</p>
                     <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
                         <figure>
                             <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
