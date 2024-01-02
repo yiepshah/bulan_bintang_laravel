@@ -46,17 +46,19 @@ Route::get('edit-user/{id}', [UserController::class, 'editUser']);
 Route::get('delete-user/{id}', [UserController::class, 'deleteUser']);
 Route::post('update-user', [UserController::class, 'updateUser']);
 
-
 Route::get('/add_item', function () {
     return view('add_item');
 });
+
 Route::post('/add_item',[PostController::class,'addPost']);
 Route::get('edit-item/{item_id}', [PostController::class, 'editItem']);
 Route::post('update-item', [PostController::class, 'updateItem']);
 Route::get('delete-item/{item_id}', [PostController::class, 'deleteItem']);
 
-
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
+
+Route::get('/collection/{category}/{subcategory}', [PostController::class, 'filtered_collection'])->name('filtered_collection');
+
 
 Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
 
@@ -64,16 +66,10 @@ Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::get('/categories', [CategoriesController::class, 'index'])->name('category.index');
+
+
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-
-
-
-
-
-
 

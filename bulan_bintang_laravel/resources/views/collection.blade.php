@@ -137,26 +137,6 @@
 
     
 
-    <script>
-        $(document).ready(function () {
-            $('.category-link').on('click', function (e) {
-                e.preventDefault();
-                var categoryId = $(this).data('category-id');
-                window.location.href = '{{ route("collection", ["id" => ":categoryId"]) }}'.replace(':categoryId', categoryId);
-            });
-
-            $('#search-icon').on('click', function () {
-                $('#search-input').toggle();
-            });
-
-            $("#search-input").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $(".item").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -189,43 +169,6 @@
         </div>
 
 
-    <script>
-        $(document).ready(function () {
-            $('.category-link').on('click', function (e) {
-                e.preventDefault();
-                var categoryId = $(this).data('category-id');
-    
-                $.ajax({
-                    url: '/get-items/' + categoryId,
-                    type: 'GET',
-                    success: function (data) {
-                        
-                        updateItemsContainer(data.items);
-                    },
-                    error: function (error) {
-                        console.error('Error fetching items:', error);
-                    }
-                });
-            });
-    
-            
-    
-            function updateItemsContainer(items) {
-                
-                $('.items-container').empty();
-    
-              
-                items.forEach(function (item) {
-                   
-                    var itemHtml = '<div class="item">' +
-                        '<a id="detail" href="{{ route("details", ["itemId" => ":itemId"]) }}">'.replace(':itemId', item.item_id) +
-                       
-                        '</a></div>';
-                    $('.items-container').append(itemHtml);
-                });
-            }
-        });
-    </script> 
 
 
     <script>

@@ -123,6 +123,16 @@
                     </div><br>
 
                     <div class="form-group">
+                        <label for="category">Category :</label>
+                        <input type="text" class="form-control" name="category" id="category" required>
+                    </div><br>
+
+                    <div class="form-group">
+                        <label for="subcategory">Subcategory :</label>
+                        <input type="text" class="form-control" name="subcategory" id="subcategory" required>
+                    </div><br>
+
+                    <div class="form-group">
                         <button id="addbtn" class="btn" name="submit" type="submit">Add</button>
                     </div><br><br>                  
                 </form>

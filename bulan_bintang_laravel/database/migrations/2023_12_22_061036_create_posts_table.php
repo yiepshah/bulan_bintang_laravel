@@ -22,6 +22,8 @@ class CreatePostsTable extends Migration
             $table->string('material');
             $table->string('inside_box');
             $table->string('image_path');
+            $table->string('category');
+            $table->string('subcategory');
             $table->timestamps();
         });
     }
