@@ -20,24 +20,6 @@ class PostController extends Controller
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        // if (Auth::check()) {
-            //         $imageFile = $request->file('image_path');
-            //         $imageName = $imageFile->getClientOriginalName();
-            
-            //         $itemPost = array_map(function ($value) {
-            //             return strip_tags($value);
-            //         }, $itemPost);
-            
-            //         $itemPost['image_path'] = $imageName;
-            //         $itemPost['user_id'] = Auth::id();
-            
-            //         Post::create($itemPost);
-            
-            //         return redirect('/collection');
-            //     }
-            
-            //     return redirect('/login')->with('error', 'Please log in to add a post.');
-            // }
     
         if (Auth::check()) {
             $imagePath = $request->file('image_path')->store('images', 'public');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoriesController;
 // use Illuminate\Support\Facades\DB;
 
 /*
@@ -64,6 +64,7 @@ Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
+Route::get('/categories', [CategoriesController::class, 'index'])->name('category.index');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 

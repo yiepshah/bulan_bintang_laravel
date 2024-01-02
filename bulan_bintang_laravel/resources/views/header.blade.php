@@ -1,7 +1,14 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head> --}}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+   
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <title>Bulan Bintang</title>
     <style>
           
         .navbar {
@@ -69,7 +76,10 @@
 
         #carticon{
             padding-top: 22px;
+        }
 
+        #Ctext{
+            font-size: 17px;
         }
 
     </style>
@@ -87,26 +97,33 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    
-                        <li class="nav-item">
-                            <a class="nav-link" href=>
-                                Men
+                    {{-- @foreach (optional($mainCategories) as $mainCategory) --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                {{-- {{ $mainCategory['category_name'] }} --}}
                             </a>
+                            <ul class="dropdown-menu">
+                                {{-- @foreach ($mainCategory['subcategories'] as $subcategory) --}}
+                                    <li class="dropdown-submenu">
+                                        {{-- <a class="dropdown-item dropdown" href="{{ route('category.index', ['id' => $subcategory['category_id']]) }}"> --}}
+                                            {{-- {{ $subcategory['category_name'] }} --}}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            {{-- @foreach ($subcategory['subcategories'] as $subSubcategory) --}}
+                                                <li>
+                                                    {{-- <a class="dropdown-item" href="{{ route('category.index', ['id' => $subSubcategory['category_id']]) }}"> --}}
+                                                        {{-- {{ $subSubcategory['category_name'] }} --}}
+                                                    </a>
+                                                </li>
+                                            {{-- @endforeach --}}
+                                        </ul>
+                                    </li>
+                                {{-- @endforeach --}}
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=>
-                                Women
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href=>
-                                Kids
-                            </a>
-                        </li>
-                
+                    {{-- @endforeach --}}
                 </ul>
             </div>
-
         <ul class="navbar-nav ml-auto">
 
             <li class="nav-item" data-toggle="tooltip" title="Log Out">

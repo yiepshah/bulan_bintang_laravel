@@ -19,6 +19,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $request->validate([
+            
             'item_name' => 'required|string',
             'image_path' => 'required|string',
             'price' => 'required|numeric',
@@ -49,16 +50,12 @@ class CartController extends Controller
             'product_information' => $product_information,
             'material' => $material,
             'inside_box' => $inside_box,
-            'date_added' => now(),
+            'date_added' => now()->toDateTimeString(),
         ];
 
-          $user = auth()->user();
+        $user = auth()->user();
 
-    $cartItem = [
-        // Cart item details...
-        'user_id' => $user->id,
-        'date_added' => now(),
-    ];
+        $cartItem['user_id'] = $user->id;
     
         $cart = session('cart', []);
 
@@ -66,17 +63,14 @@ class CartController extends Controller
         $existingIndex = array_search($item_id, array_column($cart, 'item_id'));
         
         if ($existingIndex !== false) {
-          
             if (isset($cart[$existingIndex]['quantity'])) {
                 $cart[$existingIndex]['quantity'] += $quantity;
             } else {
                 $cart[$existingIndex]['quantity'] = $quantity;
             }
-        
             $cart[$existingIndex]['date_added'] = now();
         } else {
-    
-            $cart[] = $cartItem;
+            $cart[] = $cartItem; 
         }
         
         session(['cart' => $cart]);
@@ -85,34 +79,31 @@ class CartController extends Controller
         
     }    
 
-
     public function showCart()
-    {
-        
-        $cartItems = session('cart', []);
-
+    {      
+        $user = auth()->user();
+        $cartItems = collect(session('cart', []))->where('user_id', $user->id)->all();
+    
         return view('cart', ['cartItems' => $cartItems]);
     }
 
-    public function remove($item_id)
-    {
-        $cart = session('cart', []);
-    
-        $index = array_search($item_id, array_column($cart, 'item_id'));
-    
-        if ($index !== false) {
-            unset($cart[$index]);
-            session(['cart' => $cart]);
-        }
-    
-        return redirect()->route('cart')->with('success', 'Item removed from the cart.');
+
+public function remove($item_id)
+{
+    $cart = session('cart', []);
+
+    $index = array_search($item_id, array_column($cart, 'item_id'));
+
+    if ($index !== false) {
+        unset($cart[$index]);
+        session(['cart' => $cart]);
+
+        return response()->json(['success' => true]);
     }
-    
-    
 
+    return response()->json(['success' => false]);
+}
 
-
-    
 
 }
 

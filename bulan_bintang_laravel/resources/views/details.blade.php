@@ -115,11 +115,11 @@
             <div class="col-md-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent pl-0">
-                        <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
+                        {{-- <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li> --}}
 
                         {{-- <li class="breadcrumb-item"><a href="{{ route('category') }}">BAJU MELAYU</a></li> --}}
 
-                        <li class="breadcrumb-item active" aria-current="page">BM TAILORED FIT</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">BM TAILORED FIT</li> --}}
                     </ol>
                 </nav>
     
@@ -158,6 +158,7 @@
                         <input type="hidden" name="material" value="{{ $itemDetails->material }}">
                         <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
                         <div class="form-group">
+                          
                             <label for="size"><strong>Size:</strong></label>
                             <select id="sizeSelect" class="form-control" name="size">
                                 @foreach ($sizeOptions as $size)
@@ -197,8 +198,6 @@
     var addButton = document.getElementById('button');
     addButton.addEventListener('click', function (event) {
         event.preventDefault(); 
-
- 
 
         var form = document.getElementById('addToCartForm');
         form.submit();

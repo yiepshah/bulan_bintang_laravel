@@ -145,8 +145,10 @@
     <div class="cart-container">
         
         @if (session('cart') && count(session('cart')) > 0)
-            {{-- Use a unique key to identify the items, e.g., item_id + size --}}
-            @foreach (session('cart') as $uniqueItemId => $item)
+        @php
+            $cartItems = session('cart') ? array_reverse(session('cart'), true) : [];
+        @endphp
+            @foreach ($cartItems as $uniqueItemId => $item)
                 <div class="cart-item">
                     @if (is_array($item) && array_key_exists('image_path', $item))
                         <img src="{{ asset('storage/images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
@@ -161,7 +163,7 @@
                             @if (isset($item['item_id']))
                                 <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
                                     @csrf
-                                    <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>
+                                    <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>                                   
                                 </form>
                             @endif
                         </div>
@@ -179,8 +181,6 @@
 
 @include('footer')  
 
-
-
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -192,7 +192,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to remove this item from the cart?
+                <p>Are you sure you want to remove this item from the cart?</p>
+                <div id="itemDetails"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -203,42 +204,60 @@
 </div>
 
 <script>
-    
     document.addEventListener('DOMContentLoaded', function () {
-    var removeButtons = document.querySelectorAll('.remove-button');
-    var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+        var removeButtons = document.querySelectorAll('.remove-button');
+        var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+        var itemIdToRemove;
 
-    var itemIdToRemove;
+        removeButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                itemIdToRemove = button.getAttribute('data-item-id');
 
-removeButtons.forEach(function (button) {
-    button.addEventListener('click', function (event) {
-        event.preventDefault();
-        itemIdToRemove = button.getAttribute('data-item-id');
-        console.log('Item ID to remove:', itemIdToRemove); // Add this line
-        $('#confirmationModal').modal('show');
-    });
-});
+                var itemDetails = getItemDetails(itemIdToRemove);
+                document.getElementById('itemDetails').innerHTML = itemDetails;
 
-    confirmRemoveBtn.addEventListener('click', function () {
-        console.log('Item removed with ID:', itemIdToRemove);
-
-        $.ajax({
-            url: '/cart/remove/' + itemIdToRemove,
-            type: 'POST',
-            data: { _token: '{{ csrf_token() }}' },
-            success: function (response) {
-                console.log(response);
-                location.reload();
-            },
-            error: function (error) {
-                console.error(error);
-            }
+                $('#confirmationModal').modal('show');
+            });
         });
 
-        $('#confirmationModal').modal('hide');
-    });
-});
+        confirmRemoveBtn.addEventListener('click', function () {
+            console.log('Item removed with ID:', itemIdToRemove);
 
+            $.ajax({
+                url: '/cart/remove/' + itemIdToRemove,
+                type: 'POST',
+                data: { _token: '{{ csrf_token() }}' },
+                success: function (response) {
+                    console.log(response);
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+            $('#confirmationModal').modal('hide');
+        });
+
+            function getItemDetails(itemId) {
+
+        // var itemDetails = {
+        //     item_id: itemId,
+        //     user_id: 8,
+        //     date_added: '2024-01-02 03:15:10',
+        //     // Add other item details here
+        // };
+
+        // Format itemDetails for display in the modal
+        var formattedDetails = Object.entries(itemDetails).map(([key, value]) => {
+            // return `<p>${key}: ${value}</p>`; 
+            return ('');
+        }).join('');
+
+        return formattedDetails;
+    }
+    });
 </script>
 </body>
 </html>

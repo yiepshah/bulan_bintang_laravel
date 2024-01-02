@@ -87,8 +87,8 @@
         }
 
         #itemprice {
-           
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: bold;
 
         }
 

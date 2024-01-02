@@ -4,8 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
-{
+class Categories extends Model
+{   
+    public function subcategories()
+    {
+        return $this->hasMany(Categories::class, 'parent_id', 'category_id');
+    }
+
     /**
      * The table associated with the model.
      *
@@ -40,15 +45,6 @@ class Category extends Model
         'parent_id' => 'integer',
         // Add other casts as needed
     ];
-
-    /**
-     * Get the subcategories for the category.
-     */
-    public function subcategories()
-    {
-        return $this->hasMany(Category::class, 'parent_id', 'category_id');
-    }
-    // Add other relationships, scopes, or methods as needed
 }
 
 
