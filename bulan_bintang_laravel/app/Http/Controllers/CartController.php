@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -80,29 +80,33 @@ class CartController extends Controller
     }    
 
     public function showCart()
-    {      
-        $user = auth()->user();
-        $cartItems = collect(session('cart', []))->where('user_id', $user->id)->all();
+    {
+        if (auth()->check()) {
+            $user = auth()->user();
+            $cartItems = Post::where('user_id', $user->id)->get();
+            return view('cart', ['cartItems' => $cartItems]);
+        } else {
+         
+            return view('cart', ['cartItems' => []]);
+        }
+    }
+
+
+    public function remove($item_id)
+    {
+        $cart = session('cart', []);
     
-        return view('cart', ['cartItems' => $cartItems]);
+        $index = array_search($item_id, array_column($cart, 'item_id'));
+    
+        if ($index !== false) {
+            unset($cart[$index]);
+            session(['cart' => array_values($cart)]); 
+    
+            return redirect()->route('cart')->with('success', 'Item removed from the cart successfully.');
+        }
+    
+        return redirect()->route('cart')->with('error', 'Failed to remove item from the cart.');
     }
-
-
-public function remove($item_id)
-{
-    $cart = session('cart', []);
-
-    $index = array_search($item_id, array_column($cart, 'item_id'));
-
-    if ($index !== false) {
-        unset($cart[$index]);
-        session(['cart' => $cart]);
-
-        return response()->json(['success' => true]);
-    }
-
-    return response()->json(['success' => false]);
-}
 
 
 }

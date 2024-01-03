@@ -18,6 +18,8 @@ class PostController extends Controller
             'material' => 'required',
             'inside_box' => 'required',
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'category' => 'required',
+            'subcategory' => 'required',
         ]);
 
     
@@ -54,6 +56,17 @@ class PostController extends Controller
             return view('collection', compact('items'));
         }
 
+        public function filtered_collection($category, $subcategory){
+            $category = ucfirst($category);
+            $subcategory = str_replace('-', ' ', $subcategory);
+            $subcategory = ucfirst($subcategory);
+
+            $items = Post::where('category',$category)
+            ->where('subcategory', $subcategory)->get();
+
+            return view('collection', compact('items'));
+        }
+
         public function editItem($item_id){
             $items = Post::where('item_id', '=',$item_id)->first();
             return view('admin_edit' , compact('items'));
@@ -68,6 +81,8 @@ class PostController extends Controller
                 'product_information' => 'required',
                 'material' => 'required',
                 'inside_box' => 'required',
+                'category' => 'required',
+                'subcategory' => 'required',
 
             ]);
 
@@ -77,6 +92,8 @@ class PostController extends Controller
             $product_information = $request->product_information;
             $material = $request->material;
             $inside_box = $request->inside_box;
+            $category = $request->category;
+            $subcategory = $request->subcategory;
 
             Post:: where ('item_id', '=',$items)->update([
                 'item_name'=>$item_name,
@@ -84,6 +101,8 @@ class PostController extends Controller
                 'product_information'=>$product_information,
                 'material'=>$material,
                 'inside_box'=>$inside_box,
+                'category'=>$category,
+                'subcategory'=>$subcategory,
             ]);
             return redirect('adminpage')->with('success', 'Items Updated Successfully');
         } 

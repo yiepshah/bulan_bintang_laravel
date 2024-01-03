@@ -58,13 +58,14 @@ Route::get('delete-item/{item_id}', [PostController::class, 'deleteItem']);
 
 Route::get('/collection', [PostController::class, 'collection'])->name('collection');
 
+Route::get('/collection/{category}/{subcategory}', [PostController::class, 'filtered_collection'])->name('filtered_collection');
+
+
 Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
 
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
-
-Route::get('/categories', [CategoriesController::class, 'index'])->name('category.index');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 

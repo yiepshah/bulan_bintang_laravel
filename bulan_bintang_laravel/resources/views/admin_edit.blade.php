@@ -102,6 +102,16 @@
                 <label for="inside_box">Inside Box:</label>
                 <input type="text" class="form-control" name="inside_box" value="{{ $items->inside_box }}" required>
             </div>       
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" class="form-control" name="category" value="{{ $items->category }}" required>
+            </div>   
+
+            <div class="form-group">
+                <label for="subcategory">Subcategory:</label>
+                <input type="text" class="form-control" name="subcategory" value="{{ $items->subcategory }}" required>
+            </div>   
             <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
             <button type="submit" id="editBtn" class="btn btn-primary">Update Item</button>
         </form>

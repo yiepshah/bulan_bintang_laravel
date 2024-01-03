@@ -269,20 +269,40 @@
             border: 1px solid #ddd;
             padding: 15px;
             text-align: left;
-            background-color: #ffffff;
-      
-            
+            background-color: #ffffff;           
         }
-
-
-
 
         .user-table tbody tr:hover td {
             background-color: #cecece;
-       
-   
             
         }
+
+            /* Add this style to your existing styles */
+    .fade-in {
+        animation: fadeIn ease-in 0.5s;
+    }
+
+    .fade-out {
+        animation: fadeOut ease-out 0.5s;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
 
 
         #editItembtn {
@@ -333,6 +353,18 @@
             color: #fff;
             margin-right: 20px;
         }
+
+        #searchItem {
+        border: none;
+        border-radius: 20px;
+        margin-right: 20px; /* Change margin-left to margin-right */
+    }
+
+    #itemSearchInput {
+        width: 20%;
+        border: none;
+        margin-left: 80%;
+    }
     </style>
 
 </head>
@@ -353,15 +385,15 @@
             <div class="header--title">
                 <span>Primary</span>
                 <h2>dashboard</h2>
-            </div>
+            </div>   
             <div class="user--info">
                 <p id="admin">Welcome Mr Admin  </p>
                 <div class="search--box">
-                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg"
-                     alt="Profile Image">
-                   
-                    <input id="myInput" type="text" placeholder="Search">
+                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg">
+                    <input id="userSearchInput" type="text" placeholder="Search User">
+                    <button id="searchUser" class="btn btn-success" onclick="searchUser()">Search</button>
                 </div>
+                
             </div>
         </div>
 
@@ -450,6 +482,11 @@
                         {{Session::get('success')}}
                     </div> --}}
                     {{-- @endif  --}}
+                    <div class="search--box">
+                        <input id="itemSearchInput" type="text" placeholder="Search Item ID">
+                        <button id="searchItem" class="btn btn-success" onclick="searchItem()">Search</button>
+                    </div>
+                    
                     <div class="table-responsive">
                         <table class="stock-table table table-striped">
                             <thead class="thead-dark">
@@ -460,6 +497,8 @@
                                     <th>Product Info</th>
                                     <th>Material</th>
                                     <th>Inside Box</th>
+                                    <th>Category</th>
+                                    <th>Subcategory</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -477,6 +516,8 @@
                                         <td>{{ $item->product_information }}</td>
                                         <td>{{ $item->material }}</td>
                                         <td>{{ $item->inside_box }}</td>
+                                        <td>{{ $item->category}}</td>
+                                        <td>{{ $item->subcategory}}</td>
                                         <td>
                                             <a href="{{url('edit-item/'.$item->item_id)}}"
                                              class="btn btn-primary">Edit</a> <br><br>
@@ -543,13 +584,57 @@
             </script>
             @endif
 
-                
-                <script>
-                    function clearPage() {
-    
-                        location.reload();
+            <script>
+                function searchItem() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("itemSearchInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myItemtable");
+                    tr = table.getElementsByTagName("tr");
+            
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0]; // Assuming item ID is in the first column
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].classList.remove("fade-out");
+                                tr[i].classList.add("fade-in");
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].classList.remove("fade-in");
+                                tr[i].classList.add("fade-out");
+                                tr[i].style.display = "none";
+                            }
+                        }
                     }
+                }
+            </script>
 
-                </script>
+<script>
+    function searchUser() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("userSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myUsertable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Assuming user name is in the second column
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].classList.remove("fade-out");
+                    tr[i].classList.add("fade-in");
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].classList.remove("fade-in");
+                    tr[i].classList.add("fade-out");
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
         @include('footer')
         </body>

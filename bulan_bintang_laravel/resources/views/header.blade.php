@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   
-   
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-   
     <title>Bulan Bintang</title>
     <style>
           
@@ -19,9 +10,7 @@
             padding: 10px;
         }
 
-        .logo {
-            height: 62px;
-        }
+     
 
         .navbar .navbar-nav .nav-item a {
             color: #000033;
@@ -35,12 +24,17 @@
         }
 
         .navbar .navbar-nav .nav-item i {
-            margin-right: 10px;
+            margin: 7px;
             transition: transform 0.2s ease-in-out;
         }
 
         .navbar .navbar-nav .nav-item i:hover{
             transform: scale(1.4);
+        }
+
+
+        .logo {
+            height: 62px;
         }
 
         #loginbutton {
@@ -82,6 +76,10 @@
             font-size: 17px;
         }
 
+        .category{
+            margin-bottom: 20px;
+        }
+
     </style>
     
 </head>
@@ -92,36 +90,60 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img class="logo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    {{-- @foreach (optional($mainCategories) as $mainCategory) --}}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                {{-- {{ $mainCategory['category_name'] }} --}}
-                            </a>
-                            <ul class="dropdown-menu">
-                                {{-- @foreach ($mainCategory['subcategories'] as $subcategory) --}}
-                                    <li class="dropdown-submenu">
-                                        {{-- <a class="dropdown-item dropdown" href="{{ route('category.index', ['id' => $subcategory['category_id']]) }}"> --}}
-                                            {{-- {{ $subcategory['category_name'] }} --}}
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            {{-- @foreach ($subcategory['subcategories'] as $subSubcategory) --}}
-                                                <li>
-                                                    {{-- <a class="dropdown-item" href="{{ route('category.index', ['id' => $subSubcategory['category_id']]) }}"> --}}
-                                                        {{-- {{ $subSubcategory['category_name'] }} --}}
-                                                    </a>
-                                                </li>
-                                            {{-- @endforeach --}}
-                                        </ul>
-                                    </li>
-                                {{-- @endforeach --}}
-                            </ul>
-                        </li>
-                    {{-- @endforeach --}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Men
+                        </a>
+                        @auth    
+                        <ul class="dropdown-menu">
+                                                   
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-teluk-belanga']) }}">Teluk Belanga</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-tailored-fit']) }}">Tailored Fit</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-slim-fit']) }}">Slim Fit</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'samping']) }}">Samping</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'kurta']) }}">Kurta</a></li>
+                            
+                        </ul>
+                        @endauth
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Women
+                        </a>
+                        @auth
+                        <ul class="dropdown-menu">
+                           
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => 'lana']) }}">Lana</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => 'adeline']) }}">Adeline</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => 'hana']) }}">Hanna</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => ' elyana']) }}">Elyana</a></li>
+                           
+                         
+                        </ul>
+                        @endauth
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Kids
+                        </a>
+                        @auth
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'baju-melayu-kids']) }}">Baju Melayu Kids</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'emelda']) }}">Emelda</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'sabrina']) }}">Sabrina</a></li>
+                        </ul>
+                            @endauth                        
+                    </li>
                 </ul>
             </div>
         <ul class="navbar-nav ml-auto">
@@ -182,6 +204,23 @@
 </nav>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.dropdown-item').forEach(link => {
+            link.addEventListener('click', async (event) => {
+                try {
+                    event.preventDefault();
+                    const category = link.getAttribute('data-category');
+                    const subcategory = link.getAttribute('data-subcategory');
+                    const response = await axios.get(`/subcategory/${subcategory}`);
+                    console.log('Response:', response);
+                    document.getElementById('items-container').innerHTML = response.data;
+                } catch (error) {
+                    console.error('Error fetching items:', error);
+                }
+            });
+        });
+    });
+</script>   
 </body>
 </html>

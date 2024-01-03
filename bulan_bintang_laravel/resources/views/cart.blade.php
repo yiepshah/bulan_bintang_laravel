@@ -165,7 +165,8 @@
                                     @csrf
                                     <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>                                   
                                 </form>
-                            @endif
+
+                            @endif                           
                         </div>
                     @else
                         <p>Invalid item data.</p>
@@ -175,6 +176,10 @@
         @else
             <p>Your cart is empty.</p>
         @endif
+    </div>
+    <div class="cart-totals">
+        <h4>Total Price:</h4>
+        <p id="totalPriceDisplay">RM 0.00</p>
     </div>
 </div>
 
@@ -197,6 +202,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+               
                 <button type="button" class="btn btn-danger" id="confirmRemoveBtn">Remove</button>
             </div>
         </div>
@@ -204,61 +210,99 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+    var removeButtons = document.querySelectorAll('.remove-button');
+    var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+    var itemIdToRemove;
+
+    removeButtons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            itemIdToRemove = button.getAttribute('data-item-id');
+
+            var itemDetails = {
+                
+                date_added: '2024-01-02 03:15:10',
+               
+            };
+
+            var formattedDetails = Object.entries(itemDetails).map(([key, value]) => {
+                return `<p>${key}: ${value}</p>`;
+            }).join('');
+
+            document.getElementById('itemDetails').innerHTML = formattedDetails;
+
+            $('#confirmationModal').modal('show');
+        });
+    });
+
+    confirmRemoveBtn.addEventListener('click', function () {
+        console.log('Item removed with ID:', itemIdToRemove);
+
+        $.ajax({
+            url: '/cart/remove/' + itemIdToRemove,
+            type: 'POST',
+            data: { _token: '{{ csrf_token() }}' },
+            success: function (response) {
+                console.log(response);
+                location.reload();
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+
+        $('#confirmationModal').modal('hide');
+    });
+});
+</script>
+
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         var removeButtons = document.querySelectorAll('.remove-button');
         var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
         var itemIdToRemove;
+    
 
-        removeButtons.forEach(function (button) {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                itemIdToRemove = button.getAttribute('data-item-id');
-
-                var itemDetails = getItemDetails(itemIdToRemove);
-                document.getElementById('itemDetails').innerHTML = itemDetails;
-
-                $('#confirmationModal').modal('show');
-            });
-        });
-
+    
         confirmRemoveBtn.addEventListener('click', function () {
-            console.log('Item removed with ID:', itemIdToRemove);
-
+        
+    
             $.ajax({
                 url: '/cart/remove/' + itemIdToRemove,
                 type: 'POST',
                 data: { _token: '{{ csrf_token() }}' },
                 success: function (response) {
                     console.log(response);
+                    updateTotalPrice(); 
                     location.reload();
                 },
                 error: function (error) {
                     console.error(error);
                 }
             });
-
+    
             $('#confirmationModal').modal('hide');
         });
-
-            function getItemDetails(itemId) {
-
-        // var itemDetails = {
-        //     item_id: itemId,
-        //     user_id: 8,
-        //     date_added: '2024-01-02 03:15:10',
-        //     // Add other item details here
-        // };
-
-        // Format itemDetails for display in the modal
-        var formattedDetails = Object.entries(itemDetails).map(([key, value]) => {
-            // return `<p>${key}: ${value}</p>`; 
-            return ('');
-        }).join('');
-
-        return formattedDetails;
-    }
+    
+     
+        function updateTotalPrice() {
+            var total = 0;
+            var cartItems = {!! json_encode(session('cart')) !!};
+            
+            if (cartItems) {
+                Object.values(cartItems).forEach(function (item) {
+                    total += item.quantity * item.price;
+                });
+            }
+    
+            document.getElementById('totalPriceDisplay').innerText = 'RM ' + total.toFixed(2);
+        }
+    
+    
+        updateTotalPrice();
     });
-</script>
+    </script>
 </body>
 </html>
 

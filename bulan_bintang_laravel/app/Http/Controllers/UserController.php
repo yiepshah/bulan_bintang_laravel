@@ -65,6 +65,8 @@ class UserController extends Controller
             }
         }
 
+        session(['cart' => []]);
+
         return redirect()->route('login')->with('login_error', 'Invalid email or password.')->with('showAlert', 'loginError');
     } 
 
@@ -105,6 +107,8 @@ class UserController extends Controller
 
     public function logout(){
         auth()->logout();
+
+        session(['cart' => []]);
         return redirect('/');
     }
 

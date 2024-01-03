@@ -23,7 +23,8 @@ class Post extends Model
         'product_information',
         'material',
         'inside_box',
-        'category_id',
+        'category',
+        'subcategory',
     ];
 
     
