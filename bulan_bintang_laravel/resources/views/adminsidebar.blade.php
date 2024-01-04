@@ -11,11 +11,10 @@
     <title>Document</title>
 
     <style>
-        
         .w3-sidebar {
             height: 100%;
-            width: 90px;
-            background-color: #fcfcfc;
+            width: 100px;
+            background-color: #202d45;
             position: fixed;
             overflow-x: hidden;
             padding-top: 20px;
@@ -26,10 +25,9 @@
         .w3-sidebar a {
             text-decoration: none;
             font-size: 18px;
-            color: #202d45;
+            color: #fff;
             display: block;
             padding: 30px;
-            text-align: center;
         }
 
         .w3-sidebar:hover {
@@ -44,6 +42,10 @@
             margin-left: 200px;
         }
 
+        .main--content {
+            transition: margin-left 0.4s;
+            padding: 20px;
+        }
 
         @media (max-width: 768px) {
             .w3-sidebar {

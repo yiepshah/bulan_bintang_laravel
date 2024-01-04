@@ -15,72 +15,25 @@
 
     <title>Admin Dashboard</title>
     <style>
-        /* body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            background-color: #f8f9fa;
-            color: #343a40;
-        } */
-
-        .w3-sidebar {
-            height: 100%;
-            width: 70px;
-            
-            position: fixed;
-            overflow-x: hidden;
-            padding-top: 20px;
-            transition: width 0.3s;
-            z-index: 1;
+        body{
+            background-color: #f7f7f7
         }
 
-        .w3-sidebar:hover {
-            width: 200px;
-        }
+ 
 
-        .w3-sidebar a {
-            text-decoration: none;
-            font-size: 18px;
-            color: #818181;
-            display: block;
-            padding: 30px;
-            text-align: center;
-        }
+        .container {
+    position: relative;
+    background: #fff;
+    width: 90%; /* Adjust the width as needed */
+    max-width: 1200px; /* Add a max-width to limit the container size */
+    padding: 1rem;
+    margin: 0 auto;
+    transition: margin-left 0.3s;
+    color: #333;
+    padding: 20px;
+}
 
-        .w3-sidebar a:hover {
-            color: #f1f1f1;
-        }
 
-        .main--content {
-            position: relative;
-            background: #fff;
-            width: calc(100% - 70px);
-            padding: 1rem;
-            left: 70px;
-            transition: margin-left 0.3s;
-            color: #333;
-            padding: 20px;
-            
-        }
-
-        .w3-sidebar:hover+.main--content {
-            margin-left: 90px;
-        }
-
-        @media (max-width: 576px) {
-        .w3-sidebar {
-            width: 90px;
-        }
-
-        .w3-sidebar:hover {
-           
-        }
-
-        .main--content {
-            width: 90%;
-            margin-left: 0;
-        }
-    }
         .header--wrapper img {
             width: 50px;
             height: 50px;
@@ -268,12 +221,14 @@
             border-radius: 5px 5px;
         }
 
-        .user-table th,
-        .user-table td {
+        .user-table th
+         {
             border: 1px solid #ddd;
             padding: 15px;
             text-align: left;
-            background-color: #ffffff;           
+            color: #ffff;
+            
+                      
         }
 
         .user-table tbody tr:hover td {
@@ -331,15 +286,10 @@
         .search--box {
             display: flex;
             align-items: center;
-            justify-content: flex-end; 
-             
+            justify-content: flex-end;             
             background-color: #fff;
         }
 
-        #search-icon{
-            color: #202d45;
-            width: 20px;
-        }
 
 
         .thead-dark{
@@ -358,6 +308,10 @@
             gap: 10px;
         }
 
+        .user-table{
+            background-color: #ffff;
+        }
+
         #userEdit, #deleteBtn {
             display: inline-block;
             width: auto;
@@ -370,12 +324,37 @@
             border: none;
         }
 
-        #deleteBtn {
-            background: linear-gradient(to right, #e74c3c, #e66767);
-            color: #fff;
-        }
+        #myItemtable td:last-child {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
 
-        .display{}
+#itemEdit,
+#deleteBtn {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+}
+
+#itemEdit {
+    background-color: #202d45;
+    color: #fff;
+    border: none;
+}
+
+
+
+
+
+        .new-header{
+            background-color: #202d45;
+            width: 100%;
+            height: 80px;
+            padding-right: 10px;
+            
+        }
 
 
 
@@ -392,7 +371,10 @@
             @include('adminsidebar')
         @endif
     @endauth 
-
+    <div class="new-header">
+        <h1>New Header</h1>
+        <!-- You can customize the content and styling of this new header -->
+    </div>
 
 
     <div class="container">
@@ -402,7 +384,6 @@
                 <h2>dashboard</h2>
             </div> 
         </div>
-
         <div class="card-container">
             <h2 class="main--title">Today's data</h2>
             <div class="card--wrapper">
@@ -439,125 +420,115 @@
                     </div>
                 </div>
             </div>
-            <hr>
+            <hr><br><br>
 
             <div class="user-table-container">
-                <h2 class="main--title">User Information</h2>
-                       
-                <div class="search--box">  
-                    {{-- <input id="userSearchInput" type="text" placeholder="Search User"> --}}
-                    <a href="" onclick="searchItem()"><i id="search-icon" class="fas fa-search"></i></a>
-                </div>       
-  
-                <div class="table-responsive">
-                    <table id="myUsertable" class="display">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>                       
-                       
-                        <tbody id="myUsertable">
-                            @forelse ($users as $user)
-                            <tr>
-                                        <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->role }}</td>                                                                       
-                                     <td>
-                                    <a id="userEdit" href="{{url('edit-user/'.$user->id)}}"
-                                        class="btn btn-primary">Edit</a> <br><br>
-                                        <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">Delete</a>
-                                    </td>
-                            </tr>
-                            @empty
-                                <tr><td colspan='6'>No user found</td></tr>
-                            @endforelse                        
-                        </tbody>
-                     </table>
-                </div>
-
-
-
-                <div class="stock-table-container">
-                    <h2 class="main--title">Stock Information</h2>
-
-                    <div class="search--box">
-                        {{-- <input id="itemSearchInput" type="text" placeholder="Search Item"> --}}
-                        <a href="" onclick="searchItem()"><i id="search-icon" class="fas fa-search"></i></a>
-
-                    </div>
-                    
+                <div class="user-table">
+                    <h2 class="main--title">User Information</h2>
+        
                     <div class="table-responsive">
-                        <table id="myItemtable" class="display">
+                        <table id="myUsertable" class="display">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Item Id</th>
-                                    <th>Item Name</th>
-                                    <th>Price</th>
-                                    <th>Product Info</th>
-                                    <th>Material</th>
-                                    <th>Inside Box</th>
-                                    <th>Category</th>
-                                    <th>Subcategory</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
-                            </thead>
-                            <tbody id="myItemtable">
-                                @php
-                                
-                                    $reversedItems = $items->reverse();
-                                @endphp
-
-                                @forelse ($reversedItems as $item)
-                                    <tr>
-                                        <td>{{ $item->item_id }}</td>
-                                        <td>{{ $item->item_name }}</td>
-                                        <td>{{ $item->price }}</td>
-                                        <td>{{ $item->product_information }}</td>
-                                        <td>{{ $item->material }}</td>
-                                        <td>{{ $item->inside_box }}</td>
-                                        <td>{{ $item->category}}</td>
-                                        <td>{{ $item->subcategory}}</td>
-                                        <td>
-                                            <a id="userBtninfo" href="{{url('edit-item/'.$item->item_id)}}"
-                                             class="btn btn-primary">Edit</a> <br><br>
-                                              <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger">Delete</a>
+                            </thead>                       
+                           
+                            <tbody id="myUsertable">
+                                @forelse ($users as $user)
+                                <tr>
+                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->role }}</td>                                                                       
+                                         <td>
+                                        <a id="userEdit" href="{{url('edit-user/'.$user->id)}}"
+                                            class="btn btn-primary">Edit</a> <br><br>
+                                            <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">Delete</a>
                                         </td>
-                                    </tr>
+                                </tr>
                                 @empty
-                                    <tr><td colspan='6'>No items found</td></tr>
-                                @endforelse
+                                    <tr><td colspan='6'>No user found</td></tr>
+                                @endforelse                        
                             </tbody>
-                        </table>
+                         </table>
                     </div>
-                </div> 
+            </div>
+    <hr><br><br>
+               
+    </div>
 
-                <div class="modal fade" id="deleteUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteUserModalLabel">Confirm Deletion</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete this user?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger">Delete</a>
-                            </div>
-                        </div>
+    <div class="stock-table-container">
+        <div class="stock-table">
+            <h2 class="main--title">Stock Information</h2>
+            <div class="table-responsive">
+                <table id="myItemtable" class="display">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Item Id</th>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            {{-- <th>Product Info</th> --}}
+                            <th>Material</th>
+                            <th>Inside Box</th>
+                            <th>Category</th>
+                            <th>Subcategory</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myItemtable">
+                        @php
+                        
+                            $reversedItems = $items->reverse();
+                        @endphp
+        
+                        @forelse ($reversedItems as $item)
+                            <tr>
+                                <td>{{ $item->item_id }}</td>
+                                <td>{{ $item->item_name }}</td>
+                                <td>{{ $item->price }}</td>
+                                {{-- <td>{{ $item->product_information }}</td> --}}
+                                <td>{{ $item->material }}</td>
+                                <td>{{ $item->inside_box }}</td>
+                                <td>{{ $item->category}}</td>
+                                <td>{{ $item->subcategory}}</td>
+                                <td>
+                                    <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">Delete</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan='6'>No items found</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+        <div class="modal fade" id="deleteUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteUserModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this user?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-    
 
                 <script>
                

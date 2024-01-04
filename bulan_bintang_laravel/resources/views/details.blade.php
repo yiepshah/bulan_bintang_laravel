@@ -15,7 +15,7 @@
 
     .details-container{
         padding: 80px;
-        background-color: rgb(197, 197, 197);
+        
 
     }
 
