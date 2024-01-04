@@ -12,14 +12,20 @@ class PostController extends Controller
     public function addPost(Request $request)
     {
         $itemPost = $request->validate([
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'item_name' => 'required',
             'price' => 'required',
             'product_information' => 'required',
             'material' => 'required',
             'inside_box' => 'required',
+<<<<<<< HEAD
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'category' => 'required',
             'subcategory' => 'required',
+=======
+            'category' => 'required',
+            'subcategory' => 'required',        
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
         ]);
 
     
@@ -60,7 +66,11 @@ class PostController extends Controller
             $category = ucfirst($category);
             $subcategory = str_replace('-', ' ', $subcategory);
             $subcategory = ucfirst($subcategory);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
             $items = Post::where('category',$category)
             ->where('subcategory', $subcategory)->get();
 
@@ -112,7 +122,9 @@ class PostController extends Controller
             return redirect()->back()->with('success', 'Items Deleted Successfully');
         }
 
- 
+
+
+
 
 
         
@@ -127,7 +139,7 @@ class PostController extends Controller
                 $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
         
                 $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
-                // $breadcrumb .= '<a href="' . route('category') . '">Baju Melayu Slim Fit</a> / ';
+        
                 $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
         
                 return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions'));

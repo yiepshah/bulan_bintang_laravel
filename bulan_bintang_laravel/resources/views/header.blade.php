@@ -99,6 +99,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Men
                         </a>
+<<<<<<< HEAD
                         @auth    
                         <ul class="dropdown-menu">
                                                    
@@ -110,6 +111,11 @@
                             
                         </ul>
                         @endauth
+=======
+                        <ul class="dropdown-menu" id="subcategoryDropdown">
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-teluk-belanga']) }}">Baju Melayu Teluk Belanga</a></li>     
+                        </ul>
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -117,6 +123,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Women
                         </a>
+<<<<<<< HEAD
                         @auth
                         <ul class="dropdown-menu">
                            
@@ -128,6 +135,11 @@
                          
                         </ul>
                         @endauth
+=======
+                        <ul class="dropdown-menu" id="subcategoryDropdown">
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => 'Dayang']) }}">Dayang</a></li>     
+                        </ul>
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -135,6 +147,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Kids
                         </a>
+<<<<<<< HEAD
                         @auth
                         <ul class="dropdown-menu">
                             
@@ -143,6 +156,11 @@
                             <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'sabrina']) }}">Sabrina</a></li>
                         </ul>
                             @endauth                        
+=======
+                        <ul class="dropdown-menu" id="subcategoryDropdown">
+                            <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'baju-melayu-kids']) }}">Baju Melayu Kids</a></li>     
+                        </ul>
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
                     </li>
                 </ul>
             </div>
@@ -202,7 +220,16 @@
         </ul>
     </div>
 </nav>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.dropdown-item').forEach(link => {
+        link.addEventListener('click', async (event) => {
+            try {
+                event.preventDefault();
+                const category = link.getAttribute('data-category');
+                const subcategory = link.getAttribute('data-subcategory');
 
+<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -222,5 +249,22 @@
         });
     });
 </script>   
+=======
+                const response = await axios.get(`/subcategory/${subcategory}`);
+
+                console.log('Response:', response);
+
+                document.getElementById('items-container').innerHTML = response.data;
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        });
+    });
+});
+
+
+</script>
+
+>>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
 </body>
 </html>
