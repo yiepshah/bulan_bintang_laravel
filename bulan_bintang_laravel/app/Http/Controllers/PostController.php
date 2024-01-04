@@ -18,14 +18,9 @@ class PostController extends Controller
             'product_information' => 'required',
             'material' => 'required',
             'inside_box' => 'required',
-<<<<<<< HEAD
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'category' => 'required',
             'subcategory' => 'required',
-=======
-            'category' => 'required',
-            'subcategory' => 'required',        
->>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
         ]);
 
     
@@ -66,11 +61,6 @@ class PostController extends Controller
             $category = ucfirst($category);
             $subcategory = str_replace('-', ' ', $subcategory);
             $subcategory = ucfirst($subcategory);
-<<<<<<< HEAD
-
-=======
-            
->>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
             $items = Post::where('category',$category)
             ->where('subcategory', $subcategory)->get();
 

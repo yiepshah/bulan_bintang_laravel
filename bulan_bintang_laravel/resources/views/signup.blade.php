@@ -12,12 +12,12 @@
 
     <style>
         body {
-            background-image: url('https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/USP-BMK-1-1.jpg?resize=2000%2C2000&ssl=1');
+           background-color: #202d45;
         }
 
         .container {
-            background-color: rgba(211, 211, 211, 0.5);
-            margin-top: 50px;
+            background-color: #ffff;
+            margin-top: 100px;
             border-radius: 30px 30px;
         }
 
@@ -37,14 +37,14 @@
         }
 
         #Sbtn {
-            border-radius: 20px 20px;
-            background-color: #12122f;
+            border-radius: 5px ;
+            background-color: #202d45;
             transition: transform 0.3s ease-in-out;
         }
 
         #Sbtn:hover{
             transform: scale(1.3);
-            background-color: #508D69;
+            background-color: #202d45;
             border: none;
         }
     </style>
@@ -56,7 +56,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <h2>Sign Up</h2>
+                <div class="d-flex align-items-center mb-2 pb-1">
+                    <img src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
+                        style="width: 90px; height: auto; margin-right: 10px;" alt="">
+                    <span class="h1 fw-bold mb-0">Sign Up</span>
+                </div>
 
                 <form action="{{ url('/signup') }}" method="post">
                     @csrf

@@ -66,12 +66,6 @@ Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

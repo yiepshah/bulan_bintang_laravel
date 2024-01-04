@@ -14,19 +14,19 @@
         
         .w3-sidebar {
             height: 100%;
-            width: 60px;
+            width: 90px;
             background-color: #fcfcfc;
             position: fixed;
             overflow-x: hidden;
             padding-top: 20px;
-            transition: width 0.3s;
+            transition: width 0.4s;
             z-index: 1;
         }
 
         .w3-sidebar a {
             text-decoration: none;
             font-size: 18px;
-            color: #000000;
+            color: #202d45;
             display: block;
             padding: 30px;
             text-align: center;
@@ -63,13 +63,17 @@
 </head>
 <body>
     <div class="w3-sidebar">
-        <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home"></i></a>
+        <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
+              Home</i></a>
         
-        <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store"></i></a>
+        <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
+              Shop</i></a>
        
-        <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus"></i></a>
+        <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
+               Add</i></a>
 
-        <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt">
+               Logout</i></a>
 
         
             {{-- <a class="nav-link" title="Add Item" href="{{ url('add_item') }}"><i class="fas fa-plus"></i></a>

@@ -14,9 +14,10 @@
     @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
-    body{
-        /* font-family: 'Quicksand', sans-serif; */
-    }
+        .container{
+            padding: 30px;
+            
+        }
 
     .image-container {
         display: flex; 
@@ -165,170 +166,186 @@
 </head>
 <body>
 @include('header')
-<div id="carouselExample" class="carousel slide" data-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
-  </div>
 
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Family.jpg" class="" alt="">
+<div class="container">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+        </div>
+      
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Family.jpg" class="" alt="">
+          </div>
+          <div class="carousel-item">
+            <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Perempuan-1024x576.jpg">
+          </div>
+          <div class="carousel-item">
+            <img class="custom-image" src="https://cdn.store-assets.com/s/859197/f/9740202.jpg?width=1500" class="" alt="">
+          </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      
+        @if(auth()->check())
+        <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
+      @else
+        <a id="shop" href="{{ url('login') }}">SHOP NOW!</a>
+      @endif
+      
+      </a>
+      </div>
+      
+          <h3 class="collection">Brothers Collection</h3>
+      
+          <div class="image-container brother-collection">
+              <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Flamingo-Pink_SF_22.jpg" alt="Image 1">
+              <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/03/Viridian-Green_BMTF_34-1536x1536.jpg" alt="Image 2">
+              <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
+              <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
+              
+          </div><br><br><br>
+      
+          <div class="third-image">
+    <h3 class="collection">2023 Collection</h3>
+    <div class="image-group">
+        <div class="image-container">
+            <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
+            <div class="image-info">Text for Image 1</div>
+        </div>
+        <div class="image-container">
+            <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
+            <div class="image-info">Text for Image 2</div>
+        </div>
+        <div class="image-container">
+            <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
+            <div class="image-info">Text for Image 3</div>
+        </div>
+        <div class="image-container">
+            <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt="">
+            <div class="image-info">Text for Image 4</div>
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Perempuan-1024x576.jpg">
-    </div>
-    <div class="carousel-item">
-      <img class="custom-image" src="https://cdn.store-assets.com/s/859197/f/9740202.jpg?width=1500" class="" alt="">
-    </div>
-  </div>
-  
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-
-  @if(auth()->check())
-  <a id="shop" href="{{ url('collection') }}">SHOP NOW!</a>
-@else
-  <a id="shop" href="{{ url('login') }}">SHOP NOW!</a>
-@endif
-
-</a>
+</div>
+      
+          <h3 class="collection">Visit Our Official Boutique</h3>
+         
+          <div class="boutique">
+         
+              <div class="row">
+                  <div class="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/BANGI.jpg?resize=1536%2C1536&ssl=1" alt="Image 1" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Bangi</figcaption>
+                      </figure>
+                  </div>
+                  <div class="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/UKAY-BOULEVARD.jpg?resize=1536%2C1536&ssl=1" alt="Image 2" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Ukay Boulevard</figcaption>
+                      </figure>
+                  </div>
+                  <div class="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/KELANTAN.jpg?resize=1536%2C1536&ssl=1" alt="Image 3" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Kelantan</figcaption>
+                      </figure>
+                  </div>
+      
+                  <div class ="col-md-3">
+                          <figure>
+                              <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/PENANG.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
+                              <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Penang</figcaption>
+                          </figure>
+                  </div>
+              </div>
+      
+          
+           
+      
+              
+              <div class="row">
+                  <div class="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/JOHOR.jpg?resize=1536%2C1536&ssl=1" alt="Image 4" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Johor Bahru</figcaption>
+                      </figure>
+                  </div>
+      
+                  <div class="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/SHAH-ALAM.jpg?resize=1536%2C1536&ssl=1" alt="Image 5" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Shah Alam</figcaption>
+                      </figure>
+                  </div>
+      
+                  <div class ="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/MELAKA.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Melaka</figcaption>
+                      </figure>
+                  </div>
+      
+                  <div class ="col-md-3">
+                      <figure>
+                          <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/TERENGGANU.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
+                          <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Terengganu</figcaption>    
+                      </figure>
+                  </div>
+      
+              </div>
+          </div>
+      
+          <div style="background-color: #12122f;color: #fff; padding: 60px;">
+              <div class="">
+                  <div class="row">
+                      
+                      <div class="col-md-3">
+                          <h4>ABOUT US</h4> <br>
+                          <ul>
+                              <li>About Us</li><br>
+                              <li>Blog</li><br>
+                              <li>Careers</li><br>
+                          </ul>
+                      </div>
+      
+                      <div class="col-md-3">
+                          <h4>CUSTOMER CARE</h4><br>
+                          <ul>
+                              <li>FAQ</li><br>
+                              <li>Return Policy</li>
+                          </ul>
+                      </div>
+      
+                      <div class="col-md-3">
+                          <h4>FOLLOW US</h4><br>
+                          <ul>
+                              <i class="fab fa-tiktok"></i>
+                              <i class="fab fa-facebook"></i>
+                              <i class="fab fa-twitter"></i>
+                          </ul>
+                      </div>
+      
+                      <div class="col-md-3">
+                          <h4>CUSTOMER SERVICES</h4><br>
+                          <ul>
+                              <i class="fas fa-clock">: Monday - Saturday (9:00 am - 10:00pm)</i><br><br>
+                              <i class="fas fa-mail-bulk">: Operations@bulanbintanghq.com</i><br><br>
+                              <i class="fas fa-phone-volume">: Customer Service</i><br><br>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
 </div>
 
-    <h3 class="collection">Brothers Collection</h3>
-
-    <div class="image-container brother-collection">
-        <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Flamingo-Pink_SF_22.jpg" alt="Image 1">
-        <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/03/Viridian-Green_BMTF_34-1536x1536.jpg" alt="Image 2">
-        <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
-        <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
-        
-    </div><br><br><br>
-
-    <div class="third-image">
-    <h3 class="collection">2023 Collection</h3>
-        <div class="image-group">    
-            <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1"  alt="">
-            <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
-            <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
-            <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt="">
-        </div>
-    </div><br><br>
-
-    <h3 class="collection">Visit Our Official Boutique</h3>
-   
-    <div class="boutique">
-   
-        <div class="row">
-            <div class="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/BANGI.jpg?resize=1536%2C1536&ssl=1" alt="Image 1" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Bangi</figcaption>
-                </figure>
-            </div>
-            <div class="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/UKAY-BOULEVARD.jpg?resize=1536%2C1536&ssl=1" alt="Image 2" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Ukay Boulevard</figcaption>
-                </figure>
-            </div>
-            <div class="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/KELANTAN.jpg?resize=1536%2C1536&ssl=1" alt="Image 3" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Kelantan</figcaption>
-                </figure>
-            </div>
-
-            <div class ="col-md-3">
-                    <figure>
-                        <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/PENANG.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
-                        <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Penang</figcaption>
-                    </figure>
-            </div>
-        </div>
-
-    
-        <div style="margin-top: 10px;"></div>
-
-        
-        <div class="row">
-            <div class="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/JOHOR.jpg?resize=1536%2C1536&ssl=1" alt="Image 4" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Johor Bahru</figcaption>
-                </figure>
-            </div>
-
-            <div class="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/SHAH-ALAM.jpg?resize=1536%2C1536&ssl=1" alt="Image 5" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Shah Alam</figcaption>
-                </figure>
-            </div>
-
-            <div class ="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/MELAKA.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Melaka</figcaption>
-                </figure>
-            </div>
-
-            <div class ="col-md-3">
-                <figure>
-                    <img src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/07/TERENGGANU.jpg?resize=1536%2C1536&ssl=1" alt="Image 6" class="img-fluid">
-                    <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Terengganu</figcaption>    
-                </figure>
-            </div>
-
-        </div>
-    </div>
-
-    <div style="background-color: #12122f;color: #fff; padding: 60px;">
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-md-3">
-                    <h4>ABOUT US</h4> <br>
-                    <ul>
-                        <li>About Us</li><br>
-                        <li>Blog</li><br>
-                        <li>Careers</li><br>
-                    </ul>
-                </div>
-
-                <div class="col-md-3">
-                    <h4>CUSTOMER CARE</h4><br>
-                    <ul>
-                        <li>FAQ</li><br>
-                        <li>Return Policy</li>
-                    </ul>
-                </div>
-
-                <div class="col-md-3">
-                    <h4>FOLLOW US</h4><br>
-                    <ul>
-                        <i class="fab fa-tiktok"></i>
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-twitter"></i>
-                    </ul>
-                </div>
-
-                <div class="col-md-3">
-                    <h4>CUSTOMER SERVICES</h4><br>
-                    <ul>
-                        <i class="fas fa-clock">: Monday - Saturday (9:00 am - 10:00pm)</i><br><br>
-                        <i class="fas fa-mail-bulk">: Operations@bulanbintanghq.com</i><br><br>
-                        <i class="fas fa-phone-volume">: Customer Service</i><br><br>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     @include('footer')

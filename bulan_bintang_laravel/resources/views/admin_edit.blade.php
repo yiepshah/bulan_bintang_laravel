@@ -10,8 +10,7 @@
     <title>Edit Item</title>
     <style>
         body {
-            background-image: url('https://www.shoutmeloud.com/wp-content/uploads/2015/09/Screenshot-Tools-700px-Wide.gif');
-           background-position: center;
+            background-color: #202d45;
         }
 
         .edit-item-container {
@@ -48,13 +47,14 @@
         }
 
         #editBtn {
-            background-color: #000000;
+            background-color: #202d45;
             color: #fff;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             margin-left: 100px;
+            height: 40px;
         }
 
         #editBtn:hover {
@@ -62,9 +62,10 @@
         }
 
         #backBtn{
-            
+            background-color: #202d45;          
             width: 100px;
             height: 40px;
+            border: none;
         }
     </style>
 </head>

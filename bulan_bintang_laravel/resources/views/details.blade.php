@@ -13,6 +13,11 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+    .details-container{
+        padding: 80px;
+        background-color: rgb(197, 197, 197);
+
+    }
 
     .image {
         max-width: 100%;
@@ -21,6 +26,7 @@
         border-radius: 10px 10px;
         margin-left: 0px;
         margin-top: 10px;
+        padding: 30px;
     }
 
     .col-md-11{
@@ -38,13 +44,13 @@
     }
 
     .h4{
-        color: #003366;
+        color: #202d45;
         font-family: 'Roboto', sans-serif;
         font-weight: bolder;
     }
 
     #button {
-        background-color: #8EBAFF; 
+        background-color: #202d45; 
         color: #fff; 
         border: none; 
         border-radius: 20px 20px;
@@ -56,7 +62,7 @@
     }
 
     #button:hover {
-        background-color: black; 
+        background-color: #202d45; 
         transform: scale(1.3);
         animation-timing-function: ease-in;
     }
@@ -96,6 +102,10 @@
 
     #quantity{
         border-radius: 10px 10px;
+    }
+
+    .text{
+        color: #202d45;
     }
 
 

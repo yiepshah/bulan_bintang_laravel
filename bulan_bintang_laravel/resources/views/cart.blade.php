@@ -19,9 +19,7 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        .content {
-            padding: 20px;        
-        }
+ 
 
         .content {
             background-color: #fff;
@@ -32,7 +30,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 10px;     
-             
+           margin: 50px;  
             margin-top: 10px;           
         }
 
@@ -47,12 +45,13 @@
             box-sizing: border-box;
             display: flex;
             gap: 20px;
+            color: #202d45;
             
         }
 
         .cart-item img {
-            max-width: 260px; 
-            height: 230px;
+            
+            height: 330px;
             border-radius: 8px;
             
         }
@@ -66,8 +65,21 @@
         .cart-totals {
             width: 100%;
             margin-top: 20px;
-            border-top: 1px solid #ddd; 
-            padding-top: 20px; 
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+            text-align: right; /* Align text to the right */
+        }
+
+        .cart-totals h4 {
+            display: inline-block; /* Keep the h4 element inline for proper alignment */
+            margin-right: 20px; /* Adjust margin as needed */
+        }
+
+        #totalPriceDisplay {
+            display: inline-block; /* Keep the total price inline with h4 element */
+            font-size: 18px; /* Adjust font size as needed */
+            font-weight: bold;
+            color: #202d45;
         }
 
         .cart-total-item {
@@ -165,7 +177,6 @@
                                     @csrf
                                     <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>                                   
                                 </form>
-
                             @endif                           
                         </div>
                     @else

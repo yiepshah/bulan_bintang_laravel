@@ -7,23 +7,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
  
 
 
     <title>Admin Dashboard</title>
     <style>
-        body {
+        /* body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             background-color: #f8f9fa;
             color: #343a40;
-        }
+        } */
 
         .w3-sidebar {
             height: 100%;
             width: 70px;
-            background-color: #111;
+            
             position: fixed;
             overflow-x: hidden;
             padding-top: 20px;
@@ -56,6 +59,8 @@
             left: 70px;
             transition: margin-left 0.3s;
             color: #333;
+            padding: 20px;
+            
         }
 
         .w3-sidebar:hover+.main--content {
@@ -88,7 +93,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            background: #343a40;
+            background-color: #202d45;
             border-radius: 10px;
             padding: 10px 2rem;
             margin-bottom: 1rem;
@@ -137,7 +142,7 @@
             margin-top: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            color: #343a40;
+            color: #202d45;
            
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -170,8 +175,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
-        .card--header {
-            
+        .card--header {           
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
@@ -201,19 +205,19 @@
         }
 
         .sales {
-            background: linear-gradient(to right, #45a049, #8cc84b);
+            background-color: #202d45;
         }
 
         .online-payment {
-            background: linear-gradient(to right, #36b9cc, #66b3a6);
+            background-color: #202d45;
         }
 
         .expenses {
-            background: linear-gradient(to right, #e74c3c, #e66767);
+            background-color: #202d45;
         }
 
         .new-customers {
-            background: linear-gradient(to right, #f39c12, #f5d76e);
+            background-color: #202d45;
         }
 
         .icon {
@@ -234,7 +238,7 @@
             border: 1px solid #ddd;
             padding: 15px;
             text-align: left;
-            background-color: #3498db;
+            background-color: #202d45;
             color: #fff;
         }
 
@@ -242,7 +246,7 @@
             position: sticky;
             top: 0;
             z-index: 2;
-            background-color: #3498db;
+            background-color: #202d45;
         }
 
         .stock-table td {
@@ -277,7 +281,7 @@
             
         }
 
-            /* Add this style to your existing styles */
+           
     .fade-in {
         animation: fadeIn ease-in 0.5s;
     }
@@ -304,46 +308,6 @@
         }
     }
 
-
-        #editItembtn {
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 10px 10px;
-            margin-right: 5px;
-            transition: transform 0.3s ease-in-out;
-            margin-bottom: 10px;
-        }
-
-        #deleteItembtn {
-            border: none;
-            color: #000;
-            border: none;
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: 10px 10px;
-            margin-right: 5px;
-            transition: transform 0.3s ease-in-out;
-
-        }
-
-        #editItembtn:hover {
-            background-color: #352F44;
-            border: none;
-            transform: scale('1.2');
-        }
-
-
-        #profileimg {
-            margin-left: 6px;
-        }
-
-        #clearBtn{
-            background: linear-gradient(to right, #45a049, #8cc84b);
-            border: none;
-        }
-
         #deleteBtn{
             background: linear-gradient(to right, #e74c3c, #e66767);
             border: none;
@@ -354,23 +318,74 @@
             margin-right: 20px;
         }
 
-        #searchItem {
-        border: none;
-        border-radius: 20px;
-        margin-right: 20px; /* Change margin-left to margin-right */
-    }
+        #userSearchInput,
+        #itemSearchInput {
+            width: 350px; 
+            height: 50px;
+            padding: 8px; 
+            margin-right: 10px; 
+            background-color: #eeeeee;
+            border-radius: 10px;
+        }
 
-    #itemSearchInput {
-        width: 20%;
-        border: none;
-        margin-left: 80%;
-    }
+        .search--box {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; 
+             
+            background-color: #fff;
+        }
+
+        #search-icon{
+            color: #202d45;
+            width: 20px;
+        }
+
+
+        .thead-dark{
+            background-color: #202d45;
+        }
+
+        #userBtninfo{
+            background-color: #202d45;
+            border: none;
+        }
+
+        .user-table td:last-child {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #userEdit, #deleteBtn {
+            display: inline-block;
+            width: auto;
+            margin: 0;
+        }
+
+        #userEdit {
+            background-color: #202d45;
+            color: #fff;
+            border: none;
+        }
+
+        #deleteBtn {
+            background: linear-gradient(to right, #e74c3c, #e66767);
+            color: #fff;
+        }
+
+        .display{}
+
+
+
+
     </style>
 
 </head>
-
+<html>
 <body>
-    @include('header')
+  
 
     @auth
         @if(auth()->user()->role === 'admin')
@@ -380,21 +395,12 @@
 
 
 
-    <div class="main--content">
+    <div class="container">
         <div class="header--wrapper">
             <div class="header--title">
-                <span>Primary</span>
+                <span>Admin</span>
                 <h2>dashboard</h2>
-            </div>   
-            <div class="user--info">
-                <p id="admin">Welcome Mr Admin  </p>
-                <div class="search--box">
-                    <img id="profileimg" src="https://gntme.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGZ250bWUuY29tJTJGd3AtY29udGVudCUyRnVwbG9hZHMlMkYyMDIwJTJGMDclMkY0MDAtNC5qcGcmY2FjaGVNYXJrZXI9MTY3MTAxOTcxNi03MTM2MiZ0b2tlbj1iNTAxNjcxNmY3YjkwZmM0.q.jpg">
-                    <input id="userSearchInput" type="text" placeholder="Search User">
-                    <button id="searchUser" class="btn btn-success" onclick="searchUser()">Search</button>
-                </div>
-                
-            </div>
+            </div> 
         </div>
 
         <div class="card-container">
@@ -437,12 +443,14 @@
 
             <div class="user-table-container">
                 <h2 class="main--title">User Information</h2>
-                {{-- @if(Session::has('warning'))
-                <div class="alert alert-success" role="alert"> 
-                    {{Session::get('warning')}}
-                </div> --}}
+                       
+                <div class="search--box">  
+                    {{-- <input id="userSearchInput" type="text" placeholder="Search User"> --}}
+                    <a href="" onclick="searchItem()"><i id="search-icon" class="fas fa-search"></i></a>
+                </div>       
+  
                 <div class="table-responsive">
-                    <table class="user-table table table-striped">
+                    <table id="myUsertable" class="display">
                         <thead class="thead-dark">
                             <tr>
                                 <th>ID</th>
@@ -461,7 +469,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->role }}</td>                                                                       
                                      <td>
-                                    <a href="{{url('edit-user/'.$user->id)}}"
+                                    <a id="userEdit" href="{{url('edit-user/'.$user->id)}}"
                                         class="btn btn-primary">Edit</a> <br><br>
                                         <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">Delete</a>
                                     </td>
@@ -477,18 +485,15 @@
 
                 <div class="stock-table-container">
                     <h2 class="main--title">Stock Information</h2>
-                    {{-- @if(Session::has('success'))
-                    <div class="alert alert-success" role="alert"> 
-                        {{Session::get('success')}}
-                    </div> --}}
-                    {{-- @endif  --}}
+
                     <div class="search--box">
-                        <input id="itemSearchInput" type="text" placeholder="Search Item ID">
-                        <button id="searchItem" class="btn btn-success" onclick="searchItem()">Search</button>
+                        {{-- <input id="itemSearchInput" type="text" placeholder="Search Item"> --}}
+                        <a href="" onclick="searchItem()"><i id="search-icon" class="fas fa-search"></i></a>
+
                     </div>
                     
                     <div class="table-responsive">
-                        <table class="stock-table table table-striped">
+                        <table id="myItemtable" class="display">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Item Id</th>
@@ -519,7 +524,7 @@
                                         <td>{{ $item->category}}</td>
                                         <td>{{ $item->subcategory}}</td>
                                         <td>
-                                            <a href="{{url('edit-item/'.$item->item_id)}}"
+                                            <a id="userBtninfo" href="{{url('edit-item/'.$item->item_id)}}"
                                              class="btn btn-primary">Edit</a> <br><br>
                                               <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger">Delete</a>
                                         </td>
@@ -551,6 +556,8 @@
                         </div>
                     </div>
                 </div>
+
+    
 
                 <script>
                
@@ -584,33 +591,56 @@
             </script>
             @endif
 
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+
             <script>
-                function searchItem() {
-                    var input, filter, table, tr, td, i, txtValue;
-                    input = document.getElementById("itemSearchInput");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("myItemtable");
-                    tr = table.getElementsByTagName("tr");
-            
-                    for (i = 0; i < tr.length; i++) {
-                        td = tr[i].getElementsByTagName("td")[0]; // Assuming item ID is in the first column
-                        if (td) {
-                            txtValue = td.textContent || td.innerText;
-                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].classList.remove("fade-out");
-                                tr[i].classList.add("fade-in");
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].classList.remove("fade-in");
-                                tr[i].classList.add("fade-out");
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
-                }
+                                $(document).ready(function () {
+                    $('#myUsertable').DataTable();
+                });
+
+                $(document).ready(function () {
+                    $('#myItemtable').DataTable();
+                });
+
             </script>
 
+
+
+
 <script>
+
+    function searchItem() {
+        var input, filter, table, tr, tdId, tdName, i, txtValueId, txtValueName;
+        input = document.getElementById("itemSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myItemtable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            tdId = tr[i].getElementsByTagName("td")[0]; // Assuming item ID is in the first column
+            tdName = tr[i].getElementsByTagName("td")[1]; // Assuming item name is in the second column
+            if (tdId && tdName) {
+                txtValueId = tdId.textContent || tdId.innerText;
+                txtValueName = tdName.textContent || tdName.innerText;
+                if (txtValueId.toUpperCase().indexOf(filter) > -1 || txtValueName.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].classList.remove("fade-out");
+                    tr[i].classList.add("fade-in");
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].classList.remove("fade-in");
+                    tr[i].classList.add("fade-out");
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Automatically trigger the search function on input
+    document.getElementById("itemSearchInput").addEventListener("input", searchItem);
+
+
     function searchUser() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("userSearchInput");
@@ -634,7 +664,22 @@
             }
         }
     }
+
+    // Automatically trigger search functions on input
+    document.getElementById("itemSearchInput").addEventListener("input", searchItem);
+    document.getElementById("userSearchInput").addEventListener("input", searchUser);
 </script>
 
-        @include('footer')
-        </body>
+<script>
+  
+    $(document).ready(function () {
+       $('#myUsertable').DataTable();
+    });
+ 
+    // For Item Table
+    $(document).ready(function () {
+       $('#myItemtable').DataTable();
+    });
+ </script>
+</html>
+</body>

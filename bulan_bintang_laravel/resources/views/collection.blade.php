@@ -19,15 +19,16 @@
         #collection {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: darkslategray;
-            margin-top: 50px;
+         
         }
 
         .items-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 20px;
-            padding: 10px;
+            padding: 50px;
+            background-color: rgb(214, 214, 214);
+            
         }
 
         .item figure {
@@ -35,7 +36,7 @@
         }
 
         .item {
-            width: calc(32% - 20px);
+            width: calc(25% - 20px);
             margin: 10px;
             display: inline-block;
             vertical-align: top;
@@ -44,7 +45,10 @@
             border-radius: 10px;
             transition: box-shadow 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
+            margin: 10px;
+            
+            
+           
         }
 
         .item figure img {
@@ -54,8 +58,6 @@
             -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
         }
-
-
 
         .item:hover figure::before {
             opacity: 1;
@@ -82,12 +84,14 @@
             margin-top: 5px;
             font-weight: bold;
             font-size: 15px;
-            color: black;
+            color: #202d45;
+            
+            
            
         }
 
         #itemprice {
-            font-size: 15px;
+            font-size: 20px;
             font-weight: bold;
 
         }
@@ -153,23 +157,22 @@
                     <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
                         <figure>
                             <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
-
-
                         </figure>
                         <p>{{ $item->item_name }}</p>
                         <p id="itemprice">${{ $item->price }}</p>
-                        <div class="add-to-cart">
+                        {{-- <div class="add-to-cart">
                             <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
                                 <i class="fas fa-cart-plus"></i>
                             </button>
-                        </div>
+                        </div> --}}
                     </a>
                 </div>
             @endforeach
+            
         </div>
+        @include('footer')
 
-
-
+        
 
     <script>
         function addToCart(itemId, itemName, price) {
@@ -180,6 +183,6 @@
         }
     </script>
 
-    @include('footer')
+  
 </body>
 </html>

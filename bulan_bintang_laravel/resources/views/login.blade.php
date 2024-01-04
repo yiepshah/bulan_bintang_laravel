@@ -14,6 +14,10 @@
         body{
             
         }
+
+        #Lbtn{
+            background-color: #202d45;
+        }
     </style>
 </head>
 
@@ -51,7 +55,7 @@
                                             <strong>Error!</strong> Invalid email or password. 
                                         </div>
 
-                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                        <div class="d-flex align-items-center mb-6 pb-1">
                                             <img src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
                                                 style="width: 80px; height: auto; margin-right: 10px;" alt="">
                                             <span class="h1 fw-bold mb-0">Login</span>
@@ -72,8 +76,8 @@
                                                 class="form-control form-control-lg" required />
                                         </div>
 
-                                        <div id="Lbtn" class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        <div  class="pt-1 mb-4">
+                                            <button id="Lbtn" class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                         </div>
 
                                         <a class="small text-muted" href="#!">Forgot password?</a>
@@ -82,15 +86,18 @@
                                         <a href="#!" class="small text-muted">Terms of use.</a>
                                         <a href="#!" class="small text-muted">Privacy policy</a>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @include('footer')
                 </div>
             </div>
         </div>
+        
     </section>
-
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
@@ -103,6 +110,6 @@
         });
     </script>
 
-    @include('footer')
+   
 </body>
 </html>

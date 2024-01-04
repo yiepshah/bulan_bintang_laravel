@@ -82,18 +82,6 @@
                                 <div>
                                     <p><strong>Name:</strong> {{ $user->name }}</p>
                                     <p><strong>Email:</strong> {{ $user->email }}</p>
-
-                                    @isset($user->role)
-                                        <p><strong>Status:</strong> {{ $user->role }}</p>
-                                    @else
-                                        <p><strong>Status:</strong> Not available</p>
-                                    @endisset
-
-                                    @isset($user->register_date)
-                                        <p><strong>Register Date:</strong> {{ $user->register_date }}</p>
-                                    @else
-                                        <p><strong>Register Date:</strong> Not available</p>
-                                    @endisset
                                 </div>
 
                             @else

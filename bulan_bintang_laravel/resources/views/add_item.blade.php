@@ -10,20 +10,17 @@
 <head>
     <style>
         body {
-            justify-content: center;
-            height: 100%;
-            background-image: url('https://i.pinimg.com/564x/6e/94/f4/6e94f414f98de6b1323056902ff91ffb.jpg');              
-            background-size:auto                    
+            background-color: #202d45;                 
         }
 
         .container {
-            border: 2px solid rgba(255, 255, 255, 2);
-            box-shadow: 0 0 20px rgba(0, 0, 0, .2);
-            background: transparent;
-            color:#ffff;      
+           
+         
+            background-color: #fdfdfd;
             border-radius: 10px 10px;
             border: none;
-            margin-top: 30px;
+            margin-top: 20px;
+            padding: 90px;
         }
 
         h1 {
@@ -41,7 +38,7 @@
         input[type="file"],
         input[type="text"],
         input[type="number"] {
-            border: none;
+            
             padding: 10px;
             border-radius: 10px;
             width: 100%;
@@ -51,14 +48,14 @@
         #addbtn {
             color: #ffff;
             border: none;     
-            background-color: #363062;     
+            background-color: #202d45;     
             width: 100px;    
             transition: transform 0.3s ease-in-out; 
             border-radius: 20px 20px;            
         }
 
         #addbtn:hover {
-            background-color: black;
+            background-color: #202d45;
             transform: scale(1.2);           
         }
 
@@ -139,6 +136,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        @if(Session::has('success'))
+            showSuccessAlert("{{ Session::get('success') }}");
+        @endif
+    
+        function showSuccessAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: message,
+            });
+        }
+    </script>
   
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
    @include('footer')

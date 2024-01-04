@@ -25,10 +25,6 @@ class Post extends Model
         'inside_box',
         'category',
         'subcategory',
-<<<<<<< HEAD
-=======
-        
->>>>>>> 8c0d920b955eb177133f3b50dff8d6200a0254b6
     ];
 
     
