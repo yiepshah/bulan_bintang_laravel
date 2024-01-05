@@ -11,14 +11,28 @@
     <title>Signup</title>
 
     <style>
-        body {
-           background-color: #202d45;
+       body {
+            background-color: #202d45;
+            
         }
 
         .container {
             background-color: #ffff;
             margin-top: 100px;
             border-radius: 30px 30px;
+            padding: 20px;
+            text-align: center; /* Center text in the container */
+        }
+
+        #logo {
+            width: 90px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        #signup-heading {
+            font-size: 30px;;
+            font-weight: bold;
         }
 
         #loginlink {
@@ -37,7 +51,7 @@
         }
 
         #Sbtn {
-            border-radius: 5px ;
+            border-radius: 5px;
             background-color: #202d45;
             transition: transform 0.3s ease-in-out;
         }
@@ -46,6 +60,16 @@
             transform: scale(1.3);
             background-color: #202d45;
             border: none;
+        }
+
+        /* Style to center the form elements */
+        form {
+            text-align: left;
+            margin-top: 20px; /* Adjust the top margin as needed */
+        }
+
+        .form-group {
+            margin: 10px;
         }
     </style>
 </head>
@@ -57,11 +81,11 @@
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="d-flex align-items-center mb-2 pb-1">
-                    <img src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
-                        style="width: 90px; height: auto; margin-right: 10px;" alt="">
-                    <span class="h1 fw-bold mb-0">Sign Up</span>
+                    
+                    
                 </div>
-
+                <img id="logo" src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png" alt="Logo"><br><br>
+                <span id="signup-heading" class="h1 fw-bold mb-0">Sign Up</span>
                 <form action="{{ url('/signup') }}" method="post">
                     @csrf
 
@@ -75,24 +99,23 @@
 
                     <div class="form-group">
                         <label for="name">Username</label>
-                        <input type="text" class="form-control"  name="name" required>
+                        <input type="text" class="form-control" name="name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email"  required>
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control"  name="password" required>
-                        <div  class="alert alert-primary" role="alert" style="display: none;" id="password-strength-status"></div>
+                        <input type="password" class="form-control" name="password" required>
+                        <div class="alert alert-primary" role="alert" style="display: none;" id="password-strength-status"></div>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                            required>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                     </div>
                     <div id="password-match-alert" class="alert alert-success" style="display: none;">
-                        <strong>Success!</strong> Passwords match.
+                         Passwords match.
                     </div>
                     <p style="font-family: cursive;">Already Have An Account? <a id="loginlink" href="login">Login
                             Now! </a></p>
@@ -100,9 +123,10 @@
                     <a href="">Terms of use. Privacy policy</a>
                 </form>
             </div>
-        </div>
-    </div>
+        </div><br>
 
+        @include('footer')
+    </div>
     <script>
         
 
@@ -165,7 +189,7 @@
             }
         }
     </script>
-    @include('footer')
+
 </body>
 
 </html>

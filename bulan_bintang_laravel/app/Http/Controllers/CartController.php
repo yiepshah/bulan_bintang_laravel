@@ -18,8 +18,7 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
-        $request->validate([
-            
+        $request->validate([          
             'item_name' => 'required|string',
             'image_path' => 'required|string',
             'price' => 'required|numeric',
@@ -100,12 +99,12 @@ class CartController extends Controller
     
         if ($index !== false) {
             unset($cart[$index]);
-            session(['cart' => array_values($cart)]); 
+            session(['cart' => array_values($cart)]);
     
-            return redirect()->route('cart')->with('success', 'Item removed from the cart successfully.');
+            return response()->json(['message' => 'Item removed from the cart successfully.']);
         }
     
-        return redirect()->route('cart')->with('error', 'Failed to remove item from the cart.');
+        return response()->json(['error' => 'Failed to remove item from the cart.']);
     }
 
 

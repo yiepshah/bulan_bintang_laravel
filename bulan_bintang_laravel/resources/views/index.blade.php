@@ -14,9 +14,10 @@
     @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
     @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
-        .container{
-            padding: 30px;
-            
+        .index-container{
+            width: 100%;
+            padding: 60px;
+            overflow: hidden;
         }
 
     .image-container {
@@ -24,31 +25,68 @@
         align-items: center;
         padding-top: 20px; 
         width: 25%;    
-    }
+        position: relative;
+    } 
+
+    .image-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: rgba(22, 26, 48, 0.8); /* Adjust the background color and opacity as needed */
+    padding: 20px;
+    color: #fff;
+    border-radius: 10px;
+    width: 80%; /* Adjust the width as needed */
+}
+
+.image-container:hover .image-info {
+    opacity: 3;
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #161A30;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.shop-button:hover {
+    background-color: #fff;
+    color: #161A30;
+}
+
 
     .brother-collection img {
         max-width: 100%;
         height: auto;
         width: 500px;
-        transition: transform 0.4s ease-in-out;   
+        /* transition: transform 0.4s ease-in-out;    */
              
     }
 
-    .brother-collection img:hover {
+    /* .brother-collection img:hover {
         transform: scale(1.2);     
-    }
+    } */
 
    
-    .image-group img {
+    /* .image-group img {
         font-weight: bold; 
         border: #12122f;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         transition: transform 0.3s ease-in-out;        
-    }
+    } */
 
-    .image-group img:hover {
+    /* .image-group img:hover {
         transform: scale(1.1); ;
-    }
+    } */
 
     .dropdown-item{
         color: black;
@@ -57,48 +95,31 @@
         font-weight: lighter;
     }
 
-    @media (max-width: 767px) {
-        .third-image {
-            flex-direction: column;
-            align-items: center;
-        }
-        .image-group {
-            max-width: 100%;
-        }
-        .image-group img {
-            width: 600px; 
-            max-width: 100%;
-            height: auto;
-            margin: 10px;        
-        }
-    }
+    #third-1,
+#third-3 {
+    float: left;
+    width: 800px;
 
-    #third-1{       
-        width: 730px;     
-        border-radius: 10px 10px;
-        margin-bottom: 20px;
-      
-        
-    }
+}
 
-    #third-2{      
-        width: 730px;
-        border-radius: 10px 10px;
-        margin-bottom: 20px;
-               
-    }
+#third-2,
+#third-4 {
+    float: right;
+    width: 800px;
+   
+}
 
-    #third-3{       
-        width: 730px;    
-        border-radius: 10px 10px;
-      
-        
-    }   
-
-    #third-4{     
-        width: 730px; 
-        border-radius: 10px 10px;          
+@media (max-width: 767px) {
+    #third-1,
+    #third-2,
+    #third-3,
+    #third-4 {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        margin-left: 0;
     }
+}
 
     .boutique{
         margin-left: 0px;
@@ -108,11 +129,6 @@
         border-radius: 20px 30px;
     }
 
-    .footer{
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: medium;
-        font-weight: bold;      
-    }
 
     #shop {     
         position: absolute;
@@ -161,13 +177,73 @@
         border: none;
         color: #000; /
     }
+
+    .collection figure {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .collection figure img {
+        max-width: 100%;
+        height: auto;
+        width: 100%;
+        border-radius: 10px;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .collection figure:hover img {
+        opacity: 0.7;
+    }
+
+    .hover-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2; /* Ensure the hover-info is above the image */
+}
+
+.collection figure:hover .hover-info {
+    opacity: 1;
+}
+
+.collection figure .hover-info span,
+.collection figure .hover-info .shop-button {
+    position: relative; /* Ensure the span and button stay on top */
+    z-index: 3; /* Ensure the span and button are above the image and hover-info */
+}
+
+.shop-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #161A30;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.shop-button:hover {
+    background-color: #fff;
+    color: #161A30;
+}
+
+.imageTitle{
+    font-size: 50px;
+}
       
 </style>
 </head>
 <body>
 @include('header')
 
-<div class="container">
+<div class="index-container">
+    
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
@@ -211,29 +287,54 @@
               <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
               <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
               
-          </div><br><br><br>
-      
-          <div class="third-image">
-    <h3 class="collection">2023 Collection</h3>
-    <div class="image-group">
-        <div class="image-container">
-            <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
-            <div class="image-info">Text for Image 1</div>
+          </div><br><br>
+
+          
+    <div class="collection">
+        <h2 id="demo11"> 2023 Collection</h2>
+        <div>
+            <figure> 
+                <div class="hover-info">
+                    <span class="imageTitle"> Baju Melayu Slim Fit </span>
+                    <a href="#" class="shop-button">Shop Now</a>
+                </div>
+                <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
+            </figure>
+            
         </div>
-        <div class="image-container">
-            <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
-            <div class="image-info">Text for Image 2</div>
+        <div>
+            <figure>
+                <div class="hover-info">
+                    <span class="imageTitle"> Baju Melayu Tailored Fit </span>
+                    <a href="#" class="shop-button">Shop Now</a>
+                </div> 
+                <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
+            </figure>
         </div>
-        <div class="image-container">
-            <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
-            <div class="image-info">Text for Image 3</div>
+        <div>
+            <figure> 
+                <div class="hover-info">
+                    <span class="imageTitle">Baju Melayu Kids </span>
+                    <a href="#" class="shop-button">Shop Now</a>
+                </div>      
+                <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
+            </figure>
+                
         </div>
-        <div class="image-container">
-            <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt="">
-            <div class="image-info">Text for Image 4</div>
+
+        <div>
+            <figure>
+                <div class="hover-info">
+                    <span class="imageTitle"> Kurta</span>
+                    <a href="#" class="shop-button">Shop Now</a>
+                </div>      
+                
+            
+            <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt=""></figure>
+            
+        </div>
         </div>
     </div>
-</div>
       
           <h3 class="collection">Visit Our Official Boutique</h3>
          
@@ -342,13 +443,16 @@
                           </ul>
                       </div>
                   </div>
+                  
               </div>
+              @include('footer')
           </div>
+          
 </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    @include('footer')
+    
 </body>
 </html>
 

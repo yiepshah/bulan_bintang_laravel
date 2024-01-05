@@ -14,7 +14,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
        body {
            
-           background-color:#0F0E0E;
+         
        }   
        .card{
            border-radius: 10px ;
@@ -60,11 +60,11 @@
 </head>
 <body> 
     @include('header')
-    @auth
+    {{-- @auth
     @if (auth()->user()->role === 'admin')
         @include('adminsidebar')
     @endif
-    @endauth 
+    @endauth  --}}
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-3"></div>

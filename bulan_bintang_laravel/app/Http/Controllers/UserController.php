@@ -67,7 +67,7 @@ class UserController extends Controller
 
         session(['cart' => []]);
 
-        return redirect()->route('login')->with('login_error', 'Invalid email or password.')->with('showAlert', 'loginError');
+        return redirect('/login')->with('showAlert', 'signupSuccess');
     } 
 
 

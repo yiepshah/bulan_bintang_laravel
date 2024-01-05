@@ -23,14 +23,11 @@
 
         .container {
     position: relative;
-    background: #fff;
-    width: 90%; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width as needed */
     max-width: 1200px; /* Add a max-width to limit the container size */
     padding: 1rem;
     margin: 0 auto;
-    transition: margin-left 0.3s;
-    color: #333;
-    padding: 20px;
+    padding: 10px;
 }
 
 
@@ -90,7 +87,7 @@
         }
 
         .card-container {
-            background: #fff;
+            /* background: #fff; */
             /* width: calc(100% - 2rem); */
             margin-top: 1rem;
             padding: 1rem;
@@ -308,9 +305,9 @@
             gap: 10px;
         }
 
-        .user-table{
-            background-color: #ffff;
-        }
+
+
+ 
 
         #userEdit, #deleteBtn {
             display: inline-block;
@@ -345,14 +342,20 @@
 }
 
 
-
+#detailBtn{
+    background-color: #202d45;
+    border: none;
+    
+}
 
 
         .new-header{
             background-color: #202d45;
             width: 100%;
-            height: 80px;
-            padding-right: 10px;
+            height: 79px;
+            color: #fff;
+            padding-left: 50px;
+
             
         }
 
@@ -372,7 +375,7 @@
         @endif
     @endauth 
     <div class="new-header">
-        <h1>New Header</h1>
+        <h1>Bulan Bintang</h1>
         <!-- You can customize the content and styling of this new header -->
     </div>
 
@@ -420,12 +423,13 @@
                     </div>
                 </div>
             </div>
-            <hr><br><br>
+    </div>        
+            <br>
 
-            <div class="user-table-container">
+        <div class="container">
+            <div class="card-container">
                 <div class="user-table">
-                    <h2 class="main--title">User Information</h2>
-        
+                    <h2 class="main--title">User Information</h2>        
                     <div class="table-responsive">
                         <table id="myUsertable" class="display">
                             <thead class="thead-dark">
@@ -445,11 +449,14 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->role }}</td>                                                                       
-                                         <td>
-                                        <a id="userEdit" href="{{url('edit-user/'.$user->id)}}"
-                                            class="btn btn-primary">Edit</a> <br><br>
-                                            <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">Delete</a>
-                                        </td>
+                                            <td>
+                                                <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
+                                                    <i class="fas fa-edit"></i> <!-- Edit icon -->
+                                                </a>
+                                                <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">
+                                                    <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
+                                                </a>
+                                            </td>
                                 </tr>
                                 @empty
                                     <tr><td colspan='6'>No user found</td></tr>
@@ -458,12 +465,14 @@
                          </table>
                     </div>
             </div>
-    <hr><br><br>
+  
                
     </div>
-
-    <div class="stock-table-container">
-        <div class="stock-table">
+        
+            
+    <br><br>
+    <div class="card-container">
+        <div class="user-table">
             <h2 class="main--title">Stock Information</h2>
             <div class="table-responsive">
                 <table id="myItemtable" class="display">
@@ -497,8 +506,14 @@
                                 <td>{{ $item->category}}</td>
                                 <td>{{ $item->subcategory}}</td>
                                 <td>
-                                    <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">Edit</a>
-                                    <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">Delete</a>
+                                    <button id="detailBtn" class="btn btn-info" onclick="showItemDetails('{{ $item->item_id }}')">Details</button>
+                                    <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> <!-- Edit icon -->
+                                    </a>
+                                    <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
+                                        <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
+                                    </a>
+                                   
                                 </td>
                             </tr>
                         @empty
@@ -508,6 +523,30 @@
                 </table>
             </div>
         </div> 
+
+        <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
+                        <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
+                        <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
+                        <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
+                        <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
+                        <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
+                        <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
+                        <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="deleteUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -528,10 +567,38 @@
             </div>
         </div>
     </div>
+@include('footer')
 
+<script>
+                      function showItemDetails(itemId) {
+        var item = getItemDetailsById(itemId);
+
+        // Update modal content with item details
+        $('#itemDetailsImage').attr('src', item.image_path);
+        $('#itemDetailsName').text(item.item_name);
+        $('#itemDetailsPrice').text(item.price);
+        $('#itemDetailsProductInfo').text(item.product_information);
+        $('#itemDetailsInsideBox').text(item.inside_box);
+        $('#itemDetailsMaterial').text(item.material);
+        $('#itemDetailsCategory').text(item.category);
+        $('#itemDetailsSubcategory').text(item.subcategory);
+
+        // Show the modal
+        $('#itemDetailsModal').modal('show');
+    }
+
+        // Function to retrieve item details by item ID
+        function getItemDetailsById(itemId) {
+        // Use your own logic to retrieve item details based on the item ID
+        // For example, you can use AJAX to fetch details from the server
+        // Replace the following with your actual implementation
+        var items = {!! json_encode($reversedItems) !!};
+        return items.find(item => item.item_id === itemId);
+    }
+</script>
 
                 <script>
-               
+           
                     function showSuccessAlert(message) {
                         Swal.fire({
                             icon: 'success',
@@ -564,18 +631,6 @@
 
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
-
-            <script>
-                                $(document).ready(function () {
-                    $('#myUsertable').DataTable();
-                });
-
-                $(document).ready(function () {
-                    $('#myItemtable').DataTable();
-                });
-
-            </script>
 
 
 

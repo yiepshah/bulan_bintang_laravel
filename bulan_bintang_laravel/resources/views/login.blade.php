@@ -57,10 +57,10 @@
 
                                         <div class="d-flex align-items-center mb-6 pb-1">
                                             <img src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
-                                                style="width: 80px; height: auto; margin-right: 10px;" alt="">
-                                            <span class="h1 fw-bold mb-0">Login</span>
-                                        </div>
-
+                                                style="width: 100px; height: auto; margin-right: 10px;" alt="">
+                                           
+                                        </div><br>
+                                        <span class="h1 fw-bold mb-0">Login</span><br><br>
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
                                             account</h5>
 
@@ -89,9 +89,11 @@
                                     
                                 </div>
                             </div>
+                            
                         </div>
+                        @include('footer')
                     </div>
-                    @include('footer')
+                   
                 </div>
             </div>
         </div>

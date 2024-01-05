@@ -150,55 +150,52 @@
 
             <li class="nav-item" data-toggle="tooltip" title="Log Out">
                 @auth
-                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
-                @endauth
-            </li>
+                @if (auth()->user()->role !== 'admin')
+                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
+                        <div class="search--box">
+                            <i id="search-icon" class="fas fa-search"></i>
+                            <input id="search-input" type="text" placeholder="Search" style="display: none;">
+                        </div>
+                    </li>
+            
+                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="collection">
+                        <a class="nav-link" href="{{ route('collection') }}" id="collection">
+                            <i class="fas fa-store"></i>
+                        </a>
+                    </li>
+            
+                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="cart">
+                        @php
+                            $cartCount = session('cart') ? count(session('cart')) : 0;
+                        @endphp
+                        <a id="CartIcon" href="{{ route('cart') }}">
+                            <i id="carticon" class="fas fa-shopping-cart"></i>
+                            <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
+                        </a>
+                    </li>
+            
+                    <li class="nav-item" data-toggle="tooltip" title="login">
+                        <a class="nav-link" data-placement="bottom" title="profile" href="{{ route('profile') }}"><i class="fas fa-user"></i></a>
+                    </li>
+                @endif
 
-                @auth
-                    @if (auth()->user()->role === 'admin')
+            
+                @if (auth()->user()->role === 'admin')
                     <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
                         <a class="nav-link" href="{{ route('adminpage') }}"><i class="fas fa-user-tie"></i></a>
                     </li>
-                    @endif
-                @endauth
+                @endif
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
-                @auth  
-                    <div class="search--box">
-                        <i id="search-icon" class="fas fa-search"></i>
-                        <input id="search-input" type="text" placeholder="Search" style="display: none;">
-                    </div>
-                @endauth
-            </li>
-
-            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="collection">
-                @auth
-                    <a class="nav-link" href="{{ route('collection') }}" id="collection">
-                        <i class="fas fa-store"></i>
-                    </a>
-                @endauth
-            </li>
-
-            <li  class="nav-item" data-toggle="tooltip" data-placement="bottom" title="cart">
-                @auth
-                    @php
-                        $cartCount = session('cart') ? count(session('cart')) : 0;
-                    @endphp
-                    <a id="CartIcon" href="{{ route('cart') }}">
-                        <i id="carticon" class="fas fa-shopping-cart"></i>
-                        <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
-                    </a>
-                @endauth
-            </li>
-
-            <li class="nav-item" data-toggle="tooltip" title="login">
-                @auth
-                <a class="nav-link" data-placement="bottom" title="profile" href="{{ route('profile') }}"><i class="fas fa-user"></i></a>
-
-                @else
+                                <!-- Display the logout and admin-specific icons for authenticated users -->
+                                <li class="nav-item" data-toggle="tooltip" title="Log Out">
+                                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                                </li>
+            @else
+                
+                <li class="nav-item" data-toggle="tooltip" title="login">
                     <a class="nav-link" data-placement="bottom" title="login" href="{{ route('login') }}">Login <i class="fas fa-sign-in-alt"></i></a>
-                @endauth
-            </li>
+                </li>
+            @endauth
         </ul>
     </div>
 </nav>

@@ -23,7 +23,7 @@
         max-width: 100%;
         width: 800px;
         height: auto;
-        border-radius: 10px 10px;
+        
         margin-left: 0px;
         margin-top: 10px;
         padding: 30px;
@@ -54,10 +54,12 @@
         color: #fff; 
         border: none; 
         border-radius: 20px 20px;
-        font-family: 'Roboto', sans-serif;
+        width: 150px;
         height: 40px;
         transition: transform 0.3s ease-in-out;
         margin-left: 20px;
+        margin-top: 9px;
+        
         
     }
 
@@ -74,12 +76,9 @@
     }
 
  
-    .breadcrumb-item a:hover {
-        color: #0056b3; 
-    }
 
     .clear-link {
-        margin-left: 70px;         
+              
         text-decoration: none; 
         font-family: 'Roboto', sans-serif;
         color: grey;
@@ -96,8 +95,7 @@
 
     .detailItem{
         font-family: 'Roboto', sans-serif;
-        margin-right: 10px;
-        margin-left: 10px;
+
     }
 
     #quantity{
@@ -106,6 +104,37 @@
 
     .text{
         color: #202d45;
+    }
+
+    .quantity-input-group {
+        display: flex;
+        align-items: center;
+        max-width: 120px;
+        margin-top: 10px;
+    }
+
+    #quantity {
+        width: 40px;
+        text-align: center;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        margin: 0 5px;
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .quantity-btn {
+        background-color:  #202d45;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .quantity-btn:hover {
+        background-color:  #202d45;
+        transform: scale(1.2);
     }
 
 
@@ -149,15 +178,6 @@
     
                     </div>
 
-                    {{-- <div class="form-group">
-                        <label for="size"><strong>Size:</strong></label>
-                        <select id="sizeSelect" class="form-control">
-                            @foreach ($sizeOptions as $size)
-                                <option value="{{ $size }}">{{ $size }}</option>
-                            @endforeach
-                        </select>
-                    </div> --}}
-
                     <form method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
@@ -167,26 +187,51 @@
                         <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
                         <input type="hidden" name="material" value="{{ $itemDetails->material }}">
                         <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
-                        <div class="form-group">
-                          
-                            <label for="size"><strong>Size:</strong></label>
-                            <select id="sizeSelect" class="form-control" name="size">
-                                @foreach ($sizeOptions as $size)
-                                    <option value="{{ $size }}">{{ $size }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">                    
-                        <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>
-                    </form>
+
+                        <div class="form-group">     
+                            <div class="form-size">
+                                <label for="size"><strong>Size:</strong></label>
+                                <select id="sizeSelect" class="form-control" name="size">
+                                    @foreach ($sizeOptions as $size)
+                                        <option value="{{ $size }}">{{ $size }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+                            <div class="form-group quantity-input-group">
+                                <div class="d-flex">
+                                    <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                                    <input type="text" id="quantity" name="quantity" value="1" min="1">
+                                    <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                                </div>
+                                <div class="form-group">
+                                    <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>                               
+                                </div>
+                            </div>
+                            
+
+                        </form>
+                    
                     <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
                 </div>
-                <hr>
+                
             </div>
         </div>
     </div>
 
 <script>
+
+function increaseQuantity() {
+            var quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+        }
+
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById('quantity');
+            var value = parseInt(quantityInput.value, 10) - 1;
+            quantityInput.value = value < 1 ? 1 : value;
+        }
+
     
     document.addEventListener("DOMContentLoaded", function () {
     var sizeSelect = document.getElementById('sizeSelect');

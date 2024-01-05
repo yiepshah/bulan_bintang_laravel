@@ -13,13 +13,14 @@
     <style>
         .w3-sidebar {
             height: 100%;
-            width: 100px;
+            width: 200px;
             background-color: #202d45;
             position: fixed;
             overflow-x: hidden;
             padding-top: 20px;
             transition: width 0.4s;
             z-index: 1;
+            margin-top: 80px;
         }
 
         .w3-sidebar a {
@@ -28,24 +29,25 @@
             color: #fff;
             display: block;
             padding: 30px;
+            text-align: center;
         }
 
-        .w3-sidebar:hover {
+        /* .w3-sidebar:hover {
             width: 200px;
         }
 
         .w3-sidebar a:hover {
             color: #f1f1f1;
-        }
+        } */
 
-        .w3-sidebar:hover+.main--content {
+        /* .w3-sidebar:hover+.main--content {
             margin-left: 200px;
-        }
-
+        } */
+/* 
         .main--content {
             transition: margin-left 0.4s;
             padding: 20px;
-        }
+        } */
 
         @media (max-width: 768px) {
             .w3-sidebar {

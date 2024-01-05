@@ -98,12 +98,12 @@
 
             <div class="form-group">               
                 <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
-                <button type="submit" id="editUserBtn" class="btn btn-primary">Update Item</button>
+                <button type="submit" id="editUserBtn" class="btn btn-primary">Update User</button>
             </div>
         </form>
+        @include('footer')
     </div>
     
 </body>
 
 </html>
-@include('footer')

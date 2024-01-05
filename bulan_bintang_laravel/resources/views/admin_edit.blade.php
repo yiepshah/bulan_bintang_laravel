@@ -116,7 +116,8 @@
             <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
             <button type="submit" id="editBtn" class="btn btn-primary">Update Item</button>
         </form>
+        @include('footer')
     </div>
-    @include('footer')
+    
 </body>
 </html>

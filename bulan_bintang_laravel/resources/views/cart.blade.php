@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Document</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         
-        body {           
-            background-color: #f8f9fa;
-            margin: 10px; 
-            font-family: 'Roboto', sans-serif;
-        }
+
 
  
 
-        .content {
+        .container {
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
+            margin-top: 40px;
+         
+           
+           
             justify-content: space-between;
-            gap: 10px;     
-           margin: 50px;  
-            margin-top: 10px;           
+               
+           
+                    
         }
 
         .cart-container{
@@ -50,8 +48,8 @@
         }
 
         .cart-item img {
+            width: 300px;
             
-            height: 330px;
             border-radius: 8px;
             
         }
@@ -153,7 +151,7 @@
 </head>
 <body>
 @include('header')
-<div class="content">
+<div class="container">
     <div class="cart-container">
         
         @if (session('cart') && count(session('cart')) > 0)
@@ -175,7 +173,9 @@
                             @if (isset($item['item_id']))
                                 <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
                                     @csrf
-                                    <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">Remove</button>                                   
+                                    <button class="btn btn-danger remove-button" type="button" data-toggle="modal" data-target="#confirmationModal" data-item-id="{{ $item['item_id'] }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             @endif                           
                         </div>
@@ -248,25 +248,28 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     confirmRemoveBtn.addEventListener('click', function () {
-        console.log('Item removed with ID:', itemIdToRemove);
+    console.log('Item removed with ID:', itemIdToRemove);
 
-        $.ajax({
-            url: '/cart/remove/' + itemIdToRemove,
-            type: 'POST',
-            data: { _token: '{{ csrf_token() }}' },
-            success: function (response) {
-                console.log(response);
-                location.reload();
-            },
-            error: function (error) {
-                console.error(error);
-            }
-        });
-
-        $('#confirmationModal').modal('hide');
+    $.ajax({
+        url: '/cart/remove/' + itemIdToRemove,
+        type: 'POST',
+        data: { _token: '{{ csrf_token() }}' },
+        success: function (response) {
+            console.log('Success:', response);
+            location.reload();
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
     });
+
+    $('#confirmationModal').modal('hide');
+});
 });
 </script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -277,25 +280,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
         confirmRemoveBtn.addEventListener('click', function () {
-        
-    
-            $.ajax({
-                url: '/cart/remove/' + itemIdToRemove,
-                type: 'POST',
-                data: { _token: '{{ csrf_token() }}' },
-                success: function (response) {
-                    console.log(response);
-                    updateTotalPrice(); 
-                    location.reload();
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-    
-            $('#confirmationModal').modal('hide');
-        });
-    
+    console.log('Item removed with ID:', itemIdToRemove);
+
+    $.ajax({
+        url: '/cart/remove/' + itemIdToRemove,
+        type: 'POST',
+        data: { _token: '{{ csrf_token() }}' }, // Use Blade directive to get the correct CSRF token
+        success: function (response) {
+            console.log('Success:', response);
+            updateTotalPrice();
+            location.reload();
+        },
+        error: function (error) {
+            console.error('Error:', error.responseText);
+            // Handle error, show an alert, or log it for further inspection
+        }
+    });
+
+    $('#confirmationModal').modal('hide');
+});
      
         function updateTotalPrice() {
             var total = 0;

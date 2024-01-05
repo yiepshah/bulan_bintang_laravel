@@ -27,7 +27,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             padding: 50px;
-            background-color: rgb(214, 214, 214);
+           
             
         }
 
@@ -159,7 +159,7 @@
                             <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
                         </figure>
                         <p>{{ $item->item_name }}</p>
-                        <p id="itemprice">${{ $item->price }}</p>
+                        <p id="itemprice">RM{{ $item->price }}</p>
                         {{-- <div class="add-to-cart">
                             <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
                                 <i class="fas fa-cart-plus"></i>
