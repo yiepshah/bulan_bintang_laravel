@@ -16,7 +16,7 @@
         .edit-item-container {
             max-width: 500px;
             margin: auto;
-            margin-top: 100px;
+            margin-top: 50px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);

@@ -123,13 +123,35 @@
 
                 <div class="form-group">
                     <label for="category">Category :</label>
-                    <input type="text" class="form-control" name="category" id="category" required>
+                    <select class="form-control" name="category" id="category" required>
+                        <option value="option1">Men</option>
+                        <option value="option2">Women</option>
+                        <option value="option2">Kids</option>
+                        <!-- Add more options as needed -->
+                    </select>
                 </div><br>
 
                 <div class="form-group">
                     <label for="subcategory">Subcategory :</label>
-                    <input type="text" class="form-control" name="subcategory" id="subcategory" required>
+                    <select class="form-control" name="subcategory" id="subcategory" required>
+                        <option value="suboption1">Teluk Belanga</option>
+                        <option value="suboption2">Tailored Fit</option>
+                        <option value="suboption2">Slim Fit</option>
+                        <option value="suboption2">Samping</option>
+                        <option value="suboption2">Kurta</option>
+
+                        <option value="suboption2">Lana</option>
+                        <option value="suboption2">Adeline</option>
+                        <option value="suboption2">Hanna</option>
+                        <option value="suboption2">Elyana</option>
+
+                        <option value="suboption2">Baju Melayu Kids</option>
+                        <option value="suboption2">Emelda</option>
+                        <option value="suboption2">Sabrina</option>
+                        
+                    </select>
                 </div><br>
+                
 
                 <div class="form-group">
                     <button id="addbtn" class="btn" name="submit" type="submit">Add</button>

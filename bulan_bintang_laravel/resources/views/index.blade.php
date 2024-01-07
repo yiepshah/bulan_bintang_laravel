@@ -95,7 +95,7 @@
         font-weight: lighter;
     }
 
-    #third-1,
+    /* #third-1,
 #third-3 {
     float: left;
     width: 800px;
@@ -107,7 +107,7 @@
     float: right;
     width: 800px;
    
-}
+} */
 
 @media (max-width: 767px) {
     #third-1,
@@ -234,7 +234,67 @@
 }
 
 .imageTitle{
-    font-size: 50px;
+    font-size: 40px; /* Adjust the font size as needed */
+
+    margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.section {
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #202d45;
+    margin-bottom: 20px;
+    
+    /* transition: background-color 0.3s ease-in-out; */
+}
+
+/* .section:hover {
+    background-color: #202d45;
+} */
+
+.section h4 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.section p,
+.section ul {
+    color: #ccc;
+}
+
+.section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section ul li {
+    margin-bottom: 8px;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.social-icons li {
+    margin-right: 30px;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 20px;
+    /* transition: color 0.3s ease-in-out; */
+}
+
+/* .social-icons a:hover {
+    background-color: #202d45;
+} */
+
+.footer-container{
+    background-color: #202d45;
+    color: #fff;
 }
       
 </style>
@@ -277,7 +337,7 @@
       @endif
       
       </a>
-      </div>
+      </div><br><br><br>
       
           <h3 class="collection">Brothers Collection</h3>
       
@@ -287,55 +347,53 @@
               <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
               <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
               
-          </div><br><br>
+          </div><br><br><br>
 
           
-    <div class="collection">
-        <h2 id="demo11"> 2023 Collection</h2>
-        <div>
-            <figure> 
-                <div class="hover-info">
-                    <span class="imageTitle"> Baju Melayu Slim Fit </span>
-                    <a href="#" class="shop-button">Shop Now</a>
+          <div class="collection">
+            <h2 id="demo11"> 2023 Collection</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <figure>
+                        <div class="hover-info">
+                            <span class="imageTitle"> Baju Melayu Slim Fit </span>
+                            <a href="#" class="shop-button">Shop Now</a>
+                        </div>
+                        <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
+                    </figure>
                 </div>
-                <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
-            </figure>
-            
+                <div class="col-md-6">
+                    <figure>
+                        <div class="hover-info">
+                            <span class="imageTitle"> Baju Melayu Tailored Fit </span>
+                            <a href="#" class="shop-button">Shop Now</a>
+                        </div>
+                        <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <figure>
+                        <div class="hover-info">
+                            <span class="imageTitle">Baju Melayu Kids </span><br>
+                            <a href="#" class="shop-button">Shop Now</a>
+                        </div>
+                        <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <figure>
+                        <div class="hover-info">
+                            <span class="imageTitle"> Kurta</span><br>
+                            <a href="#" class="shop-button">Shop Now</a>
+                        </div>
+                        <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt="">
+                    </figure>
+                </div>
+            </div>
         </div>
-        <div>
-            <figure>
-                <div class="hover-info">
-                    <span class="imageTitle"> Baju Melayu Tailored Fit </span>
-                    <a href="#" class="shop-button">Shop Now</a>
-                </div> 
-                <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
-            </figure>
-        </div>
-        <div>
-            <figure> 
-                <div class="hover-info">
-                    <span class="imageTitle">Baju Melayu Kids </span>
-                    <a href="#" class="shop-button">Shop Now</a>
-                </div>      
-                <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
-            </figure>
-                
-        </div>
-
-        <div>
-            <figure>
-                <div class="hover-info">
-                    <span class="imageTitle"> Kurta</span>
-                    <a href="#" class="shop-button">Shop Now</a>
-                </div>      
-                
-            
-            <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt=""></figure>
-            
-        </div>
-        </div>
-    </div>
-      
+      <br><br><br>
           <h3 class="collection">Visit Our Official Boutique</h3>
          
           <div class="boutique">
@@ -404,51 +462,59 @@
               </div>
           </div>
       
-          <div style="background-color: #12122f;color: #fff; padding: 60px;">
-              <div class="">
-                  <div class="row">
-                      
-                      <div class="col-md-3">
-                          <h4>ABOUT US</h4> <br>
-                          <ul>
-                              <li>About Us</li><br>
-                              <li>Blog</li><br>
-                              <li>Careers</li><br>
-                          </ul>
-                      </div>
-      
-                      <div class="col-md-3">
-                          <h4>CUSTOMER CARE</h4><br>
-                          <ul>
-                              <li>FAQ</li><br>
-                              <li>Return Policy</li>
-                          </ul>
-                      </div>
-      
-                      <div class="col-md-3">
-                          <h4>FOLLOW US</h4><br>
-                          <ul>
-                              <i class="fab fa-tiktok"></i>
-                              <i class="fab fa-facebook"></i>
-                              <i class="fab fa-twitter"></i>
-                          </ul>
-                      </div>
-      
-                      <div class="col-md-3">
-                          <h4>CUSTOMER SERVICES</h4><br>
-                          <ul>
-                              <i class="fas fa-clock">: Monday - Saturday (9:00 am - 10:00pm)</i><br><br>
-                              <i class="fas fa-mail-bulk">: Operations@bulanbintanghq.com</i><br><br>
-                              <i class="fas fa-phone-volume">: Customer Service</i><br><br>
-                          </ul>
-                      </div>
-                  </div>
-                  
-              </div>
-              @include('footer')
-          </div>
           
-</div>
+            <div  class="footer-container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="section about-section">
+                            <h4>ABOUT US</h4>
+                          
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Careers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-3">
+                        <div class="section customer-care-section">
+                            <h4>CUSTOMER CARE</h4>
+                            <ul>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Return Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-3">
+                        <div class="section follow-us-section">
+                            <h4>FOLLOW US</h4>
+                            <ul class="social-icons">
+                                <li><a href="#" class="fab fa-tiktok"></a></li>
+                                <li><a href="#" class="fab fa-facebook"></a></li>
+                                <li><a href="#" class="fab fa-twitter"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-3">
+                        <div class="section customer-services-section">
+                            <h4>CUSTOMER SERVICES</h4>
+                            <ul>
+                                <li><i class="fas fa-clock"></i> Monday - Saturday (9:00 am - 10:00 pm)</li>
+                                <li><i class="fas fa-mail-bulk"></i> Operations@bulanbintanghq.com</li>
+                                <li><i class="fas fa-phone-volume"></i> Customer Service</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @include('footer')
+            </div>
+
+        </div>
+        
+          
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

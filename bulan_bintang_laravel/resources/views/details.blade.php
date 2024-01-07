@@ -174,7 +174,9 @@
         
                         <p class="detailProduct"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
         
-                        <p class="detailProduct"><strong>Price: $ </strong>{{ $itemDetails->price }}</p>
+                        <p class="detailProduct"><strong>Price:</strong> Rm {{ $itemDetails->price }}</p>
+
+                        <p class="detailProduct"><strong>Stock : </strong>{{ $itemDetails->stock_number }}</p>
     
                     </div>
 

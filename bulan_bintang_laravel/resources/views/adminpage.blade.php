@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
  
 
 
     <title>Admin Dashboard</title>
+ 
     <style>
         body{
             background-color: #f7f7f7
@@ -328,7 +330,7 @@
     gap: 10px;
 }
 
-#itemEdit,
+
 #deleteBtn {
     display: inline-block;
     width: auto;
@@ -339,6 +341,7 @@
     background-color: #202d45;
     color: #fff;
     border: none;
+    
 }
 
 
@@ -355,6 +358,7 @@
             height: 79px;
             color: #fff;
             padding-left: 50px;
+            
 
             
         }
@@ -480,10 +484,11 @@
                         <tr>
                             <th>Item Id</th>
                             <th>Item Name</th>
-                            <th>Price</th>
+                            <th>Stock</th>
+                            {{-- <th>Price</th> --}}
                             {{-- <th>Product Info</th> --}}
-                            <th>Material</th>
-                            <th>Inside Box</th>
+                            {{-- <th>Material</th> --}}
+                            {{-- <th>Inside Box</th> --}}
                             <th>Category</th>
                             <th>Subcategory</th>
                             <th>Action</th>
@@ -499,17 +504,18 @@
                             <tr>
                                 <td>{{ $item->item_id }}</td>
                                 <td>{{ $item->item_name }}</td>
-                                <td>{{ $item->price }}</td>
+                                {{-- <td>{{ $item->price }}</td> --}}
                                 {{-- <td>{{ $item->product_information }}</td> --}}
-                                <td>{{ $item->material }}</td>
-                                <td>{{ $item->inside_box }}</td>
+                                {{-- <td>{{ $item->material }}</td> --}}
+                                {{-- <td>{{ $item->inside_box }}</td> --}}
                                 <td>{{ $item->category}}</td>
                                 <td>{{ $item->subcategory}}</td>
                                 <td>
-                                    <button id="detailBtn" class="btn btn-info" onclick="showItemDetails('{{ $item->item_id }}')">Details</button>
-                                    <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i> <!-- Edit icon -->
-                                    </a>
+
+                                    <button id="detailBtn" class="btn btn-info" data-toggle="modal" data-target="#itemDetailsModal">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+
                                     <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
                                         <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
                                     </a>
@@ -524,28 +530,6 @@
             </div>
         </div> 
 
-        <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
-                        <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
-                        <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
-                        <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
-                        <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
-                        <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
-                        <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
-                        <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="modal fade" id="deleteUserModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -566,36 +550,40 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
+                        <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
+                        <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
+                        <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
+                        <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
+                        <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
+                        <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
+                        <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
+                        <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> <!-- Edit icon -->
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
     </div>
 @include('footer')
 
-<script>
-                      function showItemDetails(itemId) {
-        var item = getItemDetailsById(itemId);
 
-        // Update modal content with item details
-        $('#itemDetailsImage').attr('src', item.image_path);
-        $('#itemDetailsName').text(item.item_name);
-        $('#itemDetailsPrice').text(item.price);
-        $('#itemDetailsProductInfo').text(item.product_information);
-        $('#itemDetailsInsideBox').text(item.inside_box);
-        $('#itemDetailsMaterial').text(item.material);
-        $('#itemDetailsCategory').text(item.category);
-        $('#itemDetailsSubcategory').text(item.subcategory);
 
-        // Show the modal
-        $('#itemDetailsModal').modal('show');
-    }
-
-        // Function to retrieve item details by item ID
-        function getItemDetailsById(itemId) {
-        // Use your own logic to retrieve item details based on the item ID
-        // For example, you can use AJAX to fetch details from the server
-        // Replace the following with your actual implementation
-        var items = {!! json_encode($reversedItems) !!};
-        return items.find(item => item.item_id === itemId);
-    }
-</script>
 
                 <script>
            
@@ -637,34 +625,35 @@
 
 <script>
 
-    function searchItem() {
-        var input, filter, table, tr, tdId, tdName, i, txtValueId, txtValueName;
-        input = document.getElementById("itemSearchInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myItemtable");
-        tr = table.getElementsByTagName("tr");
+function showItemDetails(itemId) {
+        // Assuming you have an array of items in your Blade template, convert it to a JavaScript array
+        var items = {!! json_encode($reversedItems) !!};
+        
+        // Find the item with the given itemId
+        var item = items.find(function(item) {
+            return item.item_id == itemId;
+        });
 
-        for (i = 0; i < tr.length; i++) {
-            tdId = tr[i].getElementsByTagName("td")[0]; // Assuming item ID is in the first column
-            tdName = tr[i].getElementsByTagName("td")[1]; // Assuming item name is in the second column
-            if (tdId && tdName) {
-                txtValueId = tdId.textContent || tdId.innerText;
-                txtValueName = tdName.textContent || tdName.innerText;
-                if (txtValueId.toUpperCase().indexOf(filter) > -1 || txtValueName.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].classList.remove("fade-out");
-                    tr[i].classList.add("fade-in");
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].classList.remove("fade-in");
-                    tr[i].classList.add("fade-out");
-                    tr[i].style.display = "none";
-                }
-            }
+        if (item) {
+            // Update modal content with item details
+            $('#itemDetailsName').text(item.item_name);
+            $('#itemDetailsPrice').text(item.price);
+            $('#itemDetailsProductInfo').text(item.product_information);
+            $('#itemDetailsInsideBox').text(item.inside_box);
+            $('#itemDetailsMaterial').text(item.material);
+            $('#itemDetailsCategory').text(item.category);
+            $('#itemDetailsSubcategory').text(item.subcategory);
+
+            // Show the modal
+            $('#itemDetailsModal').modal('show');
+        } else {
+            console.error("Item not found with ID:", itemId);
         }
     }
 
     // Automatically trigger the search function on input
     document.getElementById("itemSearchInput").addEventListener("input", searchItem);
+
 
 
     function searchUser() {
@@ -691,6 +680,8 @@
         }
     }
 
+    
+
     // Automatically trigger search functions on input
     document.getElementById("itemSearchInput").addEventListener("input", searchItem);
     document.getElementById("userSearchInput").addEventListener("input", searchUser);
@@ -707,5 +698,5 @@
        $('#myItemtable').DataTable();
     });
  </script>
+ </body>
 </html>
-</body>

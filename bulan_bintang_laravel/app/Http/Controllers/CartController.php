@@ -38,6 +38,18 @@ class CartController extends Controller
         $product_information = $request->input('product_information');
         $material = $request->input('material');
         $inside_box = $request->input('inside_box');
+
+        
+        // Fetch the stock information from the Stock model
+        $stockInfo = Post::where('item_id', $item_id)->first();
+
+        if (!$stockInfo || $stockInfo->stock_number < $quantity) {
+            // Redirect with an error message, indicating insufficient stock
+            return redirect()->route('details', $item_id)->with('error', 'Insufficient stock.');
+        }
+
+        // $stockInfo->stock_number -= $quantity;
+        // $stockInfo->save();
     
         $cartItem = [
             'item_id' => $item_id,

@@ -20,7 +20,7 @@
             padding-top: 20px;
             transition: width 0.4s;
             z-index: 1;
-            margin-top: 80px;
+            
         }
 
         .w3-sidebar a {
@@ -67,8 +67,8 @@
 </head>
 <body>
     <div class="w3-sidebar">
-        <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
-              Home</i></a>
+        {{-- <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
+              Home</i></a> --}}
         
         <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
               Shop</i></a>

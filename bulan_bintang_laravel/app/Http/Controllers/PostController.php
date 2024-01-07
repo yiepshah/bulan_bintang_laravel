@@ -111,12 +111,6 @@ class PostController extends Controller
             Post:: where ('item_id', '=',$items)->delete();
             return redirect()->back()->with('success', 'Items Deleted Successfully');
         }
-
-
-
-
-
-
         
 
         public function showDetails($itemId)
@@ -124,19 +118,21 @@ class PostController extends Controller
             $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
                 ->where('item_id', $itemId)
                 ->first();
-             
+    
             if ($itemDetails) {
                 $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
-        
+    
                 $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
-        
+    
                 $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
-        
-                return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions'));
+    
+                // Fetch stock information from the Stock model
+                $stockInfo = Post::where('item_id', $itemId)->first();
+    
+                return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions', 'stockInfo'));
             } else {
                 return view('details', ['itemNotFound' => true]);
             }
         }
-
 
 }
