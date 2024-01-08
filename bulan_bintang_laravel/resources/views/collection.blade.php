@@ -36,16 +36,16 @@
         }
 
         .item {
-            width: calc(25% - 20px);
+            width: calc(25% - 50px);
             margin: 10px;
             display: inline-block;
             vertical-align: top;
-            background-color: #fff;
-            padding: 20px;
+            /* background-color: #fff; */
+            padding: 10px;
             border-radius: 10px;
             transition: box-shadow 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            margin: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
+            
             
             
            
@@ -54,7 +54,7 @@
         .item figure img {
             max-width: 100%;
             height: auto;
-            border-radius: 5px 5px;
+            border-radius: 5px;
             -webkit-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
         }
@@ -91,8 +91,9 @@
         }
 
         #itemprice {
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
+            color: rgb(90, 90, 90);
 
         }
 
@@ -102,9 +103,9 @@
             color: inherit;
         }
 
-        .item:hover {
+        /* .item:hover {
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-        }
+        } */
 
         #detail {
             text-decoration: none;
@@ -153,13 +154,16 @@
 
         @foreach ($reversedItems as $item)
                 <div class="item">
-                    <p>Collection</p>
+                    {{-- <p>Collection</p> --}}
+                    {{-- <a href="{{ route('details', ['itemId' => $item->id]) }}">Details</a> --}}
+
                     <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
                         <figure>
                             <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
                         </figure>
                         <p>{{ $item->item_name }}</p>
                         <p id="itemprice">RM{{ $item->price }}</p>
+                        <p>{{ $item->stock_number }}</p>
                         {{-- <div class="add-to-cart">
                             <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
                                 <i class="fas fa-cart-plus"></i>

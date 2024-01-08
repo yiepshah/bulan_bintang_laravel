@@ -57,7 +57,7 @@
 
                                         <div class="d-flex align-items-center mb-6 pb-1">
                                             <img src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png"
-                                                style="width: 100px; height: auto; margin-right: 10px;" alt="">
+                                                style="width: 150px; height: auto; margin-right: 10px;" alt="">
                                            
                                         </div><br>
                                         <span class="h1 fw-bold mb-0">Login</span><br><br>

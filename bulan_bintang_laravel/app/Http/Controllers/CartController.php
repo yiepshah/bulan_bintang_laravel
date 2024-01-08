@@ -40,13 +40,13 @@ class CartController extends Controller
         $inside_box = $request->input('inside_box');
 
         
-        // Fetch the stock information from the Stock model
-        $stockInfo = Post::where('item_id', $item_id)->first();
+        // // Fetch the stock information from the Stock model
+        // $stockInfo = Post::where('item_id', $item_id)->first();
 
-        if (!$stockInfo || $stockInfo->stock_number < $quantity) {
-            // Redirect with an error message, indicating insufficient stock
-            return redirect()->route('details', $item_id)->with('error', 'Insufficient stock.');
-        }
+        // if (!$stockInfo || $stockInfo->stock_number < $quantity) {
+        //     // Redirect with an error message, indicating insufficient stock
+        //     return redirect()->route('details', $item_id)->with('error', 'Insufficient stock.');
+        // }
 
         // $stockInfo->stock_number -= $quantity;
         // $stockInfo->save();
@@ -92,16 +92,10 @@ class CartController extends Controller
 
     public function showCart()
     {
-        if (auth()->check()) {
-            $user = auth()->user();
-            $cartItems = Post::where('user_id', $user->id)->get();
-            return view('cart', ['cartItems' => $cartItems]);
-        } else {
-         
-            return view('cart', ['cartItems' => []]);
-        }
+        $cartItems = session('cart', []);
+    
+        return view('cart', ['cartItems' => $cartItems]);
     }
-
 
     public function remove($item_id)
     {

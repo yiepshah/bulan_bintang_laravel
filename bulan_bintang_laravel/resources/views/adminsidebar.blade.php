@@ -17,7 +17,7 @@
             background-color: #202d45;
             position: fixed;
             overflow-x: hidden;
-            padding-top: 20px;
+            padding-top: 80px;
             transition: width 0.4s;
             z-index: 1;
             

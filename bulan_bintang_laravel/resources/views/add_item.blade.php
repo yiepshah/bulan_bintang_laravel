@@ -89,9 +89,12 @@
             </div>       
         </div> 
         
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+             <form action="/add_item" method="post" enctype="multipart/form-data" class="justify-content-center">
+                    @csrf
                 <div class="form-group">
+                  
                     <label for="image_path">Image :</label>
                     <input class="form-control" type="file" name="image_path" id="image_path"  required accept="image/*">
                 </div><br>
@@ -126,8 +129,8 @@
                     <select class="form-control" name="category" id="category" required>
                         <option value="option1">Men</option>
                         <option value="option2">Women</option>
-                        <option value="option2">Kids</option>
-                        <!-- Add more options as needed -->
+                        <option value="option3">Kids</option>
+                        
                     </select>
                 </div><br>
 
@@ -136,22 +139,26 @@
                     <select class="form-control" name="subcategory" id="subcategory" required>
                         <option value="suboption1">Teluk Belanga</option>
                         <option value="suboption2">Tailored Fit</option>
-                        <option value="suboption2">Slim Fit</option>
-                        <option value="suboption2">Samping</option>
-                        <option value="suboption2">Kurta</option>
+                        <option value="suboption3">Slim Fit</option>
+                        <option value="suboption4">Samping</option>
+                        <option value="suboption5">Kurta</option>
 
-                        <option value="suboption2">Lana</option>
-                        <option value="suboption2">Adeline</option>
-                        <option value="suboption2">Hanna</option>
-                        <option value="suboption2">Elyana</option>
+                        <option value="suboption6">Lana</option>
+                        <option value="suboption7">Adeline</option>
+                        <option value="suboption8">Hanna</option>
+                        <option value="suboption9">Elyana</option>
 
-                        <option value="suboption2">Baju Melayu Kids</option>
-                        <option value="suboption2">Emelda</option>
-                        <option value="suboption2">Sabrina</option>
+                        <option value="suboption10">Baju Melayu Kids</option>
+                        <option value="suboption11">Emelda</option>
+                        <option value="suboption12">Sabrina</option>
                         
                     </select>
                 </div><br>
                 
+                <div class="form-group">
+                    <label for="stock_number">Stock Number :</label>
+                    <input type="number" class="form-control" name="stock_number" id="stock_number" required>
+                </div><br>
 
                 <div class="form-group">
                     <button id="addbtn" class="btn" name="submit" type="submit">Add</button>

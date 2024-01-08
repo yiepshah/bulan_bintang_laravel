@@ -126,7 +126,7 @@
     }
 
     .boutique img{
-        border-radius: 20px 30px;
+        border-radius: 10px;
     }
 
 
@@ -147,10 +147,10 @@
     }
 
     #shop:hover{
-        background-color: #161A30;
+        background-color: #202d45;
         color: #fff;
         transform: scale(1.1);
-        border: 4px solid #161A30; 
+        border: 4px solid #202d45; 
         
     }
 
@@ -219,7 +219,7 @@
 .shop-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #161A30;
+    background-color: #202d45;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;

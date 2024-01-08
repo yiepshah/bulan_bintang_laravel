@@ -338,16 +338,16 @@
 }
 
 #itemEdit {
-    background-color: #202d45;
-    color: #fff;
+    color: #202d45;
+    
     border: none;
     
 }
 
 
 #detailBtn{
-    background-color: #202d45;
-    border: none;
+    color: #202d45;
+    font-size: 20px;
     
 }
 
@@ -357,13 +357,17 @@
             width: 100%;
             height: 79px;
             color: #fff;
-            padding-left: 50px;
+            padding-left: 300px;
             
 
             
         }
 
-
+#deleteItembtn{
+    color: rgb(189, 0, 0);
+    margin-left: 20px;
+    font-size: 20px;
+}
 
 
     </style>
@@ -381,16 +385,17 @@
     <div class="new-header">
         <h1>Bulan Bintang</h1>
         <!-- You can customize the content and styling of this new header -->
-    </div>
+    </div><br>
 
-
+    
     <div class="container">
-        <div class="header--wrapper">
+        <div class="header--wrapper">            
             <div class="header--title">
                 <span>Admin</span>
                 <h2>dashboard</h2>
             </div> 
         </div>
+        
         <div class="card-container">
             <h2 class="main--title">Today's data</h2>
             <div class="card--wrapper">
@@ -433,7 +438,9 @@
         <div class="container">
             <div class="card-container">
                 <div class="user-table">
-                    <h2 class="main--title">User Information</h2>        
+                    <h2 class="main--title">
+                        <i class="fas fa-users"></i>
+                        User Information</h2>        
                     <div class="table-responsive">
                         <table id="myUsertable" class="display">
                             <thead class="thead-dark">
@@ -477,20 +484,23 @@
     <br><br>
     <div class="card-container">
         <div class="user-table">
-            <h2 class="main--title">Stock Information</h2>
+            <h2 class="main--title">
+                <i class="fas fa-box"></i>
+                Stock Information</h2>
             <div class="table-responsive">
                 <table id="myItemtable" class="display">
                     <thead class="thead-dark">
                         <tr>
                             <th>Item Id</th>
                             <th>Item Name</th>
-                            <th>Stock</th>
+                           
                             {{-- <th>Price</th> --}}
                             {{-- <th>Product Info</th> --}}
                             {{-- <th>Material</th> --}}
                             {{-- <th>Inside Box</th> --}}
                             <th>Category</th>
                             <th>Subcategory</th>
+                            <th>Stock</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -510,14 +520,14 @@
                                 {{-- <td>{{ $item->inside_box }}</td> --}}
                                 <td>{{ $item->category}}</td>
                                 <td>{{ $item->subcategory}}</td>
+                                <td>{{ $item->stock_number}}</td>
                                 <td>
 
-                                    <button id="detailBtn" class="btn btn-info" data-toggle="modal" data-target="#itemDetailsModal">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </button>
-
-                                    <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger" data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
-                                        <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
+                                    <a href="" data-toggle="modal" data-target="#itemDetailsModal">
+                                        <i id="detailBtn" class="fa fa-eye" aria-hidden="true" ></i>
+                                    </a>
+                                    <a href="{{url('delete-item/'.$item->item_id)}}"  data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
+                                        <i id="deleteItembtn" class="fas fa-trash-alt"></i>
                                     </a>
                                    
                                 </td>
@@ -561,8 +571,8 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <img id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
+                    <div class="modal-body" id="itemDetailsContent">
+                        <img src="https://khatam.com.my/cdn/shop/files/DSC00170.jpg?v=1686796144" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
                         <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
                         <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
                         <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
@@ -570,7 +580,7 @@
                         <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
                         <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
                         <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
-                        <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
+                        <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}">
                             <i class="fas fa-edit"></i> <!-- Edit icon -->
                         </a>
                     </div>
@@ -585,25 +595,25 @@
 
 
 
-                <script>
-           
-                    function showSuccessAlert(message) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: message,
-                        });
-                    }
-            
-             
-                    function showErrorAlert(message) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: message,
-                        });
-                    }
-                </script>
+        <script>
+    
+            function showSuccessAlert(message) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: message,
+                });
+            }
+    
+        
+            function showErrorAlert(message) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: message,
+                });
+            }
+        </script>
 
             @if(Session::has('success'))
             <script>
@@ -623,69 +633,24 @@
 
 
 
-<script>
-
-function showItemDetails(itemId) {
-        // Assuming you have an array of items in your Blade template, convert it to a JavaScript array
-        var items = {!! json_encode($reversedItems) !!};
-        
-        // Find the item with the given itemId
-        var item = items.find(function(item) {
-            return item.item_id == itemId;
-        });
-
-        if (item) {
-            // Update modal content with item details
-            $('#itemDetailsName').text(item.item_name);
-            $('#itemDetailsPrice').text(item.price);
-            $('#itemDetailsProductInfo').text(item.product_information);
-            $('#itemDetailsInsideBox').text(item.inside_box);
-            $('#itemDetailsMaterial').text(item.material);
-            $('#itemDetailsCategory').text(item.category);
-            $('#itemDetailsSubcategory').text(item.subcategory);
-
-            // Show the modal
-            $('#itemDetailsModal').modal('show');
-        } else {
-            console.error("Item not found with ID:", itemId);
-        }
-    }
-
-    // Automatically trigger the search function on input
-    document.getElementById("itemSearchInput").addEventListener("input", searchItem);
-
-
-
-    function searchUser() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("userSearchInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myUsertable");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1]; // Assuming user name is in the second column
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].classList.remove("fade-out");
-                    tr[i].classList.add("fade-in");
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].classList.remove("fade-in");
-                    tr[i].classList.add("fade-out");
-                    tr[i].style.display = "none";
+            <script>
+                // Function to load item details into the modal
+                function loadItemDetails(item_id) {
+                    // Fetch item details using AJAX or any other method
+                    // For simplicity, let's assume you have a function getItemDetailsById(item_id) that returns the details
+                    var itemDetails = getItemDetailsById(item_id);
+            
+                    // Update the modal content
+                    var modalContent = document.getElementById('itemDetailsContent');
+                    modalContent.innerHTML = `
+                        <h4>${itemDetails.item_name}</h4>
+                        <!-- Add more details as needed -->
+                    `;
+            
+                    // Show the modal
+                    $('#itemDetailsModal').modal('show');
                 }
-            }
-        }
-    }
-
-    
-
-    // Automatically trigger search functions on input
-    document.getElementById("itemSearchInput").addEventListener("input", searchItem);
-    document.getElementById("userSearchInput").addEventListener("input", searchUser);
-</script>
+            </script>
 
 <script>
   

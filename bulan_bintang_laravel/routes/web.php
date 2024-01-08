@@ -59,7 +59,6 @@ Route::get('/collection', [PostController::class, 'collection'])->name('collecti
 
 Route::get('/collection/{category}/{subcategory}', [PostController::class, 'filtered_collection'])->name('filtered_collection');
 
-
 Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
 
 Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');

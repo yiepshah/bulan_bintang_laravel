@@ -11,67 +11,68 @@
     <title>Signup</title>
 
     <style>
-       body {
+        body {
             background-color: #202d45;
+             /* Remove default body margin */
+        }
+    
+        .container {
+            background-color: #fff;
+            margin-top: 50px;
+            border-radius: 15px;
+            text-align: center;
             
         }
-
-        .container {
-            background-color: #ffff;
-            margin-top: 100px;
-            border-radius: 30px 30px;
-            padding: 20px;
-            text-align: center; /* Center text in the container */
-        }
-
+    
         #logo {
-            width: 90px;
+            width: 150px;
             height: auto;
-            margin-right: 10px;
+          
         }
-
+    
         #signup-heading {
-            font-size: 30px;;
+            font-size: 34px;
             font-weight: bold;
         }
-
-        #loginlink {
-            margin-right: 20px;
-        }
-
+    
         #inputErrorAlert {
             margin-top: 10px;
             width: 100%;
             background-color: #dc3545;
             color: #fff;
-            padding: 15px;
+            padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             display: none;
         }
-
+    
         #Sbtn {
             border-radius: 5px;
             background-color: #202d45;
             transition: transform 0.3s ease-in-out;
+            font-size: 16px;
+            padding: 10px 20px;
         }
-
-        #Sbtn:hover{
-            transform: scale(1.3);
+    
+        #Sbtn:hover {
+            transform: scale(1.1);
             background-color: #202d45;
             border: none;
         }
-
+    
         /* Style to center the form elements */
         form {
             text-align: left;
-            margin-top: 20px; /* Adjust the top margin as needed */
+            margin-top: 20px;
         }
-
+    
         .form-group {
             margin: 10px;
+           
+            
         }
     </style>
+  
 </head>
 
 <body>
@@ -80,12 +81,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <div class="d-flex align-items-center mb-2 pb-1">
-                    
-                    
+                <div class="d-flex">
+                   
                 </div>
                 <img id="logo" src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png" alt="Logo"><br><br>
-                <span id="signup-heading" class="h1 fw-bold mb-0">Sign Up</span>
+                <span id="signup-heading">Sign Up</span>
                 <form action="{{ url('/signup') }}" method="post">
                     @csrf
 

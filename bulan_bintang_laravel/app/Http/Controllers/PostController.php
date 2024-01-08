@@ -21,6 +21,7 @@ class PostController extends Controller
             'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'category' => 'required',
             'subcategory' => 'required',
+            'stock_number' => 'required|numeric',
         ]);
 
     
@@ -35,7 +36,10 @@ class PostController extends Controller
             $itemPost['image_path'] = $imageName; 
             $itemPost['user_id'] = Auth::id();
     
-            Post::create($itemPost);
+            $item = Post::create($itemPost);
+
+            $item->stock_number = $request->input('stock_number');
+            $item->save();
     
             return redirect('/collection');
         }
@@ -83,6 +87,7 @@ class PostController extends Controller
                 'inside_box' => 'required',
                 'category' => 'required',
                 'subcategory' => 'required',
+                'stock_number' =>'required',
 
             ]);
 
@@ -115,7 +120,7 @@ class PostController extends Controller
 
         public function showDetails($itemId)
         {
-            $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box')
+            $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box','stock_number')
                 ->where('item_id', $itemId)
                 ->first();
     
@@ -126,10 +131,10 @@ class PostController extends Controller
     
                 $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
     
-                // Fetch stock information from the Stock model
-                $stockInfo = Post::where('item_id', $itemId)->first();
+                // // Fetch stock information from the Stock model
+                // $stockInfo = Post::where('item_id', $itemId)->first();
     
-                return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions', 'stockInfo'));
+                return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions',));
             } else {
                 return view('details', ['itemNotFound' => true]);
             }

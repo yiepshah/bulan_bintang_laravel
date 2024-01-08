@@ -14,7 +14,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
     .details-container{
-        padding: 80px;
+        padding: 10px;
         
 
     }
@@ -22,8 +22,7 @@
     .image {
         max-width: 100%;
         width: 800px;
-        height: auto;
-        
+        height: auto;     
         margin-left: 0px;
         margin-top: 10px;
         padding: 30px;
@@ -102,7 +101,7 @@
         border-radius: 10px 10px;
     }
 
-    .text{
+    .detailProduct{
         color: #202d45;
     }
 
@@ -137,6 +136,10 @@
         transform: scale(1.2);
     }
 
+    #itemData{
+        color: rgb(73, 73, 73);
+    }
+
 
     
     </style>
@@ -168,28 +171,8 @@
                     <h4 class="h4" style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
                     <hr>
                     <div class="text">
-                        <p class="detailProduct"> <strong>Product Information:</strong> {{ $itemDetails->product_information }}</p>
 
-                        <p class="detailProduct"> <strong>Material:</strong>  {{ $itemDetails->material }}</p>
-        
-                        <p class="detailProduct"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
-        
-                        <p class="detailProduct"><strong>Price:</strong> Rm {{ $itemDetails->price }}</p>
-
-                        <p class="detailProduct"><strong>Stock : </strong>{{ $itemDetails->stock_number }}</p>
-    
-                    </div>
-
-                    <form method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
-                        <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
-                        <input type="hidden" name="image_path" value="{{ $itemDetails->image_path }}">
-                        <input type="hidden" name="price" value="{{ $itemDetails->price }}">
-                        <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
-                        <input type="hidden" name="material" value="{{ $itemDetails->material }}">
-                        <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
-
+                        <p class="detailProduct"><strong>Price:</strong> Rm {{ $itemDetails->price }}</p> 
                         <div class="form-group">     
                             <div class="form-size">
                                 <label for="size"><strong>Size:</strong></label>
@@ -210,9 +193,30 @@
                                     <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>                               
                                 </div>
                             </div>
-                            
+                        </div>  
 
-                        </form>
+                        <p class="detailProduct"> <strong>Product Information:</strong> {{ $itemDetails->product_information }}</p>
+
+                        <p class="detailProduct"> <strong>Material:</strong>  {{ $itemDetails->material }}</p>
+        
+                        <p class="detailProduct"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
+        
+                        
+
+                        <p class="detailProduct"><strong>Stock : </strong>{{ $itemDetails->stock_number }}</p>
+    
+                    </div>
+
+                    <form class="itemData"  method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
+                        <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
+                        <input type="hidden" name="price" value="{{ $itemDetails->price }}">
+                        <input type="hidden" name="image_path" value="{{ $itemDetails->image_path }}">
+                        <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
+                        <input type="hidden" name="material" value="{{ $itemDetails->material }}">
+                        <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
+                    </form>
                     
                     <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
                 </div>
