@@ -19,6 +19,7 @@
         #collection {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             color: darkslategray;
+            
          
         }
 
@@ -27,12 +28,14 @@
             flex-wrap: wrap;
             justify-content: space-between;
             padding: 50px;
+            
            
             
         }
 
         .item figure {
             position: relative;
+            
         }
 
         .item {
@@ -61,6 +64,7 @@
 
         .item:hover figure::before {
             opacity: 1;
+            
         }
 
         .item figure::before {
@@ -87,6 +91,7 @@
             color: #202d45;
             
             
+            
            
         }
 
@@ -107,9 +112,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         } */
 
-        #detail {
-            text-decoration: none;
-        }
+
 
         .add-to-cart button {
             background-color: transparent;

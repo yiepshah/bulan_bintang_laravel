@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Bulan Bintang</title>
 
 <style>
@@ -15,7 +15,7 @@
 
     .details-container{
         padding: 10px;
-        
+        overflow: hidden;
 
     }
 
@@ -34,6 +34,7 @@
 
     .text {
         font-size: 20px;
+        color:  #202d45;
     }
 
 
@@ -102,7 +103,7 @@
     }
 
     .detailProduct{
-        color: #202d45;
+        color: #878787;
     }
 
     .quantity-input-group {
@@ -136,8 +137,11 @@
         transform: scale(1.2);
     }
 
-    #itemData{
-        color: rgb(73, 73, 73);
+
+
+    .footer-container{
+       text-align: center;
+       overflow: hidden;
     }
 
 
@@ -168,11 +172,11 @@
 
                 
                 <div class="detailItem">
-                    <h4 class="h4" style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
+                    <h4 class="h4"style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
                     <hr>
                     <div class="text">
 
-                        <p class="detailProduct"><strong>Price:</strong> Rm {{ $itemDetails->price }}</p> 
+                        <p class="detailProduct"><strong class="label">Price:</strong> Rm {{ $itemDetails->price }}</p> 
                         <div class="form-group">     
                             <div class="form-size">
                                 <label for="size"><strong>Size:</strong></label>
@@ -190,7 +194,7 @@
                                     <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
                                 </div>
                                 <div class="form-group">
-                                    <button id="button" class="btn btn-dark" type="submit">Add to Cart</button>                               
+                                    <button id="button" class="btn btn-dark" type="button">Add to Cart</button>                               
                                 </div>
                             </div>
                         </div>  
@@ -200,9 +204,7 @@
                         <p class="detailProduct"> <strong>Material:</strong>  {{ $itemDetails->material }}</p>
         
                         <p class="detailProduct"> <strong>Inside Box:</strong>  {{ $itemDetails->inside_box }}</p>
-        
-                        
-
+    
                         <p class="detailProduct"><strong>Stock : </strong>{{ $itemDetails->stock_number }}</p>
     
                     </div>
@@ -210,8 +212,10 @@
                     <form class="itemData"  method="post" action="{{ route('cart') }}"  id="addToCartForm" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="item_id"  value="{{ $itemDetails->item_id }}">
-                        <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">
+                        <input type="hidden" name="item_name" value="{{ $itemDetails->item_name }}">                      
                         <input type="hidden" name="price" value="{{ $itemDetails->price }}">
+                        <input type="hidden" name="quantity" value="{{ $itemDetails->quantity }}">
+                        <input type="hidden" name="size" value="{{ $itemDetails->size }}">
                         <input type="hidden" name="image_path" value="{{ $itemDetails->image_path }}">
                         <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
                         <input type="hidden" name="material" value="{{ $itemDetails->material }}">
@@ -220,23 +224,84 @@
                     
                     <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
                 </div>
-                
+               
             </div>
         </div>
     </div>
 
+    
+    <!-- Modal for Cart Alert -->
+    <div class="modal fade" id="cartAlertModal" tabindex="-1" aria-labelledby="cartAlertModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartAlertModalLabel">Item Added to Cart!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your item has been added to the cart.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="goToCart()">Go to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        @include('footer')
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var sizeSelect = document.getElementById('sizeSelect');
+            var quantityInput = document.getElementById('quantity');
+            var addButton = document.getElementById('button');
+        
+            sizeSelect.addEventListener('change', function () {
+                // Your size change logic
+            });
+        
+            quantityInput.addEventListener('input', function () {
+                // Your quantity input logic
+            });
+        
+            addButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            console.log('Button clicked!');
+        
+                // Your form submission logic
+        
+                // Show the cart alert modal
+                $('#cartAlertModal').modal('show');
+        
+                // // Hide the modal after 6 seconds (adjust the value as needed)
+                // setTimeout(function () {
+                //     $('#cartAlertModal').modal('hide');
+                // }, 6000);
+            });
+        });
+        
+        function goToCart() {
+            var form = document.getElementById('addToCartForm');
+            form.submit();
+        }
+        </script>
+
 <script>
 
-function increaseQuantity() {
+        function increaseQuantity() {
             var quantityInput = document.getElementById('quantity');
             quantityInput.value = parseInt(quantityInput.value, 10) + 1;
         }
 
         function decreaseQuantity() {
-            var quantityInput = document.getElementById('quantity');
-            var value = parseInt(quantityInput.value, 10) - 1;
-            quantityInput.value = value < 1 ? 1 : value;
-        }
+        var quantityInput = document.getElementById('quantity');
+        var value = parseInt(quantityInput.value, 10) - 1;
+        quantityInput.value = value < 1 ? 1 : value;
+    }
 
     
     document.addEventListener("DOMContentLoaded", function () {
@@ -256,15 +321,11 @@ function increaseQuantity() {
         }
     });
 
-    var addButton = document.getElementById('button');
-    addButton.addEventListener('click', function (event) {
-        event.preventDefault(); 
 
-        var form = document.getElementById('addToCartForm');
-        form.submit();
-    });
 });
 </script>
+
+
 
 
 <script>
@@ -275,9 +336,8 @@ function clearPage() {
 }
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-@include('footer')
 
 </body>
 </html>
+

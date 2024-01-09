@@ -195,8 +195,6 @@
 </div>
 
 
-@include('footer')  
-
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -218,6 +216,10 @@
             </div>
         </div>
     </div>
+</div><br><br>
+
+<div>
+    @include('footer')  
 </div>
 
 <script>
@@ -317,6 +319,8 @@ document.addEventListener('DOMContentLoaded', function () {
         updateTotalPrice();
     });
     </script>
+
+    
 </body>
 </html>
 

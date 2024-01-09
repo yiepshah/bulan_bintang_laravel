@@ -16,7 +16,7 @@
 
         .index-container{
             width: 100%;
-            padding: 60px;
+            padding: 40px;
             overflow: hidden;
         }
 
@@ -137,9 +137,9 @@
         padding: 5px 5px; 
         background: transparent; 
         border: 2px solid black; 
-        border-radius: 10px 10px;
+        border-radius: 5px 5px;
         text-decoration: none;
-        font-weight: 700;
+        font-weight: 400;
         font-size: 30px;
         color: #000; 
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -157,8 +157,10 @@
     @media (max-width: 767px) {
       
         #shop {
-            top: 80%; 
-            font-size: 15px;
+            top: 59%; 
+            font-size: 10px;
+            height: 50px;
+            width: 50px;
         }
     }   
 
@@ -292,10 +294,7 @@
     background-color: #202d45;
 } */
 
-.footer-container{
-    background-color: #202d45;
-    color: #fff;
-}
+
       
 </style>
 </head>
@@ -458,61 +457,13 @@
                           <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Terengganu</figcaption>    
                       </figure>
                   </div>
-      
+                  
               </div>
+              @include('footer')
           </div>
       
           
-            <div  class="footer-container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="section about-section">
-                            <h4>ABOUT US</h4>
-                          
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Careers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <div class="section customer-care-section">
-                            <h4>CUSTOMER CARE</h4>
-                            <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Return Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <div class="section follow-us-section">
-                            <h4>FOLLOW US</h4>
-                            <ul class="social-icons">
-                                <li><a href="#" class="fab fa-tiktok"></a></li>
-                                <li><a href="#" class="fab fa-facebook"></a></li>
-                                <li><a href="#" class="fab fa-twitter"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div class="col-md-3">
-                        <div class="section customer-services-section">
-                            <h4>CUSTOMER SERVICES</h4>
-                            <ul>
-                                <li><i class="fas fa-clock"></i> Monday - Saturday (9:00 am - 10:00 pm)</li>
-                                <li><i class="fas fa-mail-bulk"></i> Operations@bulanbintanghq.com</li>
-                                <li><i class="fas fa-phone-volume"></i> Customer Service</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                @include('footer')
-            </div>
 
-        </div>
         
           
 

@@ -55,6 +55,11 @@
            color: grey;
        }
 
+       .footer-container{
+        padding: 20px;
+        
+       }
+
        
     </style>
 </head>
@@ -88,15 +93,19 @@
                                 <p>No user data found.</p>
                             @endif
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-@include('footer')
+    <br><br><br>
+    <div class="footer-container">
+        @include('footer')
+    </div>
 </body>
 </html>
+
 
 
 

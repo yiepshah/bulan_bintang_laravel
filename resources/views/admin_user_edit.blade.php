@@ -101,9 +101,9 @@
                 <button type="submit" id="editUserBtn" class="btn btn-primary">Update User</button>
             </div>
         </form>
-        @include('footer')
+      
     </div>
     
 </body>
-
+@include('footer')
 </html>

@@ -348,6 +348,7 @@
 #detailBtn{
     color: #202d45;
     font-size: 20px;
+
     
 }
 
@@ -357,7 +358,7 @@
             width: 100%;
             height: 79px;
             color: #fff;
-            padding-left: 300px;
+            padding-left: 200px;
             
 
             
@@ -369,8 +370,63 @@
     font-size: 20px;
 }
 
+.footer-container{
+    margin: 0px;
+}
 
-    </style>
+
+    .burger-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-size: 30px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .w3-sidebar {
+        height: 100%;
+        width: 0;
+        background-color: #202d45;
+        position: fixed;
+        overflow-x: hidden;
+        padding-top: 80px;
+        transition: 0.5s;
+        z-index: 1;
+    }
+
+    .w3-sidebar a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #fff;
+        display: block;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .w3-sidebar a:hover {
+        background-color: #111;
+        color: #f1f1f1;
+    }
+
+    .w3-sidebar .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .detailImg{
+        width: 900px;
+
+    }
+</style>
+
+
+   
 
 </head>
 <html>
@@ -379,15 +435,36 @@
 
     @auth
         @if(auth()->user()->role === 'admin')
-            @include('adminsidebar')
+        <div class="w3-sidebar">
+            {{-- <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
+                  Home</i></a> --}}
+            
+            <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
+                  Shop</i></a>
+           
+            <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
+                   Add</i></a>
+    
+            <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt">
+                   Logout</i></a>
+    
+            
+                {{-- <a class="nav-link" title="Add Item" href="{{ url('add_item') }}"><i class="fas fa-plus"></i></a>
+                <a class="nav-link" title="Log out" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i></a> --}}
+            
+        </div>
         @endif
     @endauth 
     <div class="new-header">
-        <h1>Bulan Bintang</h1>
-        <!-- You can customize the content and styling of this new header -->
-    </div><br>
+        
 
-    
+        <div class="burger-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars">  Bulan Bintang</i>
+        </div>
+
+    </div>
+
+
     <div class="container">
         <div class="header--wrapper">            
             <div class="header--title">
@@ -395,7 +472,11 @@
                 <h2>dashboard</h2>
             </div> 
         </div>
-        
+
+
+
+
+
         <div class="card-container">
             <h2 class="main--title">Today's data</h2>
             <div class="card--wrapper">
@@ -563,7 +644,7 @@
 
 
         <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
@@ -571,26 +652,44 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" id="itemDetailsContent">
-                        <img src="https://khatam.com.my/cdn/shop/files/DSC00170.jpg?v=1686796144" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
-                        <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
-                        <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
-                        <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
-                        <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
-                        <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
-                        <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
-                        <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
-                        <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}">
-                            <i class="fas fa-edit"></i> <!-- Edit icon -->
-                        </a>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Left column for image -->
+                                <img class="detailImg" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/TF1-RAVEN-BLACK.jpg?fit=1010%2C1010&ssl=1" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Right column for details -->
+                                <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
+                                <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
+                                <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
+                                <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
+                                <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
+                                <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
+                                <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
+                                <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}">
+                                    <i class="fas fa-edit"></i> <!-- Edit icon -->
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        
+
     </div>
-@include('footer')
+</div>
+</div>
+    <div class="footer-container">
+        @include('footer')
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.w3-sidebar');
+            sidebar.style.width = sidebar.style.width === '200px' ? '0' : '200px';
+        }
+    </script>
 
 
 

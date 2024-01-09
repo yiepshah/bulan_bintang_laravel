@@ -18,6 +18,11 @@
         #Lbtn{
             background-color: #202d45;
         }
+
+        .footer-container{
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 
@@ -91,15 +96,20 @@
                             </div>
                             
                         </div>
-                        @include('footer')
+                        
                     </div>
-                   
+                    
                 </div>
+                
             </div>
+            
         </div>
         
     </section>
-  
+    <div class="footer-container" >
+        @include('footer')
+    </div>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
