@@ -12,15 +12,17 @@
     body {
         background-color: #202d45;
        
-        margin: 0; /* Add this to remove default body margin */
+        
     }
 
     .container {
         background-color: #fdfdfd;
-        border-radius: 10px;
+        padding: 20px;
         border: none;
         margin-top: 20px;
-        padding: 20px;
+        
+        
+    
     }
 
     h1 {
@@ -36,7 +38,7 @@
     input[type="number"] {
         padding: 8px;
         border-radius: 8px;
-        width: 100%;
+
         margin-bottom: 10px;
     }
 
@@ -46,7 +48,7 @@
         background-color: #202d45;
         width: 80px;
         transition: transform 0.3s ease-in-out;
-        border-radius: 15px;
+        border-radius: 10px;
     }
 
     #addbtn:hover {
@@ -55,15 +57,15 @@
     }
 
     #bblogo {
-        /* Adjust styles to center the logo */
+
         text-align: center;
-        margin-bottom: 20px; /* Add margin-bottom for spacing */
+        margin-bottom: 20px; 
     }
 
     #bblogo img {
         border-radius: 5px;
         height: auto;
-        max-width: 100%; /* Ensure the logo doesn't exceed its container */
+        max-width: 100%; 
     }
     </style>
 
@@ -73,12 +75,12 @@
 <body>    
 
 
-
-{{-- @auth
+@include('header')
+@auth
 @if (auth()->user()->role === 'admin')
     @include('adminsidebar')
 @endif
-@endauth   --}}
+@endauth  
 
     <div class="container">
         <div class="row">
@@ -89,87 +91,91 @@
             </div>       
         </div> 
         
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-             <form action="/add_item" method="post" enctype="multipart/form-data" class="justify-content-center">
-                    @csrf
-                <div class="form-group">
-                  
-                    <label for="image_path">Image :</label>
-                    <input class="form-control" type="file" name="image_path" id="image_path"  required accept="image/*">
-                </div><br>
+        <div class="form-container">
+            <div class="container">
+                <form action="/add_item" method="post" enctype="multipart/form-data" class="justify-content-center">
+                        @csrf
+                    <div class="form-group">
+                    
+                        <label for="image_path">Image :</label>
+                        <input class="form-control" type="file" name="image_path" id="image_path"  required accept="image/*">
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="item_name">Name :</label>
-                    <input type="text" class="form-control" name="item_name" id="item_name" required>
-                </div><br>
+                    <div class="form-group">
+                        <label for="item_name">Name :</label>
+                        <input type="text" class="form-control" name="item_name" id="item_name" required>
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="price">Price :</label>
-                    <input type="number" class="form-control" name="price" id="price" required>
-                </div><br>
+                    <div class="form-group">
+                        <label for="price">Price :</label>
+                        <input type="number" class="form-control" name="price" id="price" required>
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="product_information">Product Information :</label>
-                    <input type="text" class="form-control" name="product_information" id="product_information">
-                </div><br>
+                    <div class="form-group">
+                        <label for="product_information">Product Information :</label>
+                        <input type="text" class="form-control" name="product_information" id="product_information">
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="material">Material :</label>
-                    <input type="text" class="form-control" name="material" id="material" required>
-                </div><br>
+                    <div class="form-group">
+                        <label for="material">Material :</label>
+                        <input type="text" class="form-control" name="material" id="material" required>
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="inside_box">Inside Box :</label>
-                    <input type="text" class="form-control" name="inside_box" id="inside_box" required>
-                </div><br>
+                    <div class="form-group">
+                        <label for="inside_box">Inside Box :</label>
+                        <input type="text" class="form-control" name="inside_box" id="inside_box" required>
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="category">Category :</label>
-                    <select class="form-control" name="category" id="category" required>
-                        <option value="option1">Men</option>
-                        <option value="option2">Women</option>
-                        <option value="option3">Kids</option>
-                        
-                    </select>
-                </div><br>
+                    <div class="form-group">
+                        <label for="category">Category :</label>
+                        <select class="form-control" name="category" id="category" required>
+                            <option value="Men">Men</option>
+                            <option value="Women">Women</option>
+                            <option value="Kids">Kids</option>
+                            
+                        </select>
+                    </div><br>
 
-                <div class="form-group">
-                    <label for="subcategory">Subcategory :</label>
-                    <select class="form-control" name="subcategory" id="subcategory" required>
-                        <option value="suboption1">Teluk Belanga</option>
-                        <option value="suboption2">Tailored Fit</option>
-                        <option value="suboption3">Slim Fit</option>
-                        <option value="suboption4">Samping</option>
-                        <option value="suboption5">Kurta</option>
+                    <div class="form-group">
+                        <label for="subcategory">Subcategory :</label>
+                        <select class="form-control" name="subcategory" id="subcategory" required>
+                            <option value="Teluk Belanga">Teluk Belanga</option>
+                            <option value="Tailored Fit">Tailored Fit</option>
+                            <option value="Slim Fit">Slim Fit</option>
+                            <option value="Samping">Samping</option>
+                            <option value="Kurta">Kurta</option>
 
-                        <option value="suboption6">Lana</option>
-                        <option value="suboption7">Adeline</option>
-                        <option value="suboption8">Hanna</option>
-                        <option value="suboption9">Elyana</option>
+                            <option value="Lana">Lana</option>
+                            <option value="Adeline">Adeline</option>
+                            <option value="Hanna">Hanna</option>
+                            <option value="Elyana<">Elyana</option>
 
-                        <option value="suboption10">Baju Melayu Kids</option>
-                        <option value="suboption11">Emelda</option>
-                        <option value="suboption12">Sabrina</option>
-                        
-                    </select>
-                </div><br>
+                            <option value="Baju Melayu Kids">Baju Melayu Kids</option>
+                            <option value="Emelda">Emelda</option>
+                            <option value="Sabrina">Sabrina</option>
+                            
+                        </select>
+                    </div><br>
+                    
+                    <div class="form-group">
+                        <label for="stock_number">Stock Number :</label>
+                        <input type="number" class="form-control" name="stock_number" id="stock_number" required>
+                    </div><br>
+
+                    <div class="form-group">
+                        <button id="addbtn" class="btn" name="submit" type="submit">Add</button>
+                    </div><br><br>                  
+                </form>
                 
-                <div class="form-group">
-                    <label for="stock_number">Stock Number :</label>
-                    <input type="number" class="form-control" name="stock_number" id="stock_number" required>
-                </div><br>
-
-                <div class="form-group">
-                    <button id="addbtn" class="btn" name="submit" type="submit">Add</button>
-                </div><br><br>                  
-            </form>
-            
+            </div>
         </div>
-        
-            
-        
+    </div><br><br>        
+
+  
+    <div>
+        @include('footer')
     </div>
+    
 
     <script>
         @if(Session::has('success'))
@@ -186,7 +192,7 @@
     </script>
   
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-   @include('footer')
+   
 
 </body>
 </html>

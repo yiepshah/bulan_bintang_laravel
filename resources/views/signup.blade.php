@@ -125,7 +125,7 @@
             </div>
         </div><br>
 
-        @include('footer')
+   
     </div>
     <script>
         

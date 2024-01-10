@@ -4,7 +4,7 @@
     .footer-container {
       background-color: #202d45;
       color: #ffffff;
-      padding: 50px 0;
+   
       font-family: 'Roboto', sans-serif;
       text-align: center;
        overflow: hidden;
@@ -21,9 +21,7 @@
       justify-content: space-between;
     }
   
-    .section {
-      margin-bottom: 20px;
-    }
+
   
     h4 {
       font-size: 1.5rem;
@@ -59,20 +57,15 @@
       margin-right: 15px;
     }
   
-    i {
-      margin-right: 10px;
-    }
+
   
-    .text-center {
-      text-align: center;
-    }
-  
+/* 
     .mt-3 {
       margin-top: 3rem;
-    }
+    } */
   
     .copyright {
-      font-size: 0.8rem;
+      font-size: 1.0rem;
       margin-top: 20px;
     }
   </style>

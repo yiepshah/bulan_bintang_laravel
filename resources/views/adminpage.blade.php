@@ -353,16 +353,13 @@
 }
 
 
-        .new-header{
-            background-color: #202d45;
-            width: 100%;
-            height: 79px;
-            color: #fff;
-            padding-left: 200px;
-            
-
-            
-        }
+.new-header{
+    background-color: #202d45;
+    width: 100%;
+    height: 79px;
+    color: #fff;
+    padding-left: 200px;
+}
 
 #deleteItembtn{
     color: rgb(189, 0, 0);
@@ -423,21 +420,24 @@
         width: 900px;
 
     }
+
+    .footer-container{
+        padding: 10px;
+    }
+
+    #itemEdit{
+        background-color: #ffff;
+        font-size: 30px;
+    }
 </style>
-
-
-   
 
 </head>
 <html>
 <body>
   
-
     @auth
         @if(auth()->user()->role === 'admin')
         <div class="w3-sidebar">
-            {{-- <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
-                  Home</i></a> --}}
             
             <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
                   Shop</i></a>
@@ -447,35 +447,19 @@
     
             <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt">
                    Logout</i></a>
-    
-            
-                {{-- <a class="nav-link" title="Add Item" href="{{ url('add_item') }}"><i class="fas fa-plus"></i></a>
-                <a class="nav-link" title="Log out" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i></a> --}}
-            
+        
         </div>
         @endif
     @endauth 
-    <div class="new-header">
-        
 
-        <div class="burger-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars">  Bulan Bintang</i>
-        </div>
-
-    </div>
-
-
-    <div class="container">
+@include('adminHeader');
+    {{-- <div class="container">
         <div class="header--wrapper">            
             <div class="header--title">
                 <span>Admin</span>
                 <h2>dashboard</h2>
             </div> 
-        </div>
-
-
-
-
+        </div><br><br> --}}
 
         <div class="card-container">
             <h2 class="main--title">Today's data</h2>
@@ -513,8 +497,8 @@
                     </div>
                 </div>
             </div>
-    </div>        
-            <br>
+    </div> <br><br>  <br>     
+            
 
         <div class="container">
             <div class="card-container">
@@ -593,6 +577,7 @@
         
                         @forelse ($reversedItems as $item)
                             <tr>
+                                
                                 <td>{{ $item->item_id }}</td>
                                 <td>{{ $item->item_name }}</td>
                                 {{-- <td>{{ $item->price }}</td> --}}
@@ -604,9 +589,10 @@
                                 <td>{{ $item->stock_number}}</td>
                                 <td>
 
-                                    <a href="" data-toggle="modal" data-target="#itemDetailsModal">
-                                        <i id="detailBtn" class="fa fa-eye" aria-hidden="true" ></i>
+                                    <a href="#" data-toggle="modal" data-target="#itemDetailsModal" onclick="loadItemDetails('{{ $item->item_id }}')">
+                                        <i id="detailBtn" class="fa fa-eye" aria-hidden="true"></i>
                                     </a>
+                                    
                                     <a href="{{url('delete-item/'.$item->item_id)}}"  data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
                                         <i id="deleteItembtn" class="fas fa-trash-alt"></i>
                                     </a>
@@ -646,28 +632,30 @@
         <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
+
                     <div class="modal-header">
                         <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <!-- Left column for image -->
-                                <img class="detailImg" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/TF1-RAVEN-BLACK.jpg?fit=1010%2C1010&ssl=1" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
+                                <img class="detailImg" src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
                             </div>
-                            <div class="col-md-6">
-                                <!-- Right column for details -->
-                                <p><strong>Item Name:</strong> <span id="itemDetailsName"></span></p>
-                                <p><strong>Price:</strong> <span id="itemDetailsPrice"></span></p>
-                                <p><strong>Product Information:</strong> <span id="itemDetailsProductInfo"></span></p>
-                                <p><strong>Inside Box:</strong> <span id="itemDetailsInsideBox"></span></p>
-                                <p><strong>Material:</strong> <span id="itemDetailsMaterial"></span></p>
-                                <p><strong>Category:</strong> <span id="itemDetailsCategory"></span></p>
-                                <p><strong>Subcategory:</strong> <span id="itemDetailsSubcategory"></span></p>
-                                <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}">
+                            <div class="col-md-5">
+                        
+                                <p><strong>Item Name:</strong> {{ $item->item_name }}</p>
+                                <p><strong>Price:</strong> Rm {{ $item->price }}</p>
+                                <p><strong>Product Information:</strong> {{ $item->product_information }}</p>
+                                <p><strong>Inside Box:</strong> {{ $item->inside_box }}</p>
+                                <p><strong>Material:</strong> {{ $item->material }}</p>
+                                <p><strong>Category:</strong> {{ $item->category}}</p>
+                                <p><strong>Subcategory:</strong> {{ $item->subcategory}}</p>
+                                <p><strong>Stock Number:</strong> {{ $item->stock_number}}</p>
+                                <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i> <!-- Edit icon -->
                                 </a>
                             </div>
@@ -680,9 +668,9 @@
     </div>
 </div>
 </div>
-    <div class="footer-container">
-        @include('footer')
-    </div>
+<div class="footer-container">
+    @include('footer')
+</div>
 
     <script>
         function toggleSidebar() {
@@ -690,9 +678,6 @@
             sidebar.style.width = sidebar.style.width === '200px' ? '0' : '200px';
         }
     </script>
-
-
-
 
         <script>
     
@@ -712,6 +697,7 @@
                     text: message,
                 });
             }
+
         </script>
 
             @if(Session::has('success'))
@@ -733,23 +719,26 @@
 
 
             <script>
-                // Function to load item details into the modal
                 function loadItemDetails(item_id) {
-                    // Fetch item details using AJAX or any other method
-                    // For simplicity, let's assume you have a function getItemDetailsById(item_id) that returns the details
+                    // Assume getItemDetailsById is a function that fetches item details based on the item ID
                     var itemDetails = getItemDetailsById(item_id);
             
-                    // Update the modal content
-                    var modalContent = document.getElementById('itemDetailsContent');
-                    modalContent.innerHTML = `
-                        <h4>${itemDetails.item_name}</h4>
-                        <!-- Add more details as needed -->
-                    `;
+                    // Update the modal content with the fetched details
+                    document.getElementById('itemDetailsName').innerText = itemDetails.item_name;
+                    document.getElementById('itemDetailsPrice').innerText = itemDetails.price;
+                    document.getElementById('itemDetailsProductInfo').innerText = itemDetails.product_information;
+                    document.getElementById('itemDetailsInsideBox').innerText = itemDetails.inside_box;
+                    document.getElementById('itemDetailsMaterial').innerText = itemDetails.material;
+                    document.getElementById('itemDetailsCategory').innerText = itemDetails.category;
+                    document.getElementById('itemDetailsSubcategory').innerText = itemDetails.subcategory;
+            
+                    // Add more fields as needed
             
                     // Show the modal
                     $('#itemDetailsModal').modal('show');
                 }
             </script>
+            
 
 <script>
   
@@ -757,7 +746,7 @@
        $('#myUsertable').DataTable();
     });
  
-    // For Item Table
+
     $(document).ready(function () {
        $('#myItemtable').DataTable();
     });

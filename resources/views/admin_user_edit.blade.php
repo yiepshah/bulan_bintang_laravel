@@ -17,7 +17,7 @@
         .edit-user-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 220px;
+            margin-top: 100px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -69,10 +69,14 @@
             background-color: #202d45;
             border: none;
         }
+
+        .footer-container{
+            padding: 30px;
+        }
     </style>
 </head>
 <body>
-    @include('header')
+    @include('adminHeader')
     @include('adminsidebar')
     <div class="edit-user-container">
         <h2 class="main--title">Edit User</h2>
@@ -102,8 +106,12 @@
             </div>
         </form>
       
-    </div>
-    
+    </div><br><br>
+<div class="footer-container">
+    @include('footer')
+</div> 
+
 </body>
-@include('footer')
+
+
 </html>

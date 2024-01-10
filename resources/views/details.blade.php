@@ -3,10 +3,9 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Bulan Bintang</title>
 
@@ -140,8 +139,9 @@
 
 
     .footer-container{
-       text-align: center;
+       padding: 20px;
        overflow: hidden;
+       
     }
 
 
@@ -161,16 +161,18 @@
             <div class="col-md-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent pl-0">
-                        {{-- <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li> --}}
+                        <li class="breadcrumb-item"><a href="">Home</a></li> 
 
-                        {{-- <li class="breadcrumb-item"><a href="{{ route('category') }}">BAJU MELAYU</a></li> --}}
+                        {{-- <li class="breadcrumb-item"><a href="">{{$itemDetails->$category}}</a></li> --}}
 
-                        {{-- <li class="breadcrumb-item active" aria-current="page">BM TAILORED FIT</li> --}}
+                        <li class="breadcrumb-item active" aria-current="page">{{$itemDetails->item_name}}</li>
                     </ol>
                 </nav>
     
 
-                
+                {{-- @php
+                dd($itemDetails->all);
+            @endphp  --}}
                 <div class="detailItem">
                     <h4 class="h4"style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
                     <hr>
@@ -178,6 +180,7 @@
 
                         <p class="detailProduct"><strong class="label">Price:</strong> Rm {{ $itemDetails->price }}</p> 
                         <div class="form-group">     
+
                             <div class="form-size">
                                 <label for="size"><strong>Size:</strong></label>
                                 <select id="sizeSelect" class="form-control" name="size">
@@ -197,7 +200,7 @@
                                     <button id="button" class="btn btn-dark" type="button">Add to Cart</button>                               
                                 </div>
                             </div>
-                        </div>  
+                        </div>  <hr>
 
                         <p class="detailProduct"> <strong>Product Information:</strong> {{ $itemDetails->product_information }}</p>
 
@@ -220,19 +223,21 @@
                         <input type="hidden" name="product_information" value="{{ $itemDetails->product_information }}">
                         <input type="hidden" name="material" value="{{ $itemDetails->material }}">
                         <input type="hidden" name="inside_box" value="{{ $itemDetails->inside_box }}">
+                        <input type="hidden" name="stock_number" value="{{ $itemDetails->stock_number }}">
                     </form>
-                    
+
                     <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
-                </div>
+                </div><hr>
                
             </div>
         </div>
     </div>
 
     
-    <!-- Modal for Cart Alert -->
+ 
     <div class="modal fade" id="cartAlertModal" tabindex="-1" aria-labelledby="cartAlertModalLabel" aria-hidden="true">
         <div class="modal-dialog">
+            
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cartAlertModalLabel">Item Added to Cart!</h5>
@@ -243,9 +248,12 @@
                 <div class="modal-body">
                     Your item has been added to the cart.
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="goToCart()">Go to Cart</button>
-                </div>
+                <form action="">
+                    @csrf
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="goToCart()">Go to Cart</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -254,75 +262,65 @@
         @include('footer')
     </div>
 
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var sizeSelect = document.getElementById('sizeSelect');
             var quantityInput = document.getElementById('quantity');
             var addButton = document.getElementById('button');
-        
+            var addToCartForm = document.getElementById('addToCartForm');
+    
             sizeSelect.addEventListener('change', function () {
-                // Your size change logic
+   
             });
-        
+    
             quantityInput.addEventListener('input', function () {
-                // Your quantity input logic
+    
             });
-        
+    
             addButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            console.log('Button clicked!');
-        
-                // Your form submission logic
-        
-                // Show the cart alert modal
-                $('#cartAlertModal').modal('show');
-        
-                // // Hide the modal after 6 seconds (adjust the value as needed)
-                // setTimeout(function () {
-                //     $('#cartAlertModal').modal('hide');
-                // }, 6000);
+                event.preventDefault();
+                console.log('Button clicked!');
+    
+
+                addToCartForm.elements['size'].value = sizeSelect.value;
+                addToCartForm.elements['quantity'].value = quantityInput.value;
+    
+
+                addToCartForm.submit();
+    
+ 
+                fetchCartCount().then(function (currentCartCount) {
+
+                    var cartIcon = document.getElementById('cartIcon');
+                    if (cartIcon) {
+                        cartIcon.innerText = currentCartCount;
+                    }
+    
+
+                    window.location.href = "{{ route('cart') }}";
+                });
             });
+    
+            function fetchCartCount() {
+
+
+                return new Promise(function (resolve) {
+
+                    setTimeout(function () {
+
+                        resolve(5);
+                    }, 1000); 
+                });
+            }
         });
-        
-        function goToCart() {
-            var form = document.getElementById('addToCartForm');
-            form.submit();
-        }
-        </script>
+    </script>
 
 <script>
+    function goToCart() {
 
-        function increaseQuantity() {
-            var quantityInput = document.getElementById('quantity');
-            quantityInput.value = parseInt(quantityInput.value, 10) + 1;
-        }
-
-        function decreaseQuantity() {
-        var quantityInput = document.getElementById('quantity');
-        var value = parseInt(quantityInput.value, 10) - 1;
-        quantityInput.value = value < 1 ? 1 : value;
+        window.location.href = "{{ route('cart') }}";
     }
-
-    
-    document.addEventListener("DOMContentLoaded", function () {
-    var sizeSelect = document.getElementById('sizeSelect');
-    var quantityInput = document.getElementById('quantity');
-    var selectedSizeInput = document.getElementById('selectedSize');
-
-    sizeSelect.addEventListener('change', function () {
-        var selectedSize = sizeSelect.value;
-        selectedSizeInput.value = selectedSize;
-    });
-
-    quantityInput.addEventListener('input', function () {
-        var quantity = quantityInput.value;
-        if (quantity < 1) {
-            quantityInput.value = 1;
-        }
-    });
-
-
-});
 </script>
 
 
@@ -337,7 +335,13 @@ function clearPage() {
 
 </script>
 
-
+<script>
+    if (typeof jQuery === 'undefined') {
+        console.error('jQuery is not loaded');
+    } else {
+        console.log('jQuery is loaded');
+    }
+</script>
 </body>
 </html>
 

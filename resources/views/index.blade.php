@@ -284,6 +284,10 @@
     margin-right: 30px;
 }
 
+.footer-container{
+    padding: 30px;
+}
+
 .social-icons a {
     color: #fff;
     font-size: 20px;
@@ -356,7 +360,12 @@
                     <figure>
                         <div class="hover-info">
                             <span class="imageTitle"> Baju Melayu Slim Fit </span>
-                            <a href="#" class="shop-button">Shop Now</a>
+                            @if(auth()->check())
+                            <a class="shop-button" href="{{ url('collection') }}">SHOP NOW!</a>
+                          @else
+                            <a class="shop-button" href="{{ url('login') }}">SHOP NOW!</a>
+                          @endif
+                            
                         </div>
                         <img id="third-1" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/SF-2.jpg?resize=800%2C800&ssl=1" alt="">
                     </figure>
@@ -365,7 +374,11 @@
                     <figure>
                         <div class="hover-info">
                             <span class="imageTitle"> Baju Melayu Tailored Fit </span>
-                            <a href="#" class="shop-button">Shop Now</a>
+                            @if(auth()->check())
+                            <a class="shop-button" href="{{ url('collection') }}">SHOP NOW!</a>
+                          @else
+                            <a class="shop-button" href="{{ url('login') }}">SHOP NOW!</a>
+                          @endif
                         </div>
                         <img id="third-2" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE.jpg?resize=800%2C800&ssl=1" alt="">
                     </figure>
@@ -376,7 +389,11 @@
                     <figure>
                         <div class="hover-info">
                             <span class="imageTitle">Baju Melayu Kids </span><br>
-                            <a href="#" class="shop-button">Shop Now</a>
+                            @if(auth()->check())
+                            <a class="shop-button" href="{{ url('collection') }}">SHOP NOW!</a>
+                          @else
+                            <a class="shop-button" href="{{ url('login') }}">SHOP NOW!</a>
+                          @endif
                         </div>
                         <img id="third-3" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/02/COVER-CATALOGUE-BMK-3.jpg?resize=800%2C800&ssl=1" alt="">
                     </figure>
@@ -385,7 +402,11 @@
                     <figure>
                         <div class="hover-info">
                             <span class="imageTitle"> Kurta</span><br>
-                            <a href="#" class="shop-button">Shop Now</a>
+                            @if(auth()->check())
+                            <a class="shop-button" href="{{ url('collection') }}">SHOP NOW!</a>
+                          @else
+                            <a class="shop-button" href="{{ url('login') }}">SHOP NOW!</a>
+                          @endif
                         </div>
                         <img id="third-4" src="https://i0.wp.com/bulanbintanghq.com/wp-content/uploads/2023/03/KURTA-A-2.jpg?resize=800%2C800&ssl=1" alt="">
                     </figure>
@@ -459,10 +480,12 @@
                   </div>
                   
               </div>
-              @include('footer')
+              <div class="footer-container">
+                @include('footer')
+              </div>
           </div>
       
-          
+
 
         
           

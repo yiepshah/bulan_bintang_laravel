@@ -102,9 +102,9 @@
                         @auth    
                         <ul class="dropdown-menu">
                                                    
-                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-teluk-belanga']) }}">Teluk Belanga</a></li>
-                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-tailored-fit']) }}">Tailored Fit</a></li>
-                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'baju-melayu-slim-fit']) }}">Slim Fit</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'teluk belanga']) }}">Teluk Belanga</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'tailored fit']) }}">Tailored Fit</a></li>
+                            <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'slim fit']) }}">Slim Fit</a></li>
                             <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'samping']) }}">Samping</a></li>
                             <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'kurta']) }}">Kurta</a></li>
                             

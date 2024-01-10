@@ -19,6 +19,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $request->validate([          
+            'item_id' => 'required|string', // Adjust accordingly
             'item_name' => 'required|string',
             'image_path' => 'required|string',
             'price' => 'required|numeric',
@@ -27,7 +28,9 @@ class CartController extends Controller
             'product_information' => 'required|string',
             'material' => 'required|string',
             'inside_box' => 'required|string',
+            'stock_number' => 'required|numeric',
         ]);
+        
     
         $item_id = $request->input('item_id');
         $item_name = $request->input('item_name');
@@ -38,19 +41,9 @@ class CartController extends Controller
         $product_information = $request->input('product_information');
         $material = $request->input('material');
         $inside_box = $request->input('inside_box');
+        $stock_number = $request->input('stock_number');
 
-        
-        // // Fetch the stock information from the Stock model
-        // $stockInfo = Post::where('item_id', $item_id)->first();
 
-        // if (!$stockInfo || $stockInfo->stock_number < $quantity) {
-        //     // Redirect with an error message, indicating insufficient stock
-        //     return redirect()->route('details', $item_id)->with('error', 'Insufficient stock.');
-        // }
-
-        // $stockInfo->stock_number -= $quantity;
-        // $stockInfo->save();
-    
         $cartItem = [
             'item_id' => $item_id,
             'item_name' => $item_name,
@@ -61,6 +54,7 @@ class CartController extends Controller
             'product_information' => $product_information,
             'material' => $material,
             'inside_box' => $inside_box,
+            'stock_number' => $stock_number,
             'date_added' => now()->toDateTimeString(),
         ];
 
@@ -79,7 +73,7 @@ class CartController extends Controller
             } else {
                 $cart[$existingIndex]['quantity'] = $quantity;
             }
-            $cart[$existingIndex]['date_added'] = now();
+            $cart[$existingIndex]['date_added'] = now()->toDateTimeString(); // Update date_added
         } else {
             $cart[] = $cartItem; 
         }

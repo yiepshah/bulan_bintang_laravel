@@ -60,6 +60,7 @@
         
        }
 
+
        
     </style>
 </head>
@@ -93,7 +94,7 @@
                                 <p>No user data found.</p>
                             @endif
                         </div>
-                        
+                        <a id="profileBtn" class="btn btn-success" href="{{'edit-profile'}}">Edit Profile</a>
                     </div>
                 </div>
             </div>

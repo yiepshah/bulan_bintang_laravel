@@ -17,7 +17,7 @@
         .edit-item-container {
             max-width: 500px;
             margin: auto;
-            margin-top: 50px;
+            margin-top: 20px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -48,7 +48,7 @@
         }
 
         #editBtn {
-            background-color: #202d45;
+           
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -68,6 +68,8 @@
             height: 40px;
             border: none;
         }
+
+
     </style>
 </head>
 <body>
@@ -119,11 +121,16 @@
                 <label for="stock_number">Stock:</label>
                 <input type="text" class="form-control" name="stock_number" value="{{ $items->stock_number }}" required>
             </div>  
+
             <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
             <button type="submit" id="editBtn" class="btn btn-primary">Update Item</button>
         </form>
+
+    </div>
+
+    <div class="footer-container">
         @include('footer')
     </div>
-    
+
 </body>
 </html>

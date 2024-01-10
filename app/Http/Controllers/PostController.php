@@ -41,7 +41,7 @@ class PostController extends Controller
             $item->stock_number = $request->input('stock_number');
             $item->save();
     
-            return redirect('/collection');
+            return redirect('/adminpage');
         }
     
         return redirect('/login')->with('error', 'Please log in to add a post.');
@@ -99,6 +99,7 @@ class PostController extends Controller
             $inside_box = $request->inside_box;
             $category = $request->category;
             $subcategory = $request->subcategory;
+            $stock_number = $request->stock_number;
 
             Post:: where ('item_id', '=',$items)->update([
                 'item_name'=>$item_name,
@@ -108,6 +109,7 @@ class PostController extends Controller
                 'inside_box'=>$inside_box,
                 'category'=>$category,
                 'subcategory'=>$subcategory,
+                'stock_number'=>$stock_number,
             ]);
             return redirect('adminpage')->with('success', 'Items Updated Successfully');
         } 
@@ -120,7 +122,7 @@ class PostController extends Controller
 
         public function showDetails($itemId)
         {
-            $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box','stock_number')
+            $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box','category','subcategory','stock_number')
                 ->where('item_id', $itemId)
                 ->first();
     

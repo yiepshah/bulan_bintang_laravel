@@ -27,7 +27,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            padding: 50px;
+            padding: 30px;
             
            
             
@@ -47,6 +47,7 @@
             padding: 10px;
             border-radius: 10px;
             transition: box-shadow 0.3s ease;
+            
             /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
             
             
@@ -81,6 +82,7 @@
             pointer-events: none;
             transition: opacity 0.4s ease-in-out;
             
+            
           
         }
 
@@ -89,16 +91,14 @@
             font-weight: bold;
             font-size: 15px;
             color: #202d45;
-            
-            
-            
-           
+            text-decoration: none;
+        
         }
 
         #itemprice {
             font-size: 15px;
             font-weight: bold;
-            color: rgb(90, 90, 90);
+            color: #228D57;
 
         }
 
@@ -130,25 +130,46 @@
 
         /* Media Queries for Responsive Design */
 
-@media (max-width: 1200px) {
-    .item {
-        width: calc(48% - 30px);
-    }
-}
+        @media (max-width: 1200px) {
+            .item {
+                width: calc(48% - 30px);
+            }
+        }
 
-@media (max-width: 768px) {
-    .item {
-        width: calc(100% - 20px);
-    }
-}
-    </style>
+        @media (max-width: 768px) {
+            .item {
+                width: calc(100% - 20px);
+            }
+        }
+
+        .footer-container{
+            padding: 10px;
+        }
 
     
+        #cartBtn{
+            width: 400px;
+            background-color: #202d45;
+        }   
+
+        #cartIcon{
+            background-color: #202d45;
+            border: none;
+            transition: transform 0.3ms ease;
+        }
+
+        #cartIcon:hover {
+            transition: 
+        }
+           
+           </style>
 
 </head>
 
 <body>
     @include('header')
+
+
     
     <div class="items-container">
         @php     
@@ -166,18 +187,22 @@
                         </figure>
                         <p>{{ $item->item_name }}</p>
                         <p id="itemprice">RM{{ $item->price }}</p>
-                        <p>{{ $item->stock_number }}</p>
-                        {{-- <div class="add-to-cart">
-                            <button onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
-                                <i class="fas fa-cart-plus"></i>
-                            </button>
-                        </div> --}}
+
                     </a>
+                    <div id="cartBtn" class="btn btn-dark" onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
+                        <button id="cartIcon" class="btn btn-dark">
+                            <i  class="fas fa-cart-plus"></i>
+                        </button>
+                    </div>
                 </div>
+
             @endforeach
-            
+
         </div>
-        @include('footer')
+        <div class="footer-container">
+            @include('footer')
+        </div>
+       
 
         
 

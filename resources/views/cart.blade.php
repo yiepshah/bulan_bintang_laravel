@@ -143,8 +143,12 @@
         }       
     }
 
+    .footer-container{
+        padding: 20px;
+    }
+
     .cartLogo{
-        width: 80px;
+        width: 70px;
     }
 
     </style>
@@ -153,14 +157,17 @@
 @include('header')
 <div class="container">
     <div class="cart-container">
-        
+
+    
         @if (session('cart') && count(session('cart')) > 0)
         @php
             $cartItems = session('cart') ? array_reverse(session('cart'), true) : [];
         @endphp
             @foreach ($cartItems as $uniqueItemId => $item)
                 <div class="cart-item">
+
                     @if (is_array($item) && array_key_exists('image_path', $item))
+
                         <img src="{{ asset('storage/images/' . $item['image_path']) }}" alt="{{ $item['item_name'] }}">
                         <div class="cart-item-details">
                             <p>{{ $item['item_name'] }}</p>
@@ -169,6 +176,7 @@
                                 <label for="quantity{{ $uniqueItemId }}">Quantity: {{ $item['quantity'] }} </label>
                             </div>
                             <p id="cartSize">Size: {{ $item['size'] ?? 'N/A' }}</p>
+                            <p>{{ $item['stock_number'] }} in Stocks</p>
                             <p id="cartDate">Date Added: {{ $item['date_added'] ?? 'N/A' }}</p>
                             @if (isset($item['item_id']))
                                 <form method="post" action="{{ route('cart.remove', $item['item_id']) }}">
@@ -218,7 +226,7 @@
     </div>
 </div><br><br>
 
-<div>
+<div class="footer-container">
     @include('footer')  
 </div>
 
