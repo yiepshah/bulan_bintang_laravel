@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -11,7 +12,7 @@
     <style>
         
         body {
-            background-color: #202d45;
+            background-color: #EEEEEE;
         }
 
         .edit-item-container {
@@ -69,12 +70,21 @@
             border: none;
         }
 
+        .footer-container{
+            padding: 20px;
+        }
+
 
     </style>
 </head>
 <body>
-    @include('header')
-    @include('adminsidebar')
+    @include('adminHeader')
+    @auth
+    @if (auth()->user()->role === 'admin')
+        @include('adminsidebar')
+    @endif
+    @endauth
+    
     <div class="edit-item-container">
         <h2 class="main--title">Edit Item</h2>
         <form action="{{ url('update-item') }}" method="POST">

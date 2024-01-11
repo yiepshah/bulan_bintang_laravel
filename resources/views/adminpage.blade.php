@@ -452,15 +452,8 @@
         @endif
     @endauth 
 
-@include('adminHeader');
-    {{-- <div class="container">
-        <div class="header--wrapper">            
-            <div class="header--title">
-                <span>Admin</span>
-                <h2>dashboard</h2>
-            </div> 
-        </div><br><br> --}}
-
+@include('adminHeader')
+    <div class="container">
         <div class="card-container">
             <h2 class="main--title">Today's data</h2>
             <div class="card--wrapper">
@@ -527,10 +520,10 @@
                                             <td>{{ $user->role }}</td>                                                                       
                                             <td>
                                                 <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
-                                                    <i class="fas fa-edit"></i> <!-- Edit icon -->
+                                                    <i class="fas fa-edit"></i> 
                                                 </a>
                                                 <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">
-                                                    <i class="fas fa-trash-alt"></i> <!-- Delete icon -->
+                                                    <i class="fas fa-trash-alt"></i> 
                                                 </a>
                                             </td>
                                 </tr>
@@ -656,7 +649,7 @@
                                 <p><strong>Subcategory:</strong> {{ $item->subcategory}}</p>
                                 <p><strong>Stock Number:</strong> {{ $item->stock_number}}</p>
                                 <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> <!-- Edit icon -->
+                                    <i class="fas fa-edit"></i> 
                                 </a>
                             </div>
                         </div>
@@ -668,6 +661,9 @@
     </div>
 </div>
 </div>
+    </div>
+
+        
 <div class="footer-container">
     @include('footer')
 </div>
@@ -712,18 +708,17 @@
             </script>
             @endif
 
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+            {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script> --}}
 
 
 
 
             <script>
                 function loadItemDetails(item_id) {
-                    // Assume getItemDetailsById is a function that fetches item details based on the item ID
+    
                     var itemDetails = getItemDetailsById(item_id);
-            
-                    // Update the modal content with the fetched details
+
                     document.getElementById('itemDetailsName').innerText = itemDetails.item_name;
                     document.getElementById('itemDetailsPrice').innerText = itemDetails.price;
                     document.getElementById('itemDetailsProductInfo').innerText = itemDetails.product_information;
@@ -732,9 +727,9 @@
                     document.getElementById('itemDetailsCategory').innerText = itemDetails.category;
                     document.getElementById('itemDetailsSubcategory').innerText = itemDetails.subcategory;
             
-                    // Add more fields as needed
+             
             
-                    // Show the modal
+
                     $('#itemDetailsModal').modal('show');
                 }
             </script>

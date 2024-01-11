@@ -10,7 +10,7 @@
 <head>
     <style>
     body {
-        background-color: #202d45;
+        background-color: #EEEEEE;
        
         
     }
@@ -75,7 +75,7 @@
 <body>    
 
 
-@include('header')
+@include('adminHeader')
 @auth
 @if (auth()->user()->role === 'admin')
     @include('adminsidebar')

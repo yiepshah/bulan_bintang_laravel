@@ -236,9 +236,9 @@
 }
 
 .imageTitle{
-    font-size: 40px; /* Adjust the font size as needed */
+    font-size: 40px; 
 
-    margin-bottom: 10px; /* Adjust the margin as needed */
+    margin-bottom: 10px; 
 }
 
 .section {
@@ -247,12 +247,10 @@
     background-color: #202d45;
     margin-bottom: 20px;
     
-    /* transition: background-color 0.3s ease-in-out; */
+
 }
 
-/* .section:hover {
-    background-color: #202d45;
-} */
+
 
 .section h4 {
     color: #fff;
@@ -291,12 +289,10 @@
 .social-icons a {
     color: #fff;
     font-size: 20px;
-    /* transition: color 0.3s ease-in-out; */
+    
 }
 
-/* .social-icons a:hover {
-    background-color: #202d45;
-} */
+
 
 
       

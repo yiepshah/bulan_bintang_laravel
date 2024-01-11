@@ -127,7 +127,15 @@
 
    
     </div>
+    
+        @if(session('showAlert') == 'signupSuccess')
+        <script>
+            sessionStorage.setItem('signupSuccess', true);
+        </script>
+        @endif
+
     <script>
+
         
 
         $(document).ready(function () {

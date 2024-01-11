@@ -90,16 +90,22 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img class="logo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="Logo">
             </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            @auth    
+
+            @if(auth()->user()->role !=='admin')
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
+                        
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Men
                         </a>
-                        @auth    
+                                              
                         <ul class="dropdown-menu">
                                                    
                             <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'teluk belanga']) }}">Teluk Belanga</a></li>
@@ -109,7 +115,7 @@
                             <li><a href="{{ route('filtered_collection', ['category' => 'men', 'subcategory' => 'kurta']) }}">Kurta</a></li>
                             
                         </ul>
-                        @endauth
+                        
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -117,7 +123,7 @@
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Women
                         </a>
-                        @auth
+                        
                         <ul class="dropdown-menu">
                            
                             <li><a href="{{ route('filtered_collection', ['category' => 'Women', 'subcategory' => 'lana']) }}">Lana</a></li>
@@ -127,21 +133,21 @@
                            
                          
                         </ul>
-                        @endauth
-                    </li>
+                       
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                             Kids
                         </a>
-                        @auth
+                    
                         <ul class="dropdown-menu">
                             
                             <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'baju-melayu-kids']) }}">Baju Melayu Kids</a></li>
                             <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'emelda']) }}">Emelda</a></li>
                             <li><a href="{{ route('filtered_collection', ['category' => 'Kids', 'subcategory' => 'sabrina']) }}">Sabrina</a></li>
                         </ul>
+                            @endif
                             @endauth                        
                     </li>
                 </ul>
@@ -181,14 +187,15 @@
 
             
                 @if (auth()->user()->role === 'admin')
+
                     <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="admin">
                         <a class="nav-link" href="{{ route('adminpage') }}"><i class="fas fa-user-tie"></i></a>
                     </li>
                 @endif
 
-                                <!-- Display the logout and admin-specific icons for authenticated users -->
+                               
                                 <li class="nav-item" data-toggle="tooltip" title="Log Out">
-                                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+                                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
                                 </li>
             @else
                 

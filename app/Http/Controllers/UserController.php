@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Post;
 
 class UserController extends Controller  
 {   
+
+
 
     public function showSignupForm()
     {
@@ -99,6 +101,37 @@ class UserController extends Controller
         return redirect('adminpage')->with('success', 'User Updated Successfully');
     } 
 
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+    
+        $user = User::find($request->id);
+    
+        if ($request->hasFile('image_path')) {
+        
+            if ($user->image_path) {
+                Storage::disk('public')->delete($user->image_path);
+            }
+    
+          
+            $imagePath = $request->file('image_path')->storeAs('images', $request->file('image_path')->getClientOriginalName(), 'public');        
+            $user->image_path = $imagePath;
+        }
+    
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+    
+        return redirect()->route('profile')->with('success', 'Profile updated successfully');
+    }
+    
+    
+
     public function deleteUser($users){
         User:: where ('id', '=',$users)->delete();
         return redirect()->back()->with('warning', 'User Deleted Successfully');
@@ -117,6 +150,8 @@ class UserController extends Controller
         $users = Auth::user();   
         return view('profile', ['user' => $users]);
     }
+
+
 
   
 

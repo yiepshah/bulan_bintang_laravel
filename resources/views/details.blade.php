@@ -102,7 +102,7 @@
     }
 
     .detailProduct{
-        color: #878787;
+       
     }
 
     .quantity-input-group {
@@ -135,8 +135,6 @@
         background-color:  #202d45;
         transform: scale(1.2);
     }
-
-
 
     .footer-container{
        padding: 20px;
@@ -195,6 +193,7 @@
                                     <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
                                     <input type="text" id="quantity" name="quantity" value="1" min="1">
                                     <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+
                                 </div>
                                 <div class="form-group">
                                     <button id="button" class="btn btn-dark" type="button">Add to Cart</button>                               
@@ -261,6 +260,24 @@
     <div class="footer-container">
         @include('footer')
     </div>
+
+    <script>
+        function decreaseQuantity() {
+            var quantityInput = document.getElementById('quantity');
+            var currentQuantity = parseInt(quantityInput.value);
+
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+
+        function increaseQuantity() {
+            var quantityInput = document.getElementById('quantity');
+            var currentQuantity = parseInt(quantityInput.value);
+
+            quantityInput.value = currentQuantity + 1;
+        }
+    </script>
 
 
     <script>

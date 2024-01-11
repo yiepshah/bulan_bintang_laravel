@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -110,17 +110,24 @@
         @include('footer')
     </div>
    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+    </script> --}}
 
-    <script>
-        $(document).ready(function () {
-            @if (session('showAlert') == 'loginError')
-                $('#login-error-alert').text('{{ session('login_error') }}').show();
-            @endif
-        });
-    </script>
+
+<script>
+    $(document).ready(function () {
+        if (sessionStorage.getItem('signupSuccess') === 'true') {
+            $('#welcome-modal').modal('show');
+            sessionStorage.removeItem('signupSuccess');
+        }
+
+        @if(session('showAlert') == 'loginError')
+            $('#login-error-alert').text('{{ session('login_error') }}').show();
+        @endif
+    });
+</script>
+
 
    
 </body>

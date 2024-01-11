@@ -65,7 +65,11 @@ Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
+
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update-profile');
+
+
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 

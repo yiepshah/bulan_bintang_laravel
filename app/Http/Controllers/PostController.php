@@ -18,7 +18,6 @@ class PostController extends Controller
             'product_information' => 'required',
             'material' => 'required',
             'inside_box' => 'required',
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'category' => 'required',
             'subcategory' => 'required',
             'stock_number' => 'required|numeric',
