@@ -123,9 +123,9 @@ class UserController extends Controller
             $user->image_path = $imagePath;
         }
     
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->save();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->save();
     
         return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
@@ -151,8 +151,45 @@ class UserController extends Controller
         return view('profile', ['user' => $users]);
     }
 
-
-
-  
+    public function updateAdminProfile(Request $request)
+    {
+        $request->validate([
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'nullable|string|min:6',
+            'role' => 'required|in:admin,user',
+        ]);
+    
+        $user = Auth::user();
+    
+        if (!($user instanceof User)) {
+            dd($user);
+           
+        }
+    
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+    
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+    
+        $user->role = $request->input('role');
+    
+    
+        if ($request->hasFile('image_path')) {
+            $image = $request->file('image_path');
+            $imageName = 'profile_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $user->image_path = $imageName;
+        }
+    
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
+    
+ 
 
 }

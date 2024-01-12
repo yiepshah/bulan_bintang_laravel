@@ -4,7 +4,7 @@
     .footer-container {
       background-color: #202d45;
       color: #ffffff;
-   
+      padding: 20px;
       font-family: 'Roboto', sans-serif;
       text-align: center;
        overflow: hidden;
@@ -69,6 +69,8 @@
       margin-top: 20px;
     }
   </style>
+
+  
   
   <div class="footer-container">
     <div class="footer">

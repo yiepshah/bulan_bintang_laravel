@@ -27,7 +27,7 @@
     position: relative;
     width: 100%; /* Adjust the width as needed */
     max-width: 1200px; /* Add a max-width to limit the container size */
-    padding: 1rem;
+  
     margin: 0 auto;
     padding: 10px;
 }
@@ -119,11 +119,11 @@
             justify-content: space-between;
             color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.6s ease-in-out;
+           
         }
 
         .data--card:hover {
-            transform: scale(1.10);
+       
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
@@ -307,10 +307,6 @@
             gap: 10px;
         }
 
-
-
- 
-
         #userEdit, #deleteBtn {
             display: inline-block;
             width: auto;
@@ -331,10 +327,10 @@
 }
 
 
-#deleteBtn {
-    display: inline-block;
-    width: auto;
-    margin: 0;
+.delete-btn {
+    color: rgb(189, 0, 0);
+    margin-left: 20px;
+    font-size: 20px;
 }
 
 #itemEdit {
@@ -429,19 +425,110 @@
         background-color: #ffff;
         font-size: 30px;
     }
+
+    .modern-profile-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.modern-profile-form .form-group {
+    margin-bottom: 20px;
+}
+
+.modern-profile-form label {
+    font-size: 16px;
+    color: #202d45;
+}
+
+.modern-profile-form input,
+.modern-profile-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.modern-profile-form button {
+    background-color: #202d45;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modern-profile-form button:hover {
+    background-color: #1a2233;
+}
+
+.card-container {
+    display: flex;
+}
+
+.admin-data-card {
+    background-color: #333;
+    color: #fff;
+    flex: 1;
+    margin-right: 10px;
+    padding: 20px;
+    
+}
+
+.edit-admin-profile-card {
+    flex: 1;
+    padding: 50px;
+}
+
+/* New styles for mobile screens */
+
+@media only screen and (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+    }
+
+    .admin-data-card,
+    .edit-admin-profile-card {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .edit-admin-profile-card {
+        padding: 20px; /* Adjust the padding for mobile view */
+    }
+}
+.admin-data-card {
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+    flex: 1; /* Take up all available space */
+    margin-right: 10px; /* Add some space between cards */
+    padding: 20px; /* Add padding to the card content */
+
+}
+
+.edit-admin-profile-card {
+    flex: 1; /* Take up all available space */
+    padding: 50px; /* Add padding to the card content */
+}
+
 </style>
 
 </head>
 <html>
 <body>
+
+    @php
+
+    @endphp
   
     @auth
         @if(auth()->user()->role === 'admin')
         <div class="w3-sidebar">
             
-            <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
+            {{-- <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
                   Shop</i></a>
-           
+            --}}
             <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
                    Add</i></a>
     
@@ -490,10 +577,77 @@
                     </div>
                 </div>
             </div>
-    </div> <br><br>  <br>     
-            
+    </div> <br><br>     
+
+
 
         <div class="container">
+
+            <div class="card-container">
+                <!-- Admin Profile Data Card -->
+                <div class="card--header admin-data-card">
+                    <h2 style="color: #ffff;" class="main--title">Admin Profile Data</h2>
+                    <div class="profile-image">
+                        <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <p>{{ auth()->user()->name }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <p>{{ auth()->user()->email }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <p>{{ auth()->user()->role }}</p>
+                    </div>
+                </div>
+            
+            <div class="card--header edit-admin-profile-card">
+                
+                <form method="post" action="{{ route('update-adminprofile') }}" class="modern-profile-form" enctype="multipart/form-data">
+                    @csrf
+                    <h2 class="main--title">Edit Admin Profile</h2>
+                    {{-- <div class="profile-image">
+                        <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
+                    </div> --}}
+    
+                    <div id="formAdmin" class="form-group">
+                        <label for="image_path">Change Profile Image:</label>
+                        <input type="file" name="image_path" class="form-control" accept="image/*">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" placeholder="Enter new password" class="form-control">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select name="role" class="form-control">
+                            <option value="admin" {{ auth()->user()->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="user" {{ auth()->user()->role === 'user' ? 'selected' : '' }}>User</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        <div class="container">
+   
             <div class="card-container">
                 <div class="user-table">
                     <h2 class="main--title">
@@ -514,18 +668,18 @@
                             <tbody id="myUsertable">
                                 @forelse ($users as $user)
                                 <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->role }}</td>                                                                       
-                                            <td>
-                                                <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
-                                                    <i class="fas fa-edit"></i> 
-                                                </a>
-                                                <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">
-                                                    <i class="fas fa-trash-alt"></i> 
-                                                </a>
-                                            </td>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>                                                                       
+                                    <td>
+                                        <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i> 
+                                        </a>
+                                        <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn delete-btn" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">
+                                            <i class="fas fa-trash-alt"></i> 
+                                        </a>
+                                    </td>
                                 </tr>
                                 @empty
                                     <tr><td colspan='6'>No user found</td></tr>
@@ -533,9 +687,7 @@
                             </tbody>
                          </table>
                     </div>
-            </div>
-  
-               
+            </div>          
     </div>
         
             
@@ -582,13 +734,14 @@
                                 <td>{{ $item->stock_number}}</td>
                                 <td>
 
-                                    <a href="#" data-toggle="modal" data-target="#itemDetailsModal" onclick="loadItemDetails('{{ $item->item_id }}')">
-                                        <i id="detailBtn" class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                    
-                                    <a href="{{url('delete-item/'.$item->item_id)}}"  data-toggle="modal" data-target="#deleteItemModal{{ $item->item_id }}">
-                                        <i id="deleteItembtn" class="fas fa-trash-alt"></i>
-                                    </a>
+                                   
+                                        <a href="#" data-toggle="modal" data-target="#itemDetailsModal" onclick="loadItemDetails('{{ $item->item_id }}')">
+                                            <i id="detailBtn" class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>
+                                        
+                                        <a href="#" onclick="confirmItemDeletion('{{ $item->item_id }}')">
+                                            <i class="fas fa-trash-alt delete-btn"></i>
+                                        </a>
                                    
                                 </td>
                             </tr>
@@ -640,17 +793,37 @@
                             </div>
                             <div class="col-md-5">
                         
-                                <p><strong>Item Name:</strong> {{ $item->item_name }}</p>
-                                <p><strong>Price:</strong> Rm {{ $item->price }}</p>
-                                <p><strong>Product Information:</strong> {{ $item->product_information }}</p>
-                                <p><strong>Inside Box:</strong> {{ $item->inside_box }}</p>
-                                <p><strong>Material:</strong> {{ $item->material }}</p>
-                                <p><strong>Category:</strong> {{ $item->category}}</p>
-                                <p><strong>Subcategory:</strong> {{ $item->subcategory}}</p>
-                                <p><strong>Stock Number:</strong> {{ $item->stock_number}}</p>
+                                <p><strong>Item Name:</strong> {{ $item->item_name }}</p><hr>
+                                <p><strong>Price:</strong> Rm {{ $item->price }}</p><hr>
+                                <p><strong>Product Information:</strong> {{ $item->product_information }}</p><hr>
+                                <p><strong>Inside Box:</strong> {{ $item->inside_box }}</p><hr>
+                                <p><strong>Material:</strong> {{ $item->material }}</p><hr>
+                                <p><strong>Category:</strong> {{ $item->category}}</p><hr>
+                                <p><strong>Subcategory:</strong> {{ $item->subcategory}}</p><hr>
+                                <p><strong>Stock Number:</strong> {{ $item->stock_number}}</p><hr>
                                 <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i> 
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteItemModal{{ $item->item_id }}" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteItemModalLabel">Confirm Item Deletion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this item?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <a href="{{url('delete-item/'.$item->item_id)}}" class="btn btn-danger">Delete</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -662,8 +835,7 @@
 </div>
 </div>
     </div>
-
-        
+      
 <div class="footer-container">
     @include('footer')
 </div>
@@ -688,8 +860,8 @@
         
             function showErrorAlert(message) {
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
+                    icon: 'success',
+                    title: 'Success!',
                     text: message,
                 });
             }
@@ -708,12 +880,6 @@
             </script>
             @endif
 
-            {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script> --}}
-
-
-
-
             <script>
                 function loadItemDetails(item_id) {
     
@@ -727,24 +893,35 @@
                     document.getElementById('itemDetailsCategory').innerText = itemDetails.category;
                     document.getElementById('itemDetailsSubcategory').innerText = itemDetails.subcategory;
             
-             
-            
-
                     $('#itemDetailsModal').modal('show');
                 }
             </script>
+
+<script>
+    function confirmItemDeletion(itemId) {
+        Swal.fire({
+            title: 'Confirm Deletion',
+            text: 'Are you sure you want to delete this item?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform the deletion by redirecting to the delete-item route
+                window.location.href = "{{ url('delete-item') }}/" + itemId;
+            }
+        });
+    }
+</script>
             
 
 <script>
-  
     $(document).ready(function () {
-       $('#myUsertable').DataTable();
+        $('#myUsertable').DataTable();
+        $('#myItemtable').DataTable();
     });
- 
-
-    $(document).ready(function () {
-       $('#myItemtable').DataTable();
-    });
- </script>
+</script>
  </body>
 </html>

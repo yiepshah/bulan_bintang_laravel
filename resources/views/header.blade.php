@@ -6,11 +6,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: white;
+           
             padding: 10px;
         }
-
-     
 
         .navbar .navbar-nav .nav-item a {
             color: #000033;
@@ -69,7 +67,7 @@
         }
 
         #carticon{
-            padding-top: 22px;
+            padding-top: 17px;
         }
 
         #Ctext{
@@ -82,16 +80,16 @@
 
     </style>
     
-</head>
+
 <body>
 
     <nav class="navbar navbar-expand-sm bg-light navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ auth()->check() && auth()->user()->role === 'admin' ? route('adminpage') : url('/') }}">
                 <img class="logo" src="https://th.bing.com/th/id/OIP.IV6E-NjlfboqXML32zgvtAHaFs?w=247&h=190&c=7&r=0&o=5&pid=1.7" alt="Logo">
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#collapsibleNavbar" title="Toggle Navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -157,13 +155,7 @@
             <li class="nav-item" data-toggle="tooltip" title="Log Out">
                 @auth
                 @if (auth()->user()->role !== 'admin')
-                    <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="search">
-                        <div class="search--box">
-                            <i id="search-icon" class="fas fa-search"></i>
-                            <input id="search-input" type="text" placeholder="Search" style="display: none;">
-                        </div>
-                    </li>
-            
+
                     <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="collection">
                         <a class="nav-link" href="{{ route('collection') }}" id="collection">
                             <i class="fas fa-store"></i>
@@ -195,12 +187,12 @@
 
                                
                                 <li class="nav-item" data-toggle="tooltip" title="Log Out">
-                                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                    <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
                                 </li>
             @else
                 
                 <li class="nav-item" data-toggle="tooltip" title="login">
-                    <a class="nav-link" data-placement="bottom" title="login" href="{{ route('login') }}">Login <i class="fas fa-sign-in-alt"></i></a>
+                    <a class="nav-link" data-placement="bottom" title="login" href="{{ route('login') }}"> <i class="fas fa-sign-in-alt"></i></a>
                 </li>
             @endauth
         </ul>

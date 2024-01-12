@@ -7,12 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="new-header">
-        
-        <div class="burger-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars">  Admin Dashboard</i>
-        </div>
-
-    </div>
+    <div class="text-center mt-3">
+        <p class="copyright">&copy; Copyright 2023 <strong>Bulan Bintang Clothing Sdn. Bhd. (1391049-X)</strong></p>
+      </div>
 </body>
 </html>

@@ -70,8 +70,6 @@
         {{-- <a href="{{ url('adminpage') }}" class="w3-bar-item w3-button" title="Home"><i class="fa fa-home">
               Home</i></a> --}}
         
-        <a href="{{ url('collection') }}" class="w3-bar-item w3-button" title="Store"><i class="fas fa-store">
-            Shop</i></a>
        
         <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
                Add</i></a>

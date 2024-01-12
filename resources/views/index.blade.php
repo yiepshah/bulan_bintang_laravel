@@ -16,7 +16,7 @@
 
         .index-container{
             width: 100%;
-            padding: 40px;
+            padding: 30px;
             overflow: hidden;
         }
 
@@ -64,13 +64,13 @@
 }
 
 
-    .brother-collection img {
-        max-width: 100%;
-        height: auto;
-        width: 500px;
-        /* transition: transform 0.4s ease-in-out;    */
-             
-    }
+.brother-collection img {
+    max-width: 100%;
+    height: auto;
+    width: 500px;
+    /* transition: transform 0.4s ease-in-out;    */
+}
+
 
     /* .brother-collection img:hover {
         transform: scale(1.2);     
@@ -95,19 +95,13 @@
         font-weight: lighter;
     }
 
-    /* #third-1,
-#third-3 {
-    float: left;
-    width: 800px;
-
+    @media (max-width: 767px) {
+    .brother-collection img {
+        width: 100%; /* Set to 100% width for smaller screens */
+        max-width: none; /* Remove the maximum width */
+        height: auto;
+    }
 }
-
-#third-2,
-#third-4 {
-    float: right;
-    width: 800px;
-   
-} */
 
 @media (max-width: 767px) {
     #third-1,
@@ -208,89 +202,86 @@
     z-index: 2; /* Ensure the hover-info is above the image */
 }
 
-.collection figure:hover .hover-info {
-    opacity: 1;
-}
+    .collection figure:hover .hover-info {
+        opacity: 1;
+    }
 
-.collection figure .hover-info span,
-.collection figure .hover-info .shop-button {
-    position: relative; /* Ensure the span and button stay on top */
-    z-index: 3; /* Ensure the span and button are above the image and hover-info */
-}
+    .collection figure .hover-info span,
+    .collection figure .hover-info .shop-button {
+        position: relative; /* Ensure the span and button stay on top */
+        z-index: 3; /* Ensure the span and button are above the image and hover-info */
+    }
 
-.shop-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #202d45;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-weight: bold;
-    transition: background-color 0.3s ease-in-out;
-}
+    .shop-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #202d45;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-weight: bold;
+        transition: background-color 0.3s ease-in-out;
+    }
 
-.shop-button:hover {
-    background-color: #fff;
-    color: #161A30;
-}
+    .shop-button:hover {
+        background-color: #fff;
+        color: #161A30;
+    }
 
-.imageTitle{
-    font-size: 40px; 
+    .imageTitle{
+        font-size: 40px; 
 
-    margin-bottom: 10px; 
-}
+        margin-bottom: 10px; 
+    }
 
-.section {
-    padding: 40px;
-    border-radius: 10px;
-    background-color: #202d45;
-    margin-bottom: 20px;
-    
-
-}
+    .section {
+        padding: 40px;
+        border-radius: 10px;
+        background-color: #202d45;
+        margin-bottom: 20px;
+    }
 
 
+    .section h4 {
+        color: #fff;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
 
-.section h4 {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
+    .section p,
+    .section ul {
+        color: #ccc;
+    }
 
-.section p,
-.section ul {
-    color: #ccc;
-}
+    .section ul {
+        list-style: none;
+        padding: 0;
+    }
 
-.section ul {
-    list-style: none;
-    padding: 0;
-}
+    .section ul li {
+        margin-bottom: 8px;
+    }
 
-.section ul li {
-    margin-bottom: 8px;
-}
+    .social-icons {
+        list-style: none;
+        padding: 0;
+        display: flex;
+    }
 
-.social-icons {
-    list-style: none;
-    padding: 0;
-    display: flex;
-}
+    .social-icons li {
+        margin-right: 30px;
+    }
 
-.social-icons li {
-    margin-right: 30px;
-}
+    .footer-container{
+        padding: 30px;
+    }
 
-.footer-container{
-    padding: 30px;
-}
-
-.social-icons a {
-    color: #fff;
-    font-size: 20px;
-    
-}
+    .social-icons a {
+        color: #fff;
+        font-size: 20px;
+        
+    }
 
 
 
@@ -317,9 +308,9 @@
           <div class="carousel-item">
             <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Perempuan-1024x576.jpg">
           </div>
-          <div class="carousel-item">
+          {{-- <div class="carousel-item">
             <img class="custom-image" src="https://cdn.store-assets.com/s/859197/f/9740202.jpg?width=1500" class="" alt="">
-          </div>
+          </div> --}}
         </div>
         
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

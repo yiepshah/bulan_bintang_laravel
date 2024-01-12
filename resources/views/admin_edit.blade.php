@@ -78,12 +78,8 @@
     </style>
 </head>
 <body>
-    @include('adminHeader')
-    @auth
-    @if (auth()->user()->role === 'admin')
-        @include('adminsidebar')
-    @endif
-    @endauth
+    @include('header')
+
     
     <div class="edit-item-container">
         <h2 class="main--title">Edit Item</h2>
@@ -136,11 +132,9 @@
             <button type="submit" id="editBtn" class="btn btn-primary">Update Item</button>
         </form>
 
-    </div>
+    </div><br><br>
 
-    <div class="footer-container">
-        @include('footer')
-    </div>
+    @include('footer_user')
 
 </body>
 </html>

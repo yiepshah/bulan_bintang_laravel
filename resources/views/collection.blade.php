@@ -147,20 +147,42 @@
         }
 
     
-        #cartBtn{
-            width: 400px;
+        #cartBtn {
+            width: 100%; /* Change width to 100% for better responsiveness */
+            max-width: 400px; /* Limit maximum width to 400px */
             background-color: #202d45;
-        }   
+            margin: 0 auto; /* Center the button on smaller screens */
+        }  
 
-        #cartIcon{
+        #cartIcon {
             background-color: #202d45;
             border: none;
             transition: transform 0.3ms ease;
         }
 
         #cartIcon:hover {
-            transition: 
+            transform: scale(1.1); /* Add a subtle scaling effect on hover */
         }
+
+        @media (max-width: 768px) {
+            .item {
+                width: calc(100% - 20px);
+            }
+
+            #cartBtn {
+                width: 100%; /* Adjust width for better responsiveness on smaller screens */
+                max-width: none; /* Remove the maximum width limit */
+            }
+        }
+
+        .breadcrumb{
+            background-color: #202d45;
+        }
+
+        #id,text{
+            color: black;
+        }
+
            
            </style>
 
@@ -168,6 +190,17 @@
 
 <body>
     @include('header')
+    <div class="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol id="textLabel" class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li> 
+
+                <li class="breadcrumb-item"><a href="/collection">Collection</a></li>
+            </ol>
+        </nav>
+    </div>
+
+
 
 
     
@@ -191,7 +224,7 @@
                     </a>
                     <div id="cartBtn" class="btn btn-dark" onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
                         <button id="cartIcon" class="btn btn-dark">
-                            <i  class="fas fa-cart-plus"></i>
+                            <i id="cartIcon" class="fas fa-cart-plus"></i>
                         </button>
                     </div>
                 </div>
@@ -214,6 +247,8 @@
             window.location.href = '{{ route("cart") }}';
         }
     </script>
+
+    
 
   
 </body>

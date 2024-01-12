@@ -98,7 +98,8 @@
 
                         <h2 id="userprofile">User Profile</h2>
                     </div>
-                    <img id="profileImg" src="{{ asset('storage/images/' . $user->image_path) }}" alt="{{ $user->name }}">
+                    {{-- <img id="profileImg" src="{{ asset('storage/images/' . $user->image_path) }}" alt="{{ $user->name }}"> --}}
+                    <img id="profileImg" src="https://cdn-icons-png.flaticon.com/512/6998/6998058.png">
                     {{-- <img id="profileImg" src="{{ asset($user->image_path ?? 'default_image_path') }}" alt="Profile Image"> --}}
 
                     <div class="card-body">
@@ -114,13 +115,13 @@
                                 <p>No user data found.</p>
                             @endif
                         </div>
-                        <button id="editProfileBtn" class="btn btn-success" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
+                    <button id="editProfileBtn" class="btn btn-success" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
                     </div>
                     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 id="" class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                    <h3 id="editProfile">Edit Profile</h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -129,8 +130,10 @@
                                     
                                     <form action="{{ route('update-profile') }}" method="post" enctype="multipart/form-data">
                                         @csrf       
+                                        
                                         <input type="hidden" name="id" value="{{ $user->id }}"> <!-- Add this line -->                                
                                         <div class="form-group">
+                                            
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
                                         </div>

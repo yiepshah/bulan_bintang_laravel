@@ -12,7 +12,7 @@
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
         body{
-            
+            background-color: #EEEEEE;    
         }
 
         #Lbtn{
@@ -20,7 +20,7 @@
         }
 
         .footer-container{
-            padding: 20px;
+            padding: 10px;
             background-color: #f0f0f0;
         }
     </style>
@@ -28,7 +28,7 @@
 
 <body>
     @include('header')
-    <section class="vh-100" style="background-color: #202d45;">
+    <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
@@ -100,19 +100,13 @@
                     </div>
                     
                 </div>
-                
+                @include('footer_user')
             </div>
             
         </div>
-        
+      
     </section>
-    <div class="footer-container" >
-        @include('footer')
-    </div>
-   
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script> --}}
+
 
 
 <script>

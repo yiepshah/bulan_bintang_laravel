@@ -12,7 +12,7 @@
 
     <style>
         body {
-            background-color: #202d45;
+            background-color: #EEEEEE;
              /* Remove default body margin */
         }
     
@@ -21,6 +21,7 @@
             margin-top: 50px;
             border-radius: 15px;
             text-align: center;
+            padding: 20px;
             
         }
     
@@ -68,8 +69,11 @@
     
         .form-group {
             margin: 10px;
-           
             
+        }
+
+        #loginlink{
+            color: rgb(4, 0, 223);
         }
     </style>
   
@@ -126,6 +130,9 @@
         </div><br>
 
    
+    </div><br><br>
+    <div>
+        @include('footer')
     </div>
     
         @if(session('showAlert') == 'signupSuccess')

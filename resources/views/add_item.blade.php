@@ -17,12 +17,13 @@
 
     .container {
         background-color: #fdfdfd;
-        padding: 20px;
+        padding: 40px;
         border: none;
         margin-top: 20px;
-        
-        
-    
+    }
+
+    .form-container{
+        padding: 60px;
     }
 
     h1 {
@@ -75,12 +76,8 @@
 <body>    
 
 
-@include('adminHeader')
-@auth
-@if (auth()->user()->role === 'admin')
-    @include('adminsidebar')
-@endif
-@endauth  
+@include('header')
+ 
 
     <div class="container">
         <div class="row">
@@ -92,7 +89,7 @@
         </div> 
         
         <div class="form-container">
-            <div class="container">
+            <div class="form-group">
                 <form action="/add_item" method="post" enctype="multipart/form-data" class="justify-content-center">
                         @csrf
                     <div class="form-group">

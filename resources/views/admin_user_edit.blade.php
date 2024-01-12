@@ -57,7 +57,7 @@
             border-radius: 4px;
             height: 40px;
             cursor: pointer;
-            margin-left: 100px; /* Add margin to separate the buttons */
+            margin-left: 100px; 
         }
 
         #editUserBtn:hover {
@@ -77,12 +77,8 @@
     </style>
 </head>
 <body>
-    @include('adminHeader')
-    @auth
-    @if (auth()->user()->role === 'admin')
-        @include('adminsidebar')
-    @endif
-    @endauth
+    @include('header')
+
     <div class="edit-user-container">
         <h2 class="main--title">Edit User</h2>
         <form action="{{ url('update-user') }}" method="POST">
@@ -112,10 +108,7 @@
         </form>
       
     </div><br><br>
-<div class="footer-container">
-    @include('footer')
-</div> 
-
+@include('footer_user')
 </body>
 
 
