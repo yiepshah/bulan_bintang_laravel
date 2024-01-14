@@ -40,7 +40,7 @@ class PostController extends Controller
             $item->stock_number = $request->input('stock_number');
             $item->save();
     
-            return redirect('/adminpage');
+            return redirect()->route('adminpage')->with('success', 'Item updated successfully');
         }
     
         return redirect('/login')->with('error', 'Please log in to add a post.');

@@ -13,67 +13,80 @@
     <style>
         body {
             background-color: #EEEEEE;
-             /* Remove default body margin */
+            margin: 0;
         }
     
         .container {
-            background-color: #fff;
-            margin-top: 50px;
-            border-radius: 15px;
-            text-align: center;
+            background-color: #fdfdfd;
             padding: 20px;
-            
-        }
-    
-        #logo {
-            width: 150px;
-            height: auto;
-          
-        }
-    
-        #signup-heading {
-            font-size: 34px;
-            font-weight: bold;
-        }
-    
-        #inputErrorAlert {
-            margin-top: 10px;
-            width: 100%;
-            background-color: #dc3545;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-    
-        #Sbtn {
-            border-radius: 5px;
-            background-color: #202d45;
-            transition: transform 0.3s ease-in-out;
-            font-size: 16px;
-            padding: 10px 20px;
-        }
-    
-        #Sbtn:hover {
-            transform: scale(1.1);
-            background-color: #202d45;
-            border: none;
-        }
-    
-        /* Style to center the form elements */
-        form {
-            text-align: left;
             margin-top: 20px;
+            border-radius: 15px;
         }
     
-        .form-group {
-            margin: 10px;
-            
+        .form-container {
+            padding: 20px;
         }
-
-        #loginlink{
-            color: rgb(4, 0, 223);
+    
+        h1 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+    
+        input[type="file"],
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+    
+        #addbtn {
+            color: #fff;
+            border: none;
+            background-color: #202d45;
+            width: 80px;
+            padding: 8px;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+    
+        #addbtn:hover {
+            background-color: #202d45;
+            transform: scale(1.1);
+        }
+    
+        #bblogo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    
+        #bblogo img {
+            border-radius: 5px;
+            height: auto;
+            max-width: 100%;
+            width: 40px;
+        }
+    
+        /* Additional Mobile Styles */
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 18px;
+            }
+    
+            input[type="file"],
+            input[type="text"],
+            input[type="number"],
+            select {
+                padding: 6px;
+                margin-bottom: 6px;
+            }
+    
+            #addbtn {
+                width: 60px;
+                padding: 6px;
+            }
         }
     </style>
   
@@ -121,10 +134,10 @@
                     <div id="password-match-alert" class="alert alert-success" style="display: none;">
                          Passwords match.
                     </div>
-                    <p style="font-family: cursive;">Already Have An Account? <a id="loginlink" href="login">Login
+                    <p>Already Have An Account? <a id="loginlink" href="login">Login
                             Now! </a></p>
                     <button type="submit" id="Sbtn" class="btn btn-dark">Submit</button><br><br>
-                    <a href="">Terms of use. Privacy policy</a>
+                    <a style="color: black;" href="">Terms of use. Privacy policy</a>
                 </form>
             </div>
         </div><br>
@@ -132,14 +145,10 @@
    
     </div><br><br>
     <div>
-        @include('footer')
+        @include('footer_user')
     </div>
     
-        @if(session('showAlert') == 'signupSuccess')
-        <script>
-            sessionStorage.setItem('signupSuccess', true);
-        </script>
-        @endif
+
 
     <script>
 

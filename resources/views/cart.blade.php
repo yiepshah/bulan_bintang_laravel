@@ -222,28 +222,30 @@ label.radio input:checked + span {
 }
 
 .cartLogo{
-    width: 20px;
+    width: 80px;
 }
 
-.breadcrumb{
-    background-color: #202d45;
-}
+.pageName {
+            background-color: #202d45;
+            color: aliceblue;
+            text-align: center;
+        }
+
+        .pageName h3 {
+            margin: 0; /* Remove default margin to center properly */
+            padding: 10px; /* Add padding for better appearance */
+        }
 
 
 
     </style>
 </head>
 <body>
-@include('header')
-<div class="breadcrumb">
-    <nav aria-label="breadcrumb">
-        <ol id="textLabel" class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li> 
 
-            <li class="breadcrumb-item"><a href="/details">Details</a></li>
-            <li class="breadcrumb-item"><a href="/cart">Cart</a></li>
-        </ol>
-    </nav>
+@include('header')
+
+<div class="pageName">
+    <h3>CART</h3>
 </div>
 
 <div class="container">

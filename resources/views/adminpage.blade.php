@@ -1,10 +1,10 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,30 +18,17 @@
  
     <style>
         body{
-            background-color: #f7f7f7
+            background-color: #f7f7f7;
         }
 
- 
-
-        .container {
-    position: relative;
-    width: 100%; /* Adjust the width as needed */
-    max-width: 1200px; /* Add a max-width to limit the container size */
-  
-    margin: 0 auto;
-    padding: 10px;
-}
-
-
-        .header--wrapper img {
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            border-radius: 50%;
+        .container-fluid{
+            padding: 30px;
         }
+
+
 
         .header--wrapper {
-            display: flex;
+            
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
@@ -89,8 +76,7 @@
         }
 
         .card-container {
-            /* background: #fff; */
-            /* width: calc(100% - 2rem); */
+    
             margin-top: 1rem;
             padding: 1rem;
             border-radius: 10px;
@@ -111,7 +97,7 @@
         }
 
         .data--card {
-            flex: 1;
+            flex: 2;
             border-radius: 10px;
             padding: 1.2rem;
             display: flex;
@@ -156,21 +142,6 @@
             font-size: 0.8rem;
         }
 
-        .sales {
-            background-color: #202d45;
-        }
-
-        .online-payment {
-            background-color: #202d45;
-        }
-
-        .expenses {
-            background-color: #202d45;
-        }
-
-        .new-customers {
-            background-color: #202d45;
-        }
 
         .icon {
             font-size: 3rem;
@@ -267,10 +238,6 @@
             border: none;
         }
 
-        #admin{
-            color: #fff;
-            margin-right: 20px;
-        }
 
         #userSearchInput,
         #itemSearchInput {
@@ -412,19 +379,6 @@
         cursor: pointer;
     }
 
-    .detailImg{
-        width: 900px;
-
-    }
-
-    .footer-container{
-        padding: 10px;
-    }
-
-    #itemEdit{
-        background-color: #ffff;
-        font-size: 30px;
-    }
 
     .modern-profile-form {
     max-width: 400px;
@@ -463,25 +417,14 @@
     background-color: #1a2233;
 }
 
-.card-container {
-    display: flex;
-}
 
 .admin-data-card {
-    background-color: #333;
+
     color: #fff;
-    flex: 1;
-    margin-right: 10px;
-    padding: 20px;
+    padding: 30px;
+    height: 300px;
     
 }
-
-.edit-admin-profile-card {
-    flex: 1;
-    padding: 50px;
-}
-
-/* New styles for mobile screens */
 
 @media only screen and (max-width: 768px) {
     .card-container {
@@ -489,39 +432,75 @@
     }
 
     .admin-data-card,
-    .edit-admin-profile-card {
+ {
         width: 100%;
         margin-right: 0;
     }
 
-    .edit-admin-profile-card {
-        padding: 20px; /* Adjust the padding for mobile view */
-    }
 }
 .admin-data-card {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* Light text color */
-    flex: 1; /* Take up all available space */
-    margin-right: 10px; /* Add some space between cards */
-    padding: 20px; /* Add padding to the card content */
+    background-color: #202d45;
+    color: #fff; 
+    
+}
+
+#adminporfilebtn{
+    background-color: #000000;
+    border: none;
+}
+
+
+
+.iconAllert {
+    flex-shrink: 0; /* Prevent the iconAllert from shrinking */
+    margin-top: 20px;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+
+
+.icon {
+    font-size: 3rem;
+}
+
+.data--card, icon-letter{
+    background-color: #ffffff;
+    color: #202d45;
+}
+
+.admin-container{
+
+    color: #ffffff;
 
 }
 
-.edit-admin-profile-card {
-    flex: 1; /* Take up all available space */
-    padding: 50px; /* Add padding to the card content */
+.profile-image {
+    border: #000000; /* Set the border color to black */
+    
 }
 
+.image-container {
+    width: 250px; /* Set the width of the circular container */
+    height: 250px; /* Set the height of the circular container */
+    overflow: hidden;
+    border-radius: 50%; /* Make the container circular */
+    background-color: #000; /* Set the background color to black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profileImg {
+    width: 100%; /* Make sure the image covers the entire circular container */
+    height: auto;
+}
 </style>
 
 </head>
-<html>
 <body>
-
-    @php
-
-    @endphp
-  
     @auth
         @if(auth()->user()->role === 'admin')
         <div class="w3-sidebar">
@@ -540,155 +519,177 @@
     @endauth 
 
 @include('adminHeader')
-    <div class="container">
-        <div class="card-container">
-            <h2 class="main--title">Today's data</h2>
-            <div class="card--wrapper">
-                <div class="data--card sales">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">Sales</span><span class="amount-value">$40 000.00</span>
-                        </div> <i class="fas-dollar-sign icon"></i>
-                        <span class="card-detail">Last 24 hours</span>
-                    </div>
-                </div>
-                <div class="data--card online-payment">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">Online Payment</span><span class="amount-value">$2900.00</span>
-                        </div> <i class="fas-dollar-sign icon"></i>
-                        <span class="card-detail">Last 24 hours</span>
-                    </div>
-                </div>
-                <div class="data--card expenses">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">Expenses</span><span class="amount-value">$5000.00</span>
-                        </div> <i class="fas-dollar-sign icon"></i>
-                        <span class="card-detail">Last 24 hours</span>
-                    </div>
-                </div>
-                <div class="data--card new-customers">
-                    <div class="card--header">
-                        <div class="amount">
-                            <span class="title">New Customers</span><span class="amount-value">90</span>
-                        </div> <i class="fas-dollar-sign icon"></i>
-                        <span class="card-detail">Last 24 hours</span>
-                    </div>
+  
+
+
+
+<div class="container">
+    <div class="card-container">
+
+    
+        <div class="card--header admin-data-card">
+            <div class="admin-container">
+                <h2 style="color: #ffff;" class="main--title">Admin Profile Data</h2><hr>
+            <div class="profile-image">
+                <div class="image-container">
+                    <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
                 </div>
             </div>
-    </div> <br><br>     
+        </div>
 
 
 
-        <div class="container">
-
-            <div class="card-container">
-                <!-- Admin Profile Data Card -->
-                <div class="card--header admin-data-card">
-                    <h2 style="color: #ffff;" class="main--title">Admin Profile Data</h2>
-                    <div class="profile-image">
-                        <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <p>{{ auth()->user()->name }}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <p>{{ auth()->user()->email }}</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role:</label>
-                        <p>{{ auth()->user()->role }}</p>
-                    </div>
+    <div class="modal fade" id="editAdminProfileModal" tabindex="-1" role="dialog" aria-labelledby="editAdminProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAdminProfileModalLabel">Edit Admin Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            
-            <div class="card--header edit-admin-profile-card">
-                
-                <form method="post" action="{{ route('update-adminprofile') }}" class="modern-profile-form" enctype="multipart/form-data">
-                    @csrf
-                    <h2 class="main--title">Edit Admin Profile</h2>
-                    {{-- <div class="profile-image">
-                        <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
-                    </div> --}}
-    
-                    <div id="formAdmin" class="form-group">
-                        <label for="image_path">Change Profile Image:</label>
-                        <input type="file" name="image_path" class="form-control" accept="image/*">
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" required>
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" required>
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" placeholder="Enter new password" class="form-control">
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="role">Role:</label>
-                        <select name="role" class="form-control">
-                            <option value="admin" {{ auth()->user()->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                            <option value="user" {{ auth()->user()->role === 'user' ? 'selected' : '' }}>User</option>
-                        </select>
-                    </div>
-    
-                    <button type="submit" class="btn btn-primary">Update Profile</button>
-                </form>
+                <div class="modal-body">
+                    <form method="post" action="{{ route('update-adminprofile') }}" class="modern-profile-form" enctype="multipart/form-data">
+                        @csrf
+                        <div id="formAdmin" class="form-group">
+                            <label for="image_path">Change Profile Image:</label>
+                            <input type="file" name="image_path" class="form-control" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" value="{{ auth()->user()->name }}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" value="{{ auth()->user()->email }}" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" placeholder="Enter new password" class="form-control">
+                        </div>
+
+                        {{-- <div class="form-group">
+                            <label for="role">Role:</label>
+                            <select name="role" class="form-control">
+                                <option value="admin" {{ auth()->user()->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="user" {{ auth()->user()->role === 'user' ? 'selected' : '' }}>User</option>
+                            </select>
+                        </div> --}}
+
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-        <div class="container">
+</div> <br><br> <br> 
+
+
+    <div class="card-container-fluid">
+        <div id="iconAllert" class="card--wrapper iconAllert">
+            <div class="data--card icon-letter">
+                <div class="card--header">
+            <div class="form-group">
+                <label for="name">Name:</label><h5>{{ auth()->user()->name }}</h5>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label><h5>{{ auth()->user()->email }}</h5>
+                
+            </div>
+            <button id="adminporfilebtn" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editAdminProfileModal">Edit Profile</button>
+            </div>
+           
+        </div>
+    </div><br><hr><br>
+    
+
+
+
+    <div class="card-container">
+        <h2 class="main--title">Today's data</h2>
+        <div class="card--wrapper">
+            <div class="data--card sales">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">Sales</span><span class="amount-value">$40 000.00</span>
+                    </div> <i class="fas-dollar-sign icon"></i>
+                    <span class="card-detail">Last 24 hours</span>
+                </div>
+            </div>
+            <div class="data--card online-payment">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">Online Payment</span><span class="amount-value">$2900.00</span>
+                    </div> <i class="fas-dollar-sign icon"></i>
+                    <span class="card-detail">Last 24 hours</span>
+                </div>
+            </div>
+            <div class="data--card expenses">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">Expenses</span><span class="amount-value">$5000.00</span>
+                    </div> <i class="fas-dollar-sign icon"></i>
+                    <span class="card-detail">Last 24 hours</span>
+                </div>
+            </div>
+            <div class="data--card new-customers">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">New Customers</span><span class="amount-value">90</span>
+                    </div> <i class="fas-dollar-sign icon"></i>
+                    <span class="card-detail">Last 24 hours</span>
+                </div>
+            </div>
+        </div>
+    </div> <hr> <br>
+
+        
    
-            <div class="card-container">
-                <div class="user-table">
-                    <h2 class="main--title">
-                        <i class="fas fa-users"></i>
-                        User Information</h2>        
-                    <div class="table-responsive">
-                        <table id="myUsertable" class="display">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>                       
-                           
-                            <tbody id="myUsertable">
-                                @forelse ($users as $user)
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>                                                                       
-                                    <td>
-                                        <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
-                                            <i class="fas fa-edit"></i> 
-                                        </a>
-                                        <a href="{{ url('delete-user/'.$user->id) }}" class="btn btn delete-btn" data-toggle="modal" data-target="#deleteUserModal{{ $user->id }}">
-                                            <i class="fas fa-trash-alt"></i> 
-                                        </a>
-                                    </td>
-                                </tr>
-                                @empty
-                                    <tr><td colspan='6'>No user found</td></tr>
-                                @endforelse                        
-                            </tbody>
-                         </table>
-                    </div>
-            </div>          
-    </div>
+    <div class="card-container">
+        <div class="user-table">
+            <h2 class="main--title">
+                <i class="fas fa-users"></i>
+                User Information</h2>        
+            <div class="table-responsive">
+                <table id="myUsertable" class="display">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>                       
+                    
+                    <tbody id="myUsertable">
+                        @forelse ($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>                                                                       
+                            <td>
+                                <a id="userEdit" href="{{url('edit-user/'.$user->id)}}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> 
+                                </a>
+                                <a href="#" onclick="confirmUserDeletion('{{ $user->id }}')">
+                                    <i class="fas fa-trash-alt delete-btn"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @empty
+                            <tr><td colspan='6'>No user found</td></tr>
+                        @endforelse                        
+                    </tbody>
+                    </table>
+            </div>
+        </div>
+    </div> <hr> <br>         
+
         
             
     <br><br>
@@ -702,13 +703,14 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Item Id</th>
+                            <th>Image</th>
                             <th>Item Name</th>
                            
                             {{-- <th>Price</th> --}}
                             {{-- <th>Product Info</th> --}}
                             {{-- <th>Material</th> --}}
                             {{-- <th>Inside Box</th> --}}
-                            <th>Category</th>
+                            {{-- <th>Category</th> --}}
                             <th>Subcategory</th>
                             <th>Stock</th>
                             <th>Action</th>
@@ -724,20 +726,23 @@
                             <tr>
                                 
                                 <td>{{ $item->item_id }}</td>
+                                <td>
+                                    <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" style="max-width: 50px; max-height: 50px;">
+                                </td>
                                 <td>{{ $item->item_name }}</td>
                                 {{-- <td>{{ $item->price }}</td> --}}
                                 {{-- <td>{{ $item->product_information }}</td> --}}
                                 {{-- <td>{{ $item->material }}</td> --}}
                                 {{-- <td>{{ $item->inside_box }}</td> --}}
-                                <td>{{ $item->category}}</td>
+                                {{-- <td>{{ $item->category}}</td> --}}
                                 <td>{{ $item->subcategory}}</td>
                                 <td>{{ $item->stock_number}}</td>
                                 <td>
 
                                    
-                                        <a href="#" data-toggle="modal" data-target="#itemDetailsModal" onclick="loadItemDetails('{{ $item->item_id }}')">
-                                            <i id="detailBtn" class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
+                                    <a href="#" data-toggle="modal" data-target="#itemDetailsModal" onclick="loadItemDetails('{{ $item->item_id }}','{{ $item->image_path }}', '{{ $item->item_name }}', '{{ $item->price }}', '{{ $item->product_information }}', '{{ $item->material }}', '{{ $item->inside_box }}', '{{ $item->category }}', '{{ $item->subcategory }}', '{{ $item->stock_number }}')">
+                                        <i id="detailBtn" class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
                                         
                                         <a href="#" onclick="confirmItemDeletion('{{ $item->item_id }}')">
                                             <i class="fas fa-trash-alt delete-btn"></i>
@@ -773,6 +778,7 @@
                 </div>
             </div>
         </div>
+        
 
 
         <div class="modal fade" id="itemDetailsModal" tabindex="-1" role="dialog" aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
@@ -792,20 +798,24 @@
                                 <img class="detailImg" src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
                             </div>
                             <div class="col-md-5">
-                        
-                                <p><strong>Item Name:</strong> {{ $item->item_name }}</p><hr>
-                                <p><strong>Price:</strong> Rm {{ $item->price }}</p><hr>
-                                <p><strong>Product Information:</strong> {{ $item->product_information }}</p><hr>
-                                <p><strong>Inside Box:</strong> {{ $item->inside_box }}</p><hr>
-                                <p><strong>Material:</strong> {{ $item->material }}</p><hr>
-                                <p><strong>Category:</strong> {{ $item->category}}</p><hr>
-                                <p><strong>Subcategory:</strong> {{ $item->subcategory}}</p><hr>
-                                <p><strong>Stock Number:</strong> {{ $item->stock_number}}</p><hr>
-                                <a id="itemEdit" href="{{url('edit-item/'.$item->item_id)}}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i> 
+                                <a id="itemEdit" href="#" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
                                 </a>
+                                <p><strong>Item Name:</strong><span id="item_name"></span></p><hr>
+                                <p><strong>Price:</strong> Rm <span id="price"></span></p><hr>
+                                <p><strong>Product Information:</strong> <span id="product_information"></span></p><hr>
+                                <p><strong>Inside Box:</strong> <span id="inside_box"></span></p><hr>
+                                <p><strong>Material:</strong> <span id="material"></span></p><hr>
+                                <p><strong>Category:</strong> <span id="category"></span></p><hr>
+                                <p><strong>Subcategory:</strong> <span id="subcategory"></span></p><hr>
+                                <p><strong>Stock Number:</strong> <span id="stock_number"></span></p><hr>
+
                             </div>
-                        </div>
+                            
+                               
+                            
+                        </div><br>
+                        @include('footer_user')
                     </div>
 
                     <div class="modal fade" id="deleteItemModal{{ $item->item_id }}" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
@@ -830,15 +840,43 @@
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
 </div>
 </div>
-    </div>
-      
+<br>
 <div class="footer-container">
     @include('footer')
 </div>
+
+
+<script>
+function getItemDetailsById(itemId) {
+    return $.ajax({
+        url: '/correct/endpoint/' + itemId, 
+        method: 'GET',
+        dataType: 'json',
+    });
+}
+
+function loadItemDetails(id, image_path,item_name,price,product_information,material,inside_box,category,subcategory,stock_number) {
+    console.log(id,image_path,item_name,price,product_information,material,inside_box,category,subcategory,stock_number)
+    $('#itemDetailsImage').attr('src', "{{ asset('storage/images/') }}" + '/' + image_path);
+    $('#item_name').text(item_name)
+    $('#price').text(price)
+    $('#product_information').text(product_information)
+    $('#material').text(material)
+    $('#inside_box').text(inside_box)
+    $('#category').text(category)
+    $('#subcategory').text(subcategory)
+    $('#stock_number').text(stock_number)
+    let url = "{{ url('edit-item/' . 123) }}".replace('123', id)
+    $('#itemEdit').attr('href', url)
+    
+    
+}
+</script>
+
 
     <script>
         function toggleSidebar() {
@@ -880,42 +918,46 @@
             </script>
             @endif
 
-            <script>
-                function loadItemDetails(item_id) {
-    
-                    var itemDetails = getItemDetailsById(item_id);
 
-                    document.getElementById('itemDetailsName').innerText = itemDetails.item_name;
-                    document.getElementById('itemDetailsPrice').innerText = itemDetails.price;
-                    document.getElementById('itemDetailsProductInfo').innerText = itemDetails.product_information;
-                    document.getElementById('itemDetailsInsideBox').innerText = itemDetails.inside_box;
-                    document.getElementById('itemDetailsMaterial').innerText = itemDetails.material;
-                    document.getElementById('itemDetailsCategory').innerText = itemDetails.category;
-                    document.getElementById('itemDetailsSubcategory').innerText = itemDetails.subcategory;
-            
-                    $('#itemDetailsModal').modal('show');
+            <script>
+                function confirmUserDeletion(id) {
+                    Swal.fire({
+                    title: 'Confirm Deletion',
+                    text: 'Are you sure you want to delete this item?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    
+                        window.location.href = "{{ url('delete-user') }}/" + id;
+                    }
+                });
                 }
             </script>
 
-<script>
-    function confirmItemDeletion(itemId) {
-        Swal.fire({
-            title: 'Confirm Deletion',
-            text: 'Are you sure you want to delete this item?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Perform the deletion by redirecting to the delete-item route
-                window.location.href = "{{ url('delete-item') }}/" + itemId;
-            }
-        });
-    }
-</script>
-            
+
+    <script>
+        function confirmItemDeletion(itemId) {
+            Swal.fire({
+                title: 'Confirm Deletion',
+                text: 'Are you sure you want to delete this item?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                
+                    window.location.href = "{{ url('delete-item') }}/" + itemId;
+                }
+            });
+        }
+    </script>
+                
 
 <script>
     $(document).ready(function () {

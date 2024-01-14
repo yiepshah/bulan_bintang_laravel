@@ -69,7 +69,7 @@ class UserController extends Controller
 
         session(['cart' => []]);
 
-        return redirect('/login')->with('showAlert', 'signupSuccess');
+        return view('/collection')->with('showAlert', 'signupSuccess');
     } 
 
 
@@ -104,32 +104,35 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $request->validate([
-            'id' => 'required',
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'name' => 'required',
             'email' => 'required|email',
         ]);
     
-        $user = User::find($request->id);
+        $user = Auth::user();
     
-        if ($request->hasFile('image_path')) {
-        
-            if ($user->image_path) {
-                Storage::disk('public')->delete($user->image_path);
-            }
-    
-          
-            $imagePath = $request->file('image_path')->storeAs('images', $request->file('image_path')->getClientOriginalName(), 'public');        
-            $user->image_path = $imagePath;
+        if (!($user instanceof User)) {
+            dd($user);
         }
     
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->save();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+    
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+    
+        if ($request->hasFile('image_path')) {
+            $image = $request->file('image_path');
+            $imageName = 'profile_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $user->image_path = $imageName;
+        }
+    
+        $user->save();
     
         return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
-    
     
 
     public function deleteUser($users){
@@ -158,7 +161,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:6',
-            'role' => 'required|in:admin,user',
         ]);
     
         $user = Auth::user();
@@ -175,7 +177,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
     
-        $user->role = $request->input('role');
+        // $user->role = $request->input('role');
     
     
         if ($request->hasFile('image_path')) {
@@ -187,7 +189,7 @@ class UserController extends Controller
     
         $user->save();
     
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Admin Profile updated successfully!');
     }
     
  

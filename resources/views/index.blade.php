@@ -67,7 +67,7 @@
 .brother-collection img {
     max-width: 100%;
     height: auto;
-    width: 500px;
+    width: 900px;
     /* transition: transform 0.4s ease-in-out;    */
 }
 

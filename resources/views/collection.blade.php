@@ -175,8 +175,15 @@
             }
         }
 
-        .breadcrumb{
+        .pageName {
             background-color: #202d45;
+            color: aliceblue;
+            text-align: center;
+        }
+
+        .pageName h3 {
+            margin: 0; /* Remove default margin to center properly */
+            padding: 10px; /* Add padding for better appearance */
         }
 
         #id,text{
@@ -190,20 +197,10 @@
 
 <body>
     @include('header')
-    <div class="breadcrumb">
-        <nav aria-label="breadcrumb">
-            <ol id="textLabel" class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li> 
-
-                <li class="breadcrumb-item"><a href="/collection">Collection</a></li>
-            </ol>
-        </nav>
+    <div class="pageName">
+        <h3>COLLECTION</h3>
     </div>
-
-
-
-
-    
+      
     <div class="items-container">
         @php     
             $reversedItems = $items->reverse();     

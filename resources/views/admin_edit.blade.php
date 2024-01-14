@@ -111,9 +111,41 @@
             <div class="form-group">
                 <label for="inside_box">Inside Box:</label>
                 <input type="text" class="form-control" name="inside_box" value="{{ $items->inside_box }}" required>
-            </div>       
+            </div>    
 
+            
             <div class="form-group">
+                <label for="category">Category :</label>
+                <select class="form-control" name="category"  value="{{ $items->category }}" required>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Kids">Kids</option>
+                    
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="subcategory">Subcategory :</label>
+                <select class="form-control" name="subcategory"  value="{{ $items->subcategory }}"  required>
+                    <option value="Teluk Belanga">Teluk Belanga</option>
+                    <option value="Tailored Fit">Tailored Fit</option>
+                    <option value="Slim Fit">Slim Fit</option>
+                    <option value="Samping">Samping</option>
+                    <option value="Kurta">Kurta</option>
+
+                    <option value="Lana">Lana</option>
+                    <option value="Adeline">Adeline</option>
+                    <option value="Hanna">Hanna</option>
+                    <option value="Elyana<">Elyana</option>
+
+                    <option value="Baju Melayu Kids">Baju Melayu Kids</option>
+                    <option value="Emelda">Emelda</option>
+                    <option value="Sabrina">Sabrina</option>
+                    
+                </select>
+            </div>
+
+            {{-- <div class="form-group">
                 <label for="category">Category:</label>
                 <input type="text" class="form-control" name="category" value="{{ $items->category }}" required>
             </div>   
@@ -121,7 +153,7 @@
             <div class="form-group">
                 <label for="subcategory">Subcategory:</label>
                 <input type="text" class="form-control" name="subcategory" value="{{ $items->subcategory }}" required>
-            </div>   
+            </div>    --}}
 
             <div class="form-group">
                 <label for="stock_number">Stock:</label>

@@ -17,17 +17,15 @@ use App\Http\Controllers\CategoriesController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('index');
+});
+
+
+
 
 Route::middleware(['web', 'auth'])->group(function () {
     
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
-
-    Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
-
-    Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
-
     Route::get('edit-user/{id}', [UserController::class, 'editUser']);
     Route::get('delete-user/{id}', [UserController::class, 'deleteUser']);
 
@@ -47,21 +45,20 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 
-    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
     
 });
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login'); 
+// Route::get('/login', function () {
+//     return view('login');
+// })->name('login'); 
  
-
+Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
 
-
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware(['auth'])->group(function () {
@@ -80,7 +77,7 @@ Route::post('/add_item',[PostController::class,'addPost']);
 
 Route::post('update-item', [PostController::class, 'updateItem']);
 
-Route::post('/cart', [CartController::class, 'addToCart'])->name('cart');
+Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.post');
 
 Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
@@ -89,3 +86,6 @@ Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('
 
 
 Route::post('/update-adminprofile', [UserController::class, 'updateAdminProfile'])->name('update-adminprofile');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+

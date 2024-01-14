@@ -159,18 +159,14 @@
             <div class="col-md-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent pl-0">
-                        <li class="breadcrumb-item"><a href="">Home</a></li> 
+                        <li class="breadcrumb-item"><a href="/">Home</a></li> 
 
-                        {{-- <li class="breadcrumb-item"><a href="">{{$itemDetails->$category}}</a></li> --}}
+                        <li class="breadcrumb-item"><a href="/collection">Collection</a></li> 
 
                         <li class="breadcrumb-item active" aria-current="page">{{$itemDetails->item_name}}</li>
                     </ol>
                 </nav>
-    
 
-                {{-- @php
-                dd($itemDetails->all);
-            @endphp  --}}
                 <div class="detailItem">
                     <h4 class="h4"style="font-family: 'Oswald', sans-serif;">{{ $itemDetails->item_name }}</h4>
                     <hr>
