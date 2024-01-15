@@ -82,13 +82,30 @@ class CartController extends Controller
         
         return redirect()->route('cart')->with('success', 'Item added to the cart successfully.');
         
-    }    
+    }
+    
+    // public function adminPage()
+    // {
+        
+    //     if (auth()->user()->role == 'admin') {
+    //         $items = Post::all();
+    //         $users = User::all();
+    //         return view('adminpage', ['items' => $items] , ['users'=> $users]);
+    //     } else {
+    //         return redirect()->route('collection');
+    //     }
+    // }
 
     public function showCart()
-    {
+    {   if (auth()->user()->role != 'admin') {
         $cartItems = session('cart', []);
-    
         return view('cart', ['cartItems' => $cartItems]);
+    }
+       else{
+        return redirect()->route('adminpage');
+       }
+    
+        
     }
 
     public function remove($item_id)

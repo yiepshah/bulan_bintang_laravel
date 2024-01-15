@@ -14,7 +14,7 @@
         .w3-sidebar {
             height: 100%;
             width: 200px;
-            background-color: #202d45;
+            background-color: #0F0F0F;;
             position: fixed;
             overflow-x: hidden;
             padding-top: 80px;

@@ -88,21 +88,36 @@
                 padding: 6px;
             }
         }
+
+        #logo{
+            width: 50px;
+        }
+
+        .pageName {
+            background-color: #202d45;
+            color: aliceblue;
+            text-align: center;
+        }
+
+        .pageName h3 {
+            margin: 0; /* Remove default margin to center properly */
+            padding: 10px; /* Add padding for better appearance */
+        }
     </style>
   
 </head>
 
 <body>
     @include('header')
+    <div class="pageName">
+        <h3>SIGNUP</h3>
+    </div>
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <div class="d-flex">
-                   
-                </div>
                 <img id="logo" src="https://bulanbintanghq.com/wp-content/uploads/2022/01/bulanbintanglogo-1040x800.png" alt="Logo"><br><br>
-                <span id="signup-heading">Sign Up</span>
+                <h3><span id="signup-heading">Sign Up</span></h3><br>
                 <form action="{{ url('/signup') }}" method="post">
                     @csrf
 
@@ -110,9 +125,9 @@
                         <strong>Error!</strong> There was an issue with your input. Please check and try again.
                     </div>
 
-                    <div id="inputErrorAlert">
+                    {{-- <div id="inputErrorAlert">
                         <strong>Error!</strong> Please fill in all the form fields.
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="name">Username</label>
@@ -145,11 +160,9 @@
    
     </div><br><br>
     <div>
-        @include('footer_user')
+        @include('footer')
     </div>
     
-
-
     <script>
 
         

@@ -44,20 +44,30 @@ class PostController extends Controller
         }
     
         return redirect('/login')->with('error', 'Please log in to add a post.');
+    
     }
     
 
         public function adminPage()
         {
-            $items = Post::all();
-            $users = User::all();
-            return view('adminpage', ['items' => $items] , ['users'=> $users]);
+            
+            if (auth()->user()->role == 'admin') {
+                $items = Post::all();
+                $users = User::all();
+                return view('adminpage', ['items' => $items] , ['users'=> $users]);
+            } else {
+                return redirect()->route('collection');
+            }
         }
 
         public function collection()
-        {
-            $items = Post::all(); 
-            return view('collection', compact('items'));
+        {  
+            if (Auth::check() && Auth::user()->role != 'admin') {
+                $items = Post::all();
+                return view('collection', compact('items'));
+            } else {
+                return redirect()->route('adminpage');
+            }
         }
 
         public function filtered_collection($category, $subcategory){
@@ -71,12 +81,19 @@ class PostController extends Controller
         }
 
         public function editItem($item_id){
-            $items = Post::where('item_id', '=',$item_id)->first();
-            return view('admin_edit' , compact('items'));
+            if (auth()->user()->role == 'admin') {
+                $items = Post::where('item_id', '=',$item_id)->first();
+                return view('admin_edit' , compact('items'));
+            } else {
+                return redirect()->route('collection');
+            }
+
         }
 
+        
+
         public function updateItem(Request $request){
-            // dd($request->all());
+            // dd($request->all()); 
                 $request->validate([
                 'item_id'=>'required',
                 'item_name' => 'required',
@@ -128,17 +145,17 @@ class PostController extends Controller
             if ($itemDetails) {
                 $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
     
-                $breadcrumb = '<a href="' . route('index') . '">Home</a> / ';
+                // $breadcrumb = '<a href="' . route('/') . '">Home</a> / ';
     
-                $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
+                // $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
     
                 // // Fetch stock information from the Stock model
                 // $stockInfo = Post::where('item_id', $itemId)->first();
     
-                return view('details', compact('itemDetails', 'breadcrumb', 'sizeOptions',));
+                return view('details', compact('itemDetails','sizeOptions',));
             } else {
                 return view('details', ['itemNotFound' => true]);
             }
         }
-
 }
+ 

@@ -12,9 +12,11 @@
 
 
 
-        <style>
+    <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        body{
+            
+        }
 
         #collection {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -203,7 +205,11 @@
       
     <div class="items-container">
         @php     
-            $reversedItems = $items->reverse();     
+            if (!empty($items)) {
+                $reversedItems = $items->reverse();     
+            } else {
+                $reversedItems = [];
+            }
         @endphp
 
         @foreach ($reversedItems as $item)
@@ -234,7 +240,35 @@
         </div>
        
 
+        <script>
+            function showSuccessAlert(message) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: message,
+                });
+            }
         
+            function showWarningAlert(message) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning!',
+                    text: message,
+                });
+            }
+        </script>
+        
+        @if(Session::has('success'))
+            <script>
+                showSuccessAlert("{{ Session::get('success') }}");
+            </script>
+        @endif
+        
+        @if(Session::has('warning'))
+            <script>
+                showWarningAlert("{{ Session::get('warning') }}");
+            </script>
+        @endif
 
     <script>
         function addToCart(itemId, itemName, price) {

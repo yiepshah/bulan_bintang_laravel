@@ -23,33 +23,39 @@ Route::get('/', function () {
 
 
 
-
-Route::middleware(['web', 'auth'])->group(function () {
+// Route::middleware(['web', 'auth'])->group(function () {
     
+
+
+   
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
+    Route::get('/users/{userId}/edit', 'PostController@editUser');
+    Route::get('/collection', [PostController::class, 'collection'])->name('collection');
+    Route::get('/collection/{category}/{subcategory}', [PostController::class, 'filtered_collection'])->name('filtered_collection');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('edit-user/{id}', [UserController::class, 'editUser']);
     Route::get('delete-user/{id}', [UserController::class, 'deleteUser']);
+    Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
+    Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.post');
+
+Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
+
 
     Route::get('/add_item', function () {
         return view('add_item');
     });
 
     Route::get('edit-item/{item_id}', [PostController::class, 'editItem']);
-
     Route::get('delete-item/{item_id}', [PostController::class, 'deleteItem']);
 
-    Route::get('/collection', [PostController::class, 'collection'])->name('collection');
-
-    Route::get('/collection/{category}/{subcategory}', [PostController::class, 'filtered_collection'])->name('filtered_collection');
-
-    Route::get('/details/{itemId}', [PostController::class, 'showDetails'])->name('details');
-
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
 
 
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-
-    
 });
+
 
 // Route::get('/login', function () {
 //     return view('login');
@@ -61,15 +67,11 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/adminpage', [UserController::class, 'showAdminpage'])->name('adminpage');
-});
+// Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
 
-Route::get('/adminpage', [PostController::class, 'adminPage'])->name('adminpage');
-Route::middleware('auth')->group(function () {
-    Route::get('/users/{userId}/edit', 'PostController@editUser');
-    Route::delete('/users/{userId}', 'PostController@deleteUser');
-});
+
+Route::delete('/users/{userId}', 'PostController@deleteUser');
+
 
 Route::post('update-user', [UserController::class, 'updateUser']);
 
@@ -77,9 +79,6 @@ Route::post('/add_item',[PostController::class,'addPost']);
 
 Route::post('update-item', [PostController::class, 'updateItem']);
 
-Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.post');
-
-Route::post('/cart/remove/{item_id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
 Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update-profile');

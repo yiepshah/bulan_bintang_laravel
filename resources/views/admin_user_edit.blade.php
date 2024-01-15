@@ -22,8 +22,7 @@
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px 10px;
-            
+            border-radius: 10px 10px;            
         }
 
         .main--title {
@@ -50,7 +49,7 @@
         }
 
         #editUserBtn {
-            background-color:#202d45;
+            background-color:#0F0F0F;;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -67,7 +66,7 @@
         #backBtn {
             width: 100px;
             height: 40px;
-            background-color: #202d45;
+            background-color: #0F0F0F;;
             border: none;
         }
 

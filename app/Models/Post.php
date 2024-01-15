@@ -25,9 +25,5 @@ class Post extends Model
         'inside_box',
         'category',
         'subcategory',
-    ];
-
-    
-
-    
+    ];    
 }

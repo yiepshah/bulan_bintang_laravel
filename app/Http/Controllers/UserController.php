@@ -11,9 +11,6 @@ use App\Models\Post;
 
 class UserController extends Controller  
 {   
-
-
-
     public function showSignupForm()
     {
         return view('signup');
@@ -40,7 +37,7 @@ class UserController extends Controller
         auth()->login($user);
 
 
-        return redirect()->route('login')->with('success', 'Signup successful!');
+        return redirect()->route('login')->with('success', 'Congratulations, your account has been successfully created.');
     }
 
     public function showLoginForm()
@@ -60,17 +57,28 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            if ($user->email === 'shahirayp@gmail.com') {
-                return redirect()->route('adminpage');
-            } else {
-                return redirect()->route('collection');
+            // dd($user->role);
+
+            switch ($user->role) {
+                case 'admin':
+                    return redirect()->route('adminpage')->with('success', ' Hey,  Welcome Back !');
+                    break;
+
+                case 'user':
+                    return redirect()->route('collection')->with('success', 'Hey Welcome Back!');
+                    break;
+
+        
+                default:
+            
+                    return redirect()->route('login')->with('warning', 'something happen');
             }
         }
 
         session(['cart' => []]);
 
-        return view('/collection')->with('showAlert', 'signupSuccess');
-    } 
+        return redirect('login')->with('warning', 'Wrong Password Or Email');
+    }
 
 
     public function editUser($id){
@@ -191,7 +199,5 @@ class UserController extends Controller
     
         return redirect()->back()->with('success', 'Admin Profile updated successfully!');
     }
-    
- 
 
 }

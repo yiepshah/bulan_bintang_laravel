@@ -21,7 +21,7 @@
        .card{
            border-radius: 10px ;
            color: #ffff;
-           background-color: #202d45;
+           background-color: #0F0F0F;
            width: auto;
            text-align: left;   
            margin-top: 60px;   
@@ -84,6 +84,15 @@
             padding: 10px; /* Add padding for better appearance */
         }
 
+        #profileImg {
+    cursor: pointer;
+}
+
+hr{
+    background-color: #616161;
+}
+
+
 
        
     </style>
@@ -117,7 +126,9 @@
 
                         {{-- <h2 id="userprofile">User Profile</h2> --}}
                     </div>
-                    <img id="profileImg" src="{{ asset('storage/images/' . $user->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
+                    <a href="#" data-toggle="modal" data-target="#fullImageModal">
+                        <img id="profileImg" src="{{ asset('storage/images/' . $user->image_path) }}" alt="Profile Image" class="rounded-circle">
+                    </a><hr>
                     {{-- <img id="profileImg" src="https://cdn-icons-png.flaticon.com/512/6998/6998058.png"> --}}
                     {{-- <img id="profileImg" src="{{ asset($user->image_path ?? 'default_image_path') }}" alt="Profile Image"> --}}
 
@@ -126,16 +137,33 @@
                             @if ($user !== null)
                             
                                 <div>
-                                    <p><strong>Name:</strong> {{ $user->name }}</p><hr>
+                                    <p><strong>Name:</strong> {{ $user->name }}</p>
                                     <p><strong>Email:</strong> {{ $user->email }}</p>
                                 </div>
 
                             @else
                                 <p>No user data found.</p>
                             @endif
-                        </div><hr>
+                        </div>
                     <button id="editProfileBtn" class="btn btn-success" data-toggle="modal" data-target="#editProfileModal">Edit Profile</button>
                     </div>
+
+                    <div class="modal fade" id="fullImageModal" tabindex="-1" role="dialog" aria-labelledby="fullImageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="fullImageModalLabel">Full Profile Image</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset('storage/images/' . $user->image_path) }}" alt="Profile Image" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">

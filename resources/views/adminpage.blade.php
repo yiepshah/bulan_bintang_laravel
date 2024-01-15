@@ -19,20 +19,20 @@
     <style>
         body{
             background-color: #f7f7f7;
+            /* background-color: #EBE3D5; */
         }
 
         .container-fluid{
             padding: 30px;
         }
 
-
-
         .header--wrapper {
             
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            background-color: #202d45;
+      
+            
             border-radius: 10px;
             padding: 10px 2rem;
             margin-bottom: 1rem;
@@ -259,11 +259,11 @@
 
 
         .thead-dark{
-            background-color: #202d45;
+            background-color: #0F0F0F;;
         }
 
         #userBtninfo{
-            background-color: #202d45;
+            background-color: #0F0F0F;;
             border: none;
         }
 
@@ -281,7 +281,7 @@
         }
 
         #userEdit {
-            background-color: #202d45;
+            background-color: #0F0F0F;;
             color: #fff;
             border: none;
         }
@@ -301,15 +301,15 @@
 }
 
 #itemEdit {
-    color: #202d45;
-    
+    background-color: #0F0F0F;;
+    width: 200px;
     border: none;
     
 }
 
 
 #detailBtn{
-    color: #202d45;
+    color: #0F0F0F;;
     font-size: 20px;
 
     
@@ -317,7 +317,7 @@
 
 
 .new-header{
-    background-color: #202d45;
+    background-color: #000000;
     width: 100%;
     height: 79px;
     color: #fff;
@@ -348,7 +348,7 @@
     .w3-sidebar {
         height: 100%;
         width: 0;
-        background-color: #202d45;
+        background-color: #000000;
         position: fixed;
         overflow-x: hidden;
         padding-top: 80px;
@@ -391,7 +391,7 @@
 
 .modern-profile-form label {
     font-size: 16px;
-    color: #202d45;
+    color: #0F0F0F;;
 }
 
 .modern-profile-form input,
@@ -405,7 +405,7 @@
 }
 
 .modern-profile-form button {
-    background-color: #202d45;
+    background-color: #0F0F0F;;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -439,7 +439,7 @@
 
 }
 .admin-data-card {
-    background-color: #202d45;
+    background-color: #0F0F0F;
     color: #fff; 
     
 }
@@ -468,7 +468,7 @@
 
 .data--card, icon-letter{
     background-color: #ffffff;
-    color: #202d45;
+    color: #0F0F0F;
 }
 
 .admin-container{
@@ -480,11 +480,13 @@
 .profile-image {
     border: #000000; /* Set the border color to black */
     
+}.modal-title{
+    color: #000;
 }
 
 .image-container {
-    width: 250px; /* Set the width of the circular container */
-    height: 250px; /* Set the height of the circular container */
+    width: 240px; /* Set the width of the circular container */
+    height: 240px; /* Set the height of the circular container */
     overflow: hidden;
     border-radius: 50%; /* Make the container circular */
     background-color: #000; /* Set the background color to black */
@@ -496,6 +498,12 @@
 #profileImg {
     width: 100%; /* Make sure the image covers the entire circular container */
     height: auto;
+}
+
+.footer-container{
+    background-color: #0F0F0F;
+    color: #ffff;
+    height: 40px;
 }
 </style>
 
@@ -543,14 +551,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editAdminProfileModalLabel">Edit Admin Profile</h5>
+                    <h3 class="modal-title" id="editAdminProfileModalLabel">Edit Admin Profile</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                   
                     <form method="post" action="{{ route('update-adminprofile') }}" class="modern-profile-form" enctype="multipart/form-data">
                         @csrf
+                        
                         <div id="formAdmin" class="form-group">
                             <label for="image_path">Change Profile Image:</label>
                             <input type="file" name="image_path" class="form-control" accept="image/*">
@@ -796,11 +806,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <img class="detailImg" src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
-                            </div>
-                            <div class="col-md-5">
+                            </div><br><br>
+                            <div class="col-md-5"><br><br>
                                 <a id="itemEdit" href="#" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                    <i class="far fa-edit"> Edit</i>
+                                </a><br><br>
                                 <p><strong>Item Name:</strong><span id="item_name"></span></p><hr>
                                 <p><strong>Price:</strong> Rm <span id="price"></span></p><hr>
                                 <p><strong>Product Information:</strong> <span id="product_information"></span></p><hr>
@@ -814,8 +824,9 @@
                             
                                
                             
-                        </div><br>
-                        @include('footer_user')
+                    </div><br>
+
+                      
                     </div>
 
                     <div class="modal fade" id="deleteItemModal{{ $item->item_id }}" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
@@ -846,7 +857,7 @@
 </div>
 <br>
 <div class="footer-container">
-    @include('footer')
+    @include('footer_user')
 </div>
 
 

@@ -13,6 +13,7 @@
     <style>
         body {
             background-color: #EEEEEE;
+            /* background-color: #EBE3D5; */
             margin: 0;
         }
 
@@ -173,9 +174,6 @@
     </div><br><br>        
 
 
-   
-
-  
     <div>
         @include('footer_user')
     </div>
