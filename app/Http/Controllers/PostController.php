@@ -136,21 +136,20 @@ class PostController extends Controller
         }
         
 
-        public function showDetails($itemId)
-        {
-            $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box','category','subcategory','stock_number')
-                ->where('item_id', $itemId)
-                ->first();
+        public function showDetails($itemId) 
+        {      
+
+             if (auth()->user()->role != 'admin') {
+
+                $itemDetails = Post::select('item_id', 'item_name', 'image_path', 'price', 'product_information', 'material', 'inside_box','category','subcategory','stock_number')
+                    ->where('item_id', $itemId)
+                    ->first();
+            } else {
+                return redirect()->route('adminpage');
+            }
     
             if ($itemDetails) {
                 $sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
-    
-                // $breadcrumb = '<a href="' . route('/') . '">Home</a> / ';
-    
-                // $breadcrumb .= '<span>' . $itemDetails->item_name . '</span>';
-    
-                // // Fetch stock information from the Stock model
-                // $stockInfo = Post::where('item_id', $itemId)->first();
     
                 return view('details', compact('itemDetails','sizeOptions',));
             } else {

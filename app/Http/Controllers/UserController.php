@@ -77,13 +77,20 @@ class UserController extends Controller
 
         session(['cart' => []]);
 
-        return redirect('login')->with('warning', 'Wrong Password Or Email');
+        return redirect('login')->with('warning', 'Wrong Password Or Email.');
     }
 
 
+
+
     public function editUser($id){
-        $users = User::where('id', '=',$id)->first();
-        return view('admin_user_edit' , compact('users'));
+        if (auth()->user()->role == 'admin') {
+            $users = User::where('id', '=',$id)->first();
+            return view('admin_user_edit' , compact('users'));
+        } else {
+            return redirect()->route('collection');
+        }
+
     }
 
     public function updateUser(Request $request){
@@ -156,10 +163,14 @@ class UserController extends Controller
         return redirect('/');
     }
 
+
     public function profile()
-    {
+    {    if (auth()->user()->role != 'admin') {
         $users = Auth::user();   
         return view('profile', ['user' => $users]);
+    } else {
+        return redirect()->route('adminpage');
+    }
     }
 
     public function updateAdminProfile(Request $request)
