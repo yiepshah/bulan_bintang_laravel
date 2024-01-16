@@ -13,7 +13,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
     .details-container{
-        padding: 10px;
+        padding: 30px;
         overflow: hidden;
 
     }
@@ -142,12 +142,27 @@
        
     }
 
+    .pageName {
+            background-color: #202d45;
+            color: aliceblue;
+            text-align: center;
+        }
+
+        .pageName h3 {
+            margin: 0; /* Remove default margin to center properly */
+            padding: 10px; /* Add padding for better appearance */
+        }
+
 
     
     </style>
 </head>
 <body>
     @include('header')
+
+    <div class="pageName">
+        <h3>DETAILS</h3>
+    </div>
 
     <div class="details-container">
         <div class="row">
@@ -159,11 +174,11 @@
             <div class="col-md-6">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent pl-0">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li> 
+                        {{-- <li class="breadcrumb-item"><a href="/">Home</a></li> 
 
                         <li class="breadcrumb-item"><a href="/collection">Collection</a></li> 
 
-                        <li class="breadcrumb-item active" aria-current="page">{{$itemDetails->item_name}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{$itemDetails->item_name}}</li> --}}
                     </ol>
                 </nav>
 
@@ -221,7 +236,7 @@
                         <input type="hidden" name="stock_number" value="{{ $itemDetails->stock_number }}">
                     </form>
 
-                    <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a> 
+                    {{-- <a href="javascript:void(0);" onclick="clearPage()" class="clear-link">Clear</a>  --}}
                 </div><hr>
                
             </div>

@@ -49,7 +49,7 @@
         }
 
         #editUserBtn {
-            background-color:#0F0F0F;;
+            /* background-color:#0F0F0F;; */
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -97,12 +97,16 @@
             
             <div class="form-group">
                 <label for="role">Role:</label>
-                <input type="text" class="form-control" name="role" value="{{ $users->role }}" required>
+                <select class="form-control" name="role" id="role" >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+               
             </div>
 
             <div class="form-group">               
                 <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
-                <button type="submit" id="editUserBtn" class="btn btn-primary">Update User</button>
+                <button type="submit" id="editUserBtn" class="btn btn-success">Update User</button>
             </div>
         </form>
       

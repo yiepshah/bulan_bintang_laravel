@@ -1,4 +1,7 @@
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <title>Bulan Bintang</title>
     <style>
           
@@ -168,7 +171,7 @@
                         @endphp
                         <a id="CartIcon" href="{{ route('cart') }}">
                             <i id="carticon" class="fas fa-shopping-cart"></i>
-                            <span class="badge badge-pill badge-primary">{{ $cartCount }}</span>
+                            <span id="cartBadge" class="badge badge-pill badge-primary">{{ $cartCount }}</span>
                         </a>
                     </li>
             

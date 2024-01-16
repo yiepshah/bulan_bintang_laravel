@@ -18,8 +18,8 @@
     
         .container {
             background-color: #fdfdfd;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 30px;
+            margin-top: 30px;
             border-radius: 15px;
         }
     
@@ -51,6 +51,7 @@
             transition: transform 0.3s ease-in-out;
             border-radius: 10px;
         }
+        
     
         #addbtn:hover {
             background-color: #202d45;
@@ -149,10 +150,10 @@
                     <div id="password-match-alert" class="alert alert-success" style="display: none;">
                          Passwords match.
                     </div>
-                    <p>Already Have An Account? <a id="loginlink" href="login">Login
+                    <p>Already Have An Account? <a style="color: rgb(0, 81, 255);" id="loginlink" href="login">Login
                             Now! </a></p>
-                    <button type="submit" id="Sbtn" class="btn btn-dark">Submit</button><br><br>
-                    <a style="color: black;" href="">Terms of use. Privacy policy</a>
+                    <button type="submit" style="background-color: #202d45;" id="Sbtn" class="btn btn-dark">Submit</button><br><br>
+                    <a style="color: rgb(0, 81, 255);" href="">Terms of use. Privacy policy</a>
                 </form>
             </div>
         </div><br>

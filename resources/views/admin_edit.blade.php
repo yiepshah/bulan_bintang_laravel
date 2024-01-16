@@ -64,7 +64,7 @@
         }
 
         #backBtn{
-            background-color: #0F0F0F;;          
+            background-color: #0F0F0F;
             width: 100px;
             height: 40px;
             border: none;
@@ -161,7 +161,7 @@
             </div>  
 
             <a href="{{ url('adminpage') }}" id="backBtn" class="btn btn-primary">Back</a>
-            <button type="submit" id="editBtn" class="btn btn-primary">Update Item</button>
+            <button type="submit" id="editBtn" class="btn btn-success">Update Item</button>
         </form>
 
     </div><br><br>

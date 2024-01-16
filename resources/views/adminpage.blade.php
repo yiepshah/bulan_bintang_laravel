@@ -30,9 +30,7 @@
             
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-      
-            
+            flex-wrap: wrap;        
             border-radius: 10px;
             padding: 10px 2rem;
             margin-bottom: 1rem;
@@ -80,8 +78,7 @@
             margin-top: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            color: #202d45;
-           
+            color: #202d45;          
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -419,7 +416,6 @@
 
 
 .admin-data-card {
-
     color: #fff;
     padding: 30px;
     height: 300px;
@@ -432,7 +428,7 @@
     }
 
     .admin-data-card,
- {
+    {
         width: 100%;
         margin-right: 0;
     }
@@ -462,9 +458,7 @@
 
 
 
-.icon {
-    font-size: 3rem;
-}
+
 
 .data--card, icon-letter{
     background-color: #ffffff;
@@ -472,7 +466,6 @@
 }
 
 .admin-container{
-
     color: #ffffff;
 
 }
@@ -532,20 +525,17 @@
 
 
 <div class="container">
-    <div class="card-container">
-
-    
+    <div class="card-container">    
         <div class="card--header admin-data-card">
             <div class="admin-container">
                 <h2 style="color: #ffff;" class="main--title">Admin Profile Data</h2><hr>
             <div class="profile-image">
                 <div class="image-container">
-                    <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 250px; height: 250px; object-fit: cover;">
+                    <img id="profileImg" src="{{ asset('storage/images/' . auth()->user()->image_path) }}" alt="Profile Image" class="rounded-circle" style="width: 240px; height:240px; object-fit: cover;">
                 </div>
             </div>
         </div>
-
-
+    </div>
 
     <div class="modal fade" id="editAdminProfileModal" tabindex="-1" role="dialog" aria-labelledby="editAdminProfileModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -595,7 +585,7 @@
             </div>
         </div>
     </div>
-</div> <br><br> <br> 
+</div><br><br>
 
 
     <div class="card-container-fluid">

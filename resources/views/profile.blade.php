@@ -21,7 +21,7 @@
        .card{
            border-radius: 10px ;
            color: #ffff;
-           background-color: #0F0F0F;
+           background-color: #252525;
            width: auto;
            text-align: left;   
            margin-top: 60px;   

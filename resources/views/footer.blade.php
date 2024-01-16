@@ -102,7 +102,7 @@
             <ul>
               <li><a href="#" class="fab fa-tiktok"></a></li>
               <li><a href="#" class="fab fa-facebook"></a></li>
-              <li><a href="#" class="fab fa-twitter"></a></li>
+              <li><a href="#" class="fab fa-instagram"></a></li>
             </ul>
           </div>
         </div>

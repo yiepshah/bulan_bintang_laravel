@@ -116,14 +116,15 @@
                         </div>
                         
                     </div>
-                    @include('footer_user')
+                    
                 </div>
                 
             </div>
           
         </section>
+        
     </div>
-    
+    @include('footer')
 
 
 
