@@ -809,11 +809,12 @@
                                 <p><strong>Category:</strong> <span id="category"></span></p><hr>
                                 <p><strong>Subcategory:</strong> <span id="subcategory"></span></p><hr>
                                 <p><strong>Stock Number:</strong> <span id="stock_number"></span></p><hr>
-
+                              
                             </div>
-                            
+                           
+                        </div>   
                                
-                            
+                        @include('footer_user')
                     </div><br>
 
                       

@@ -153,6 +153,12 @@
             padding: 10px; /* Add padding for better appearance */
         }
 
+        #detailPrice{
+           
+            font-weight: bold;
+            color: #228D57;
+        }
+
 
     
     </style>
@@ -187,7 +193,7 @@
                     <hr>
                     <div class="text">
 
-                        <p class="detailProduct"><strong class="label">Price:</strong> Rm {{ $itemDetails->price }}</p> 
+                        <p id="detailPrice" class="detailProduct"> Rm {{ $itemDetails->price }}</p> 
                         <div class="form-group">     
 
                             <div class="form-size">

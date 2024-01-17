@@ -16,8 +16,28 @@
 
     <style>
 
+        :root {
+            --background-light: #ffffff;
+            --text-light: #202d45;
+            --background-dark: #202d45;
+            --text-dark: #ffffff;
+        }
+
         body{
-            
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        .dark-mode {
+            --background-light: #04040e;
+            --text-light: #ffffff;
+            --background-dark: #ffffff;
+            --text-dark: #ffffff;
+        }
+
+        .dark-mode body {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
         }
 
         #collection {
@@ -204,6 +224,8 @@
     <div class="pageName">
         <h3>COLLECTION</h3>
     </div>
+
+    <button id="darkModeToggle">Toggle Dark Mode</button>
       
     <div class="items-container">
         @php     
@@ -240,6 +262,15 @@
         <div class="footer-container">
             @include('footer')
         </div>
+
+        <script>
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+        
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+            });
+        </script>
        
 
         <script>
@@ -297,7 +328,7 @@
     // Optionally, redirect to the cart page or perform additional actions
     // window.location.href = '{{ route("cart") }}';
 }
-        </script>
+ </script>
 
   
 </body>

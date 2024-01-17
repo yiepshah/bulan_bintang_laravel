@@ -16,6 +16,9 @@
             background-color: #EEEEEE;    
         }
 
+
+        
+
         #Lbtn{
             background-color: #202d45;
         }
@@ -23,18 +26,16 @@
         .footer-container{
             padding: 10px;
             background-color: #f0f0f0;
+            margin-top: 70px;
         }
 
         .pageName {
             background-color: #202d45;
             color: aliceblue;
             text-align: center;
+            
         }
 
-        .pageName h3 {
-            margin: 0; /* Remove default margin to center properly */
-            padding: 10px; /* Add padding for better appearance */
-        }
     </style>
 </head>
 
@@ -120,13 +121,16 @@
                 </div>
                 
             </div>
+                
+
           
         </section>
-        
+
     </div>
-    @include('footer')
 
-
+    <div class="footer-container">
+        @include('footer')
+    </div>
 
     <script>
         function showSuccessAlert(message) {

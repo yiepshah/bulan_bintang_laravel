@@ -319,8 +319,10 @@ label.radio input:checked + span {
 
                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                   <!-- Data -->
-                 <h5>{{ $item['item_name'] }}</h5>
-                  <p><strong>Size:</strong> {{ $item['size'] }}</p>
+                  <h5>{{ $item['item_name'] }}</h5>
+                  <h5>RM  {{ $item['quantity'] * $item['price'] }}</h5> 
+                 
+                  
                  
                
                   @if (isset($item['item_id']))
@@ -344,14 +346,14 @@ label.radio input:checked + span {
   
                   <!-- Price -->
                   <p class="text-start text-md-center">
-                    <p><strong>Price:</strong> RM {{ $item['quantity'] * $item['price'] }}</p>
+                    <p><strong>Size:</strong> {{ $item['size'] }}</p>
                   </p>
                   <!-- Price -->
                 </div>
               </div>
               <!-- Single item -->
   
-              <hr class="my-4" />
+              {{-- <hr class="my-4" /> --}}
             @endforeach
 
               <!-- Single item -->
