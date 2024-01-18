@@ -248,6 +248,10 @@ label.radio input:checked + span {
           background-color: #202d45;
         }
 
+        .detailPrice{
+          color: #228D57;
+        }
+
 
 
     </style>
@@ -319,8 +323,8 @@ label.radio input:checked + span {
 
                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                   <!-- Data -->
-                  <h5>{{ $item['item_name'] }}</h5>
-                  <h5>RM  {{ $item['quantity'] * $item['price'] }}</h5> 
+                  <h5>{{ $item['item_name'] }}</h5><br>
+                  <h5 class="detailPrice">RM  {{ $item['quantity'] * $item['price'] }}</h5> <br>
                  
                   
                  
@@ -340,7 +344,7 @@ label.radio input:checked + span {
   
                     <div class="form-outline">
                       <p><strong>Quantity:</strong> {{ $item['quantity'] }}</p>
-                    </div>
+                    </div><br>
   
 
   
@@ -400,7 +404,7 @@ label.radio input:checked + span {
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Shipping
-                  <span>Gratis</span>
+                  <span> RM 10 </span>
                 </li>
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -482,73 +486,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
            
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var totalAmount = 0;
-    var feePerItem = 10; 
-    var cartItems = {!! json_encode(session('cart')) !!};
-
-    function updateCardTotalAmount() {
-        document.getElementById('cardTotalAmount').innerText = 'RM ' + totalAmount.toFixed(2);
-    }
-
-    function updateSummaryTotalAmount() {
-        var summaryItemPrice = 0;
-
-        Object.values(cartItems).forEach(function (item) {
-            summaryItemPrice += item.quantity * item.price;
-        });
-
-        document.getElementById('summaryItemPrice').innerText = 'RM ' + summaryItemPrice.toFixed(2);
-        document.getElementById('summaryTotalAmount').innerText = 'RM ' + (summaryItemPrice + feePerItem).toFixed(2);
-    }
-
-    function updateAllTotalAmount() {
-        var checkoutAmountSpan = document.getElementById('checkoutTotalAmount');
-
-        document.getElementById('allTotalAmount').innerText = 'RM ' + totalAmount.toFixed(2);
-
-        if (checkoutAmountSpan) {
-            checkoutAmountSpan.innerText = 'RM ' + totalAmount.toFixed(2);
-        }
-    }
-
-    var removeButtons = document.querySelectorAll('.remove-button');
-    var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
-    var itemIdToRemove;
-
-    Object.values(cartItems).forEach(function (item) {
-        totalAmount += (item.quantity * item.price) + (item.quantity * feePerItem);
-    });
-
-    updateCardTotalAmount();
-    updateSummaryTotalAmount();
-    updateAllTotalAmount();
-
-    confirmRemoveBtn.addEventListener('click', function () {
-        console.log('Item removed with ID:', itemIdToRemove);
-
-        $.ajax({
-            url: '/cart/remove/' + itemIdToRemove,
-            type: 'POST',
-            data: { _token: '{{ csrf_token() }}' },
-            success: function (response) {
-                console.log('Success:', response);
-                totalAmount -= (cartItems[itemIdToRemove].quantity * cartItems[itemIdToRemove].price) + (cartItems[itemIdToRemove].quantity * feePerItem);
-                updateCardTotalAmount();
-                updateSummaryTotalAmount();
-                updateAllTotalAmount();
-                location.reload();
-            },
-            error: function (error) {
-                console.error('Error:', error.responseText);
-            }
-        });
-
-        $('#confirmationModal').modal('hide');
-    });
-});
-
-</script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var feePerItem = 10; 
+      var cartItems = {!! json_encode(session('cart')) !!};
+  
+      function updateSummaryTotalAmount() {
+          var summaryItemPrice = 0;
+  
+          Object.values(cartItems).forEach(function (item) {
+              summaryItemPrice += item.quantity * item.price;
+          });
+  
+          document.getElementById('summaryItemPrice').innerText = 'RM ' + summaryItemPrice.toFixed(2);
+          document.getElementById('summaryTotalAmount').innerText = 'RM ' + (summaryItemPrice + feePerItem).toFixed(2);
+      }
+  
+      function updateAllTotalAmount() {
+          var allTotalAmount = 0;
+  
+          Object.values(cartItems).forEach(function (item) {
+              allTotalAmount += (item.quantity * item.price) + (item.quantity * feePerItem);
+          });
+  
+          document.getElementById('allTotalAmount').innerText = 'RM ' + allTotalAmount.toFixed(2);
+      }
+  
+      updateSummaryTotalAmount();
+      updateAllTotalAmount();
+  
+      var removeButtons = document.querySelectorAll('.remove-button');
+      var confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+      var itemIdToRemove;
+  
+      confirmRemoveBtn.addEventListener('click', function () {
+          console.log('Item removed with ID:', itemIdToRemove);
+  
+          $.ajax({
+              url: '/cart/remove/' + itemIdToRemove,
+              type: 'POST',
+              data: { _token: '{{ csrf_token() }}' },
+              success: function (response) {
+                  console.log('Success:', response);
+                  updateSummaryTotalAmount();
+                  updateAllTotalAmount();
+                  location.reload();
+              },
+              error: function (error) {
+                  console.error('Error:', error.responseText);
+              }
+          });
+  
+          $('#confirmationModal').modal('hide');
+      });
+  });
+  
+  </script>
 <script>
 
     document.getElementById('pendingOrdersBtn').addEventListener('click', function() {

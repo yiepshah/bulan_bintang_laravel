@@ -64,21 +64,20 @@
 
     #button:hover {
         background-color: #202d45; 
-        transform: scale(1.3);
+        transform: scale(1.2);
         animation-timing-function: ease-in;
     }
 
-    .breadcrumb-item a {
+    /* .breadcrumb-item a {
         color:#4C4244 ; 
         text-decoration: none; 
         transition: color 0.3s ease; 
-    }
+    } */
 
  
 
-    .clear-link {
-              
-        text-decoration: none; 
+    .clear-link {           
+       text-decoration: none; 
         font-family: 'Roboto', sans-serif;
         color: grey;
     }
@@ -88,21 +87,10 @@
         cursor: pointer; 
     }
 
-    /* .detailProduct {
-        font-style: oblique;
-    } */
 
     .detailItem{
         font-family: 'Roboto', sans-serif;
 
-    }
-
-    #quantity{
-        border-radius: 10px 10px;
-    }
-
-    .detailProduct{
-       
     }
 
     .quantity-input-group {

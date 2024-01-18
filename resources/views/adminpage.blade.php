@@ -494,9 +494,9 @@
 }
 
 .footer-container{
-    background-color: #0F0F0F;
-    color: #ffff;
-    height: 40px;
+   
+    color: #000000;
+    
 }
 </style>
 
@@ -797,7 +797,7 @@
                             <div class="col-md-6">
                                 <img class="detailImg" src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
                             </div><br><br>
-                            <div class="col-md-5"><br><br>
+                            <div style="color: #000000;" class="col-md-5"><br><br>
                                 <a id="itemEdit" href="#" class="btn btn-primary">
                                     <i class="far fa-edit"> Edit</i>
                                 </a><br><br>
@@ -812,9 +812,11 @@
                               
                             </div>
                            
-                        </div>   
-                               
-                        @include('footer_user')
+                        </div>   <br><br>
+                        <div class="footer-container">
+                            @include('footer_user')
+                        </div>
+                       
                     </div><br>
 
                       
@@ -846,10 +848,8 @@
     </div>
 </div>
 </div>
-<br>
-<div class="footer-container">
-    @include('footer_user')
-</div>
+
+
 
 
 <script>
@@ -925,7 +925,7 @@ function loadItemDetails(id, image_path,item_name,price,product_information,mate
                 function confirmUserDeletion(id) {
                     Swal.fire({
                     title: 'Confirm Deletion',
-                    text: 'Are you sure you want to delete this item?',
+                    text: 'Are you sure you want to delete this user?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

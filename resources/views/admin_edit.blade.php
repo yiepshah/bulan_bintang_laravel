@@ -13,6 +13,7 @@
         
         body {
             background-color: #EEEEEE;
+            color: #000000;
         }
 
         .edit-item-container {
