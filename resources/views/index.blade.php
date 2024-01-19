@@ -16,7 +16,7 @@
 
         .index-container{
             width: 100%;
-            padding: 50px;
+            padding: 20px;
             overflow: hidden;
         }
 
@@ -68,13 +68,13 @@
     max-width: 100%;
     height: auto;
     width: 1200px;
-    /* transition: transform 0.4s ease-in-out;    */
+    transition: transform 0.6s ease-in-out;   
 }
 
 
-    /* .brother-collection img:hover {
-        transform: scale(1.2);     
-    } */
+    .brother-collection img:hover {
+        transform: scale(1.5);     
+    }
 
    
     /* .image-group img {
@@ -330,15 +330,18 @@
           </a>
           </div><br><br><br>
           
-              <h3 class="collection">Brothers Collection</h3>
-          
-              <div class="image-container brother-collection">
-                  <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Flamingo-Pink_SF_22.jpg" alt="Image 1">
-                  <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/03/Viridian-Green_BMTF_34-1536x1536.jpg" alt="Image 2">
-                  <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
-                  <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
-                  
-              </div><br><br><br>
+              <h3 class="brother-collection">Brothers Collection</h3>
+
+              <a href="collection">
+                <div class="image-container brother-collection">
+                    <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Flamingo-Pink_SF_22.jpg" alt="Image 1">
+                    <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/03/Viridian-Green_BMTF_34-1536x1536.jpg" alt="Image 2">
+                    <img src="https://www.bulanbintangstore.com/wp-content/uploads/2021/05/Mint-Green_SF_7.jpg" alt="Image 3">
+                    <img src="https://bulanbintang.onpay.my/media/uploads/lilac.jpg" alt="Image 4">
+                    
+                </div><br><br><br>
+              </a>
+
     
               
               <div class="collection">

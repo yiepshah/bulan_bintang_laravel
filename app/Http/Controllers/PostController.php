@@ -24,9 +24,8 @@ class PostController extends Controller
             'subcategory' => 'required',
             'stock_number' => 'required|numeric',
         ]);
-
     
-        if (Auth::check()) {
+        if (Auth::check() && auth()->user()->role == 'admin') {
             $imagePath = $request->file('image_path')->store('images', 'public');
             $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
     
@@ -34,19 +33,18 @@ class PostController extends Controller
                 return strip_tags($value);
             }, $itemPost);
     
-            $itemPost['image_path'] = $imageName; 
+            $itemPost['image_path'] = $imageName;
             $itemPost['user_id'] = Auth::id();
     
             $item = Post::create($itemPost);
-
+    
             $item->stock_number = $request->input('stock_number');
             $item->save();
     
-            return redirect()->route('adminpage')->with('success', 'Item updated successfully');
+            return redirect()->route('add_item')->with('success', 'Item added successfully');
         }
     
-        return redirect('/login')->with('error', 'Please log in to add a post.');
-    
+        return redirect()->route('collection')->with('error', 'You do not have permission to add a post.');
     }
     
 

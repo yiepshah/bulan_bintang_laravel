@@ -200,6 +200,7 @@
 
         .user-table tbody tr:hover td {
             background-color: #cecece;
+       
             
         }
 
@@ -448,17 +449,13 @@
 
 
 .iconAllert {
-    flex-shrink: 0; /* Prevent the iconAllert from shrinking */
+    flex-shrink: 0; 
     margin-top: 20px;
 }
 
 .profile-info {
     flex-grow: 1;
 }
-
-
-
-
 
 .data--card, icon-letter{
     background-color: #ffffff;
@@ -471,25 +468,25 @@
 }
 
 .profile-image {
-    border: #000000; /* Set the border color to black */
+    border: #000000; 
     
 }.modal-title{
     color: #000;
 }
 
 .image-container {
-    width: 240px; /* Set the width of the circular container */
-    height: 240px; /* Set the height of the circular container */
+    width: 240px; 
+    height: 240px;
     overflow: hidden;
-    border-radius: 50%; /* Make the container circular */
-    background-color: #000; /* Set the background color to black */
+    border-radius: 50%; 
+    background-color: #000; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #profileImg {
-    width: 100%; /* Make sure the image covers the entire circular container */
+    width: 100%;
     height: auto;
 }
 
@@ -521,8 +518,6 @@
 
 @include('adminHeader')
   
-
-
 
 <div class="container">
     <div class="card-container">    
@@ -755,7 +750,8 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
+            </div><br>
+
         </div> 
 
 
@@ -845,6 +841,9 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="footer-container">
+        @include('footer_user')
     </div>
 </div>
 </div>

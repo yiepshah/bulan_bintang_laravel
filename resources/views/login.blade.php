@@ -17,23 +17,32 @@
         }
 
 
+
+        .container {
+        padding: 10px;
+    }
         
 
         #Lbtn{
             background-color: #202d45;
         }
 
-        .footer-container{
-            padding: 10px;
-            background-color: #f0f0f0;
-            margin-top: 70px;
-        }
+        .footer-container {
+     
+        background-color: #f0f0f0;
+        margin-top: 70px;
+    }
 
         .pageName {
+        
             background-color: #202d45;
             color: aliceblue;
             text-align: center;
-            
+        }
+
+        .pageName h3 {
+            margin: 0; /* Remove default margin to center properly */
+            padding: 10px; /* Add padding for better appearance */
         }
 
     </style>
@@ -46,7 +55,7 @@
     </div>
     <div class="container">
         <section class="vh-100">
-            <div class="container py-5 h-100">
+            <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col col-xl-10">
                         <div class="card" style="border-radius: 1rem;">

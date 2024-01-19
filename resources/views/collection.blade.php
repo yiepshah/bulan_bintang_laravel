@@ -172,10 +172,10 @@
 
     
         #cartBtn {
-            width: 100%; /* Change width to 100% for better responsiveness */
-            max-width: 400px; /* Limit maximum width to 400px */
+            width: 100%; 
+            max-width: 400px; 
             background-color: #202d45;
-            margin: 0 auto; /* Center the button on smaller screens */
+            margin: 0 auto; 
         }  
 
         #cartIcon {
@@ -185,7 +185,7 @@
         }
 
         #cartIcon:hover {
-            transform: scale(1.1); /* Add a subtle scaling effect on hover */
+            transform: scale(1.1); 
         }
 
         @media (max-width: 768px) {
@@ -194,8 +194,8 @@
             }
 
             #cartBtn {
-                width: 100%; /* Adjust width for better responsiveness on smaller screens */
-                max-width: none; /* Remove the maximum width limit */
+                width: 100%; 
+                max-width: none; 
             }
         }
 
@@ -206,8 +206,8 @@
         }
 
         .pageName h3 {
-            margin: 0; /* Remove default margin to center properly */
-            padding: 10px; /* Add padding for better appearance */
+            margin: 0; 
+            padding: 10px; 
         }
 
         #id,text{
@@ -225,7 +225,7 @@
         <h3>COLLECTION</h3>
     </div>
 
-    <button id="darkModeToggle">Toggle Dark Mode</button>
+    {{-- <button id="darkModeToggle">Toggle Dark Mode</button> --}}
       
     <div class="items-container">
         @php     
@@ -273,7 +273,7 @@
         </script>
        
 
-        <script>
+        {{-- <script>
             function showSuccessAlert(message) {
                 Swal.fire({
                     icon: 'success',
@@ -328,7 +328,7 @@
     // Optionally, redirect to the cart page or perform additional actions
     // window.location.href = '{{ route("cart") }}';
 }
- </script>
+ </script> --}}
 
   
 </body>

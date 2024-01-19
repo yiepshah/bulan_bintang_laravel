@@ -13,6 +13,7 @@
     <style>
         body {
             background-color: #EEEEEE;
+      
             margin: 0;
         }
     
