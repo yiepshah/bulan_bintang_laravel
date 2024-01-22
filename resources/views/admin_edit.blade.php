@@ -89,6 +89,7 @@
 
             <input type="hidden" name="item_id" value="{{ $items->item_id }}">
 
+
             <div class="form-group">
                 <label for="item_name">Item Name:</label>
                 <input type="text" class="form-control" name="item_name" value="{{ $items->item_name }}" required>

@@ -794,7 +794,8 @@
                                 <img class="detailImg" src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}" id="itemDetailsImage" alt="Item Image" style="max-width: 100%; height: auto;">
                             </div><br><br>
                             <div style="color: #000000;" class="col-md-5"><br><br>
-                                <a id="itemEdit" href="#" class="btn btn-primary">
+                                {{dd($item->item_id);}}
+                                <a id="itemEdit" href="{{ route('edit_item', $item->item_id) }}" class="btn btn-primary">
                                     <i class="far fa-edit"> Edit</i>
                                 </a><br><br>
                                 <p><strong>Item Name:</strong><span id="item_name"></span></p><hr>

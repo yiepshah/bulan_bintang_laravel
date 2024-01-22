@@ -7,25 +7,31 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 
+
+
 class PostController extends Controller
 
 
 {
     public function addPost(Request $request)
     {
-        $itemPost = $request->validate([
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'item_name' => 'required',
-            'price' => 'required',
-            'product_information' => 'required',
-            'material' => 'required',
-            'inside_box' => 'required',
-            'category' => 'required',
-            'subcategory' => 'required',
-            'stock_number' => 'required|numeric',
-        ]);
+        // dd(auth()->user()->role == 'admin');
+        if (auth()->user()->role == 'admin') {
     
-        if (Auth::check() && auth()->user()->role == 'admin') {
+            $itemPost = $request->validate([
+                'image_path' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+                'item_name' => 'required',
+                'price' => 'required',
+                'product_information' => 'required',
+                'material' => 'required',
+                'inside_box' => 'required',
+                'category' => 'required',
+                'subcategory' => 'required',
+                'stock_number' => 'required|numeric',
+            ]);
+    
+       
+    
             $imagePath = $request->file('image_path')->store('images', 'public');
             $imageName = pathinfo($imagePath, PATHINFO_BASENAME);
     
@@ -41,11 +47,21 @@ class PostController extends Controller
             $item->stock_number = $request->input('stock_number');
             $item->save();
     
-            return redirect()->route('add_item')->with('success', 'Item added successfully');
+            return redirect()->route('adminpage')->with('success', 'Item added successfully');
+        }else {
+            return redirect()->route('collection');
         }
-    
-        return redirect()->route('collection')->with('error', 'You do not have permission to add a post.');
-    }
+    } 
+
+        public function add_Item(){
+        
+            if (auth()->user()->role == 'admin') {
+                return view('add_item');
+            } else {
+                return redirect()->route('collection')->with('error', 'You do not have permission to access this page.');
+            }
+        }
+
     
 
         public function adminPage()
@@ -135,9 +151,9 @@ class PostController extends Controller
             return redirect()->back()->with('success', 'Items Deleted Successfully');
         }
         
-
-        public function showDetails($itemId) 
-        {      
+        public function showDetails($encodedId) 
+        {
+            $itemId = decrypt($encodedId); 
 
              if (auth()->user()->role != 'admin') {
 

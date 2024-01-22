@@ -71,10 +71,10 @@
               Home</i></a> --}}
         
        
-        <a href="{{ url('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
+        <a href="{{ route('add_item') }}" class="w3-bar-item w3-button" title="Add item"><i class="fas fa-plus">
                Add</i></a>
 
-        <a href="{{ url('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt">
+        <a href="{{ route('logout') }}" class="w3-bar-item w3-button" title="Logout"><i class="fas fa-sign-out-alt">
                Logout</i></a>
 
         

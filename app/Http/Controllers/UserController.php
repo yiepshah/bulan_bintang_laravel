@@ -196,7 +196,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->input('password'));
         }
     
-        // $user->role = $request->input('role');
+        $user->role = $request->input('role');
     
     
         if ($request->hasFile('image_path')) {

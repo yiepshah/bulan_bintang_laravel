@@ -68,10 +68,8 @@
 
         .cart-item img {
             width: 150px;
-            height:150px;;
-            
-            border-radius: 8px;
-            
+            height:150px;;           
+            border-radius: 8px;           
         }
 
         .cart-item-details {

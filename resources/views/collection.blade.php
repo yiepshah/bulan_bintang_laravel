@@ -241,13 +241,12 @@
                     {{-- <p>Collection</p> --}}
                     {{-- <a href="{{ route('details', ['itemId' => $item->id]) }}">Details</a> --}}
 
-                    <a href="{{ route('details', ['itemId' => $item->item_id]) }}">
+                    <a href="{{ route('details', ['encodedId' => encrypt($item->item_id)]) }}">
                         <figure>
                             <img src="{{ asset('storage/images/' . $item->image_path) }}" alt="{{ $item->item_name }}">
                         </figure>
                         <p>{{ $item->item_name }}</p>
                         <p id="itemprice">RM{{ $item->price }}</p>
-
                     </a>
                     {{-- <div id="cartBtn" class="btn btn-dark" onclick="addToCart({{ $item->item_id }}, '{{ $item->item_name }}', {{ $item->price }})">
                         <button id="cartIcon" class="btn btn-dark">

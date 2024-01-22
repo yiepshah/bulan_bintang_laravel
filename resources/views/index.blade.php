@@ -46,47 +46,26 @@
 .image-container:hover .image-info {
     opacity: 3;
 }
-
-.shop-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #161A30;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.shop-button:hover {
-    background-color: #fff;
-    color: #161A30;
-}
-
-
 .brother-collection img {
     max-width: 100%;
     height: auto;
     width: 1200px;
-    transition: transform 0.6s ease-in-out;   
+    transition: transform 0.6s ease-in-out;
 }
 
-
-    .brother-collection img:hover {
-        transform: scale(1.5);     
+@media (max-width: 997px) {
+    .brother-collection {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 350px;
     }
 
-   
-    /* .image-group img {
-        font-weight: bold; 
-        border: #12122f;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        transition: transform 0.3s ease-in-out;        
-    } */
+    .brother-collection img {
+        width: 200px;
+        max-width: none;
+    }
+}
 
-    /* .image-group img:hover {
-        transform: scale(1.1); ;
-    } */
 
     .dropdown-item{
         color: black;
@@ -95,13 +74,6 @@
         font-weight: lighter;
     }
 
-    @media (max-width: 767px) {
-    .brother-collection img {
-        width: 100%; /* Set to 100% width for smaller screens */
-        max-width: none; /* Remove the maximum width */
-        height: auto;
-    }
-}
 
 @media (max-width: 767px) {
     #third-1,
@@ -129,32 +101,32 @@
         top: 80%; 
         left: 69%; 
         padding: 5px 5px; 
-        background: transparent; 
-        border: 2px solid black; 
+        background-color: #161A30;
+        /* border: 2px solid black;  */
         border-radius: 5px 5px;
         text-decoration: none;
         font-weight: 400;
-        font-size: 30px;
-        color: #000; 
+        font-size: 20px;
+        /* color: #000;  */
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         transition: transform 0.3s ease-in-out;    
     }
 
     #shop:hover{
-        background-color: #202d45;
+        
         color: #fff;
         transform: scale(1.1);
-        border: 4px solid #202d45; 
+        border: none; 
         
     }
 
     @media (max-width: 767px) {
       
         #shop {
-            top: 59%; 
+            top: 76%; 
             font-size: 10px;
-            height: 50px;
-            width: 50px;
+            height: 25px;
+            width: 70px;
         }
     }   
 
@@ -171,7 +143,8 @@
     .carousel-control-next {
         background-color: transparent;
         border: none;
-        color: #000; /
+        color: #000; 
+        
     }
 
     .collection figure {
@@ -215,7 +188,7 @@
     .shop-button {
         display: inline-block;
         padding: 10px 20px;
-        background-color: #202d45;
+        background-color: #161A30;
         color: #fff;
         text-decoration: none;
         border-radius: 5px;
@@ -231,7 +204,7 @@
 
     .imageTitle{
         font-size: 40px; 
-
+        
         margin-bottom: 10px; 
     }
 
@@ -240,6 +213,7 @@
         border-radius: 10px;
         background-color: #202d45;
         margin-bottom: 20px;
+        
     }
 
 
@@ -283,6 +257,27 @@
         
     }
 
+    #shopRedeem{
+        color: #7a7a7a;
+    }
+
+    .col-mb-3 {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333; /* Adjust the color to your preference */
+    }
+
+    .col-mb-3 h3 {
+        font-size: 24px;
+        color: #000000; /* Adjust the color for headings */
+        margin-bottom: 10px;
+    }
+
+    .col-mb-3 p {
+        margin-bottom: 20px;
+    }
+
 
 
 
@@ -303,15 +298,15 @@
             </div>
           
             <div class="carousel-inner">
-              <div class="carousel-item active">
+              <div class="carousel-item active"> 
                 <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Family.jpg" class="" alt="">
               </div>
               <div class="carousel-item">
-                <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Perempuan-1024x576.jpg">
+                <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Raya-Perempuan-1024x576.jpg" class="" alt="">
               </div>
-              {{-- <div class="carousel-item">
-                <img class="custom-image" src="https://cdn.store-assets.com/s/859197/f/9740202.jpg?width=1500" class="" alt="">
-              </div> --}}
+               <div class="carousel-item">
+                <img class="custom-image" src="https://bulanbintanghq.my/wp-content/uploads/2023/02/Raya-2023-Baju-Melayu-Tailored-Fit.jpg" class="" alt="">
+              </div> 
             </div>
             
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -435,12 +430,10 @@
                                   <figcaption style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Penang</figcaption>
                               </figure>
                       </div>
-                  </div>
-          
-              
-               
-          
-                  
+                  </div><br><br><br><br>
+
+
+                
                   <div class="row">
                       <div class="col-md-3">
                           <figure>
@@ -472,8 +465,53 @@
                       
                   </div>
                   
-              </div>
+              </div><br><br>
+
+              <div class="col-mb-3">
+
+                {{-- <h3 class="section-title tc pr flex fl_center al_center fs__24 title_1">
+                    <span  class="mr__10 ml__10"> Shop and collect points to redeem your rewards!</span>
+                </h3>
+                
+
+                <span id="shopRedeem" class="section-subtitle db tc sub-title">
+                     <i class="las la-envelope-open">
+                        Subscribe to receive RM10 off your first order, exclusive deals and early access to new release.
+                    </i></span><br><br><br> --}}
+               
+                <h3> Traditional Baju Melayu</h3>
+                <p> Immerse yourself in the timeless charm of traditional Baju Melayu. Our collections highlight modern & classic interpretations of Malay cultural styles, and we want nothing more than to pay homage to our rich heritage.
+
+                    Find authentic and meticulously crafted Malay festive & modest wear. Each piece showcases intricate details and a deep respect for tradition, making it a symbol of cultural pride.
+
+                    Discover our commitment to preserving tradition while providing quality craftsmanship - guaranteed by our lifetime warranty for loose stitching & buttons. Experience a new age of Malaysian modest wear.
+                </p>
+
+                <h3>Modern Modest Wear</h3>
+
+                <p>
+                    We believe that modesty and fashion can coexist harmoniously. Elevate your style with our modern modest & Muslimah wear collection in Malaysia. Explore our range of contemporary designs, from loose-fitting dresses to stylish blouses, designed for the modern, confident, and fashion-forward woman.
+
+                    Wide Selection Of Modest Styles
+                    Experience the ease and convenience of shopping for Malaysian modest clothing online at Khatam. Our handpicked selection of modest wear offers a variety of styles for all occasions, available at your fingertips. Browse, choose, and buy comfortably.
+
+                </p>
+
+                
+                <h3>About Bulan Bintang</h3>
+                <p>                       
+                    Bulan Bintang is a team of dedicated Malaysians whose sole aim is to craft clothing that celebrates the rich heritage of Malaysia while ensuring that every piece reflects the highest standards of craftsmanship and quality, ensuring that you not only look your best but feel the cultural richness and pride with every wear. Learn more about us here.
+                </p>
+               
+            </div><br><br><br><br>
+
+            <div class="index-container">
+                <video class="vide0-js" loop autoplay preload="none" muted playinline poster ="https://cdn.shopify.com/videos/c/o/v/e65ac01d0d13421a9d038108d23be9e6.mp4"></video>
+                <source src="https://cdn.shopify.com/videos/c/o/v/e65ac01d0d13421a9d038108d23be9e6.mp4" type="video/mp4">
+            </div>
     </div>
+
+
     
 
 
